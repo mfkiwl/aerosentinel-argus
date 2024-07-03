@@ -54,4 +54,4 @@ To make sure the build process has been successful, you can check the console fo
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
 
 ## License
-This project is licensed under the [Creative Commons Zero v1.0 Universal](LICENSE).
+This project is licensed under the [BSD 3-Clause License](LICENSE).
