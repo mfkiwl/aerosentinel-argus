@@ -41,7 +41,7 @@
 /*!  @name          Header Files                                  */
 /******************************************************************************/
 
-#include "bmi323.h"
+#include "DRIVERS_H/BMI323/bmi323.h"
 #ifdef __KERNEL__
 #include <linux/types.h>
 #include <linux/kernel.h>

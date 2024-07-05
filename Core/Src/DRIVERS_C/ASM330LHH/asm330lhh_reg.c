@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-#include "asm330lhh_reg.h"
+#include "DRIVERS_H/ASM330LHH/asm330lhh_reg.h"
 
 /**
   * @defgroup    ASM330LHH

@@ -25,12 +25,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if _NMEA_USE_FREERTOS != 0
-#define nmea_delay(x) osDelay(x)
-#include "cmsis_os.h"
-#else
+//#if _NMEA_USE_FREERTOS != 0
+//#define nmea_delay(x) osDelay(x)
+//#include "cmsis_os.h"
+//#else
 #define nmea_delay(x) HAL_Delay(x)
-#endif
+//#endif
 
 typedef struct
 {

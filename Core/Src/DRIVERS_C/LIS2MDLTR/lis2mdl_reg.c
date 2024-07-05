@@ -17,7 +17,7 @@
   ******************************************************************************
   */
 
-#include "lis2mdl_reg.h"
+#include "DRIVERS_H/LIS2MDLTR/lis2mdl_reg.h"
 
 /**
   * @defgroup    LIS2MDL

@@ -40,7 +40,7 @@
 
 /*!  @name          Header Files                                  */
 /******************************************************************************/
-#include "bmi3.h"
+#include "DRIVERS_H/BMI323/bmi3.h"
 
 #ifdef __KERNEL__
 #include <linux/types.h>

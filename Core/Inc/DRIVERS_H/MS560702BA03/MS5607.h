@@ -35,7 +35,7 @@ SOFTWARE.
 extern "C" {
 #endif
 
-#include "stm32f1xx_hal.h"
+#include "stm32h7xx_hal.h"
 
 /* MS5607 SPI COMMANDS */
 #define RESET_COMMAND                 0x1E
