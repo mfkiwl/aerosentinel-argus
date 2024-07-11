@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h" // printf function
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,7 +109,15 @@ static void MX_ADC2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int _write(int file, char *ptr, int len){
+	int i=0;
+	for(i=0 ; i < len ; i++){
+		ITM_SendChar((*ptr++));
+	}
+	return len;
+}
 
+uint8_t count = 0;
 
 /* USER CODE END 0 */
 
@@ -183,6 +191,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  count++; //Increment count variable
+	  printf("Hello World from Aerosentinel Argus Navigation Module! Count =%d \n", count); // Hello World Test
+	  HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }
