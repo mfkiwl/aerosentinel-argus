@@ -62,10 +62,10 @@ The Aerosentinel Argus Navigation Module is designed with a modular and hierarch
 
 This architecture comprises several key components:
 
-Peripherals Drivers: Interfaces for various sensors such as IMUs, barometers, and magnetometers.
-Peripherals Data Management: Manages data from peripherals, including sensor fusion using Cascade Extended Kalman Filtering (EKF).
-Module Control Center: Handles states, commands, error management, data management, and communication interfaces.
-Aerosentinel Relay Protocol (A.R.P.): Ensures secure and reliable communication using data encryption, authentication mechanisms, and a robust protocol stack.
+- **Peripherals Drivers**: Interfaces for various sensors such as IMUs, barometers, and magnetometers.
+- **Peripherals Data Management**: Manages data from peripherals, including sensor fusion using Cascade Extended Kalman Filtering (EKF).
+- **Module Control Center**: Handles states, commands, error management, data management, and communication interfaces.
+- [**Aerosentinel Relay Protocol (A.R.P.)**](https://github.com/yaxsomo/aerosentinel-relay-protocol): Ensures secure and reliable communication using data encryption, authentication mechanisms, and a robust protocol stack.
 
 ## Contributing
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
