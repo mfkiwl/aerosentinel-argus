@@ -1,17 +1,17 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/DRIVERS_C/GPS/nmea.c 
+../Core/Src/DRIVERS_C/GPS/GPS.c 
 
 OBJS += \
-./Core/Src/DRIVERS_C/GPS/nmea.o 
+./Core/Src/DRIVERS_C/GPS/GPS.o 
 
 C_DEPS += \
-./Core/Src/DRIVERS_C/GPS/nmea.d 
+./Core/Src/DRIVERS_C/GPS/GPS.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +21,7 @@ Core/Src/DRIVERS_C/GPS/%.o Core/Src/DRIVERS_C/GPS/%.su Core/Src/DRIVERS_C/GPS/%.
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS:
-	-$(RM) ./Core/Src/DRIVERS_C/GPS/nmea.cyclo ./Core/Src/DRIVERS_C/GPS/nmea.d ./Core/Src/DRIVERS_C/GPS/nmea.o ./Core/Src/DRIVERS_C/GPS/nmea.su
+	-$(RM) ./Core/Src/DRIVERS_C/GPS/GPS.cyclo ./Core/Src/DRIVERS_C/GPS/GPS.d ./Core/Src/DRIVERS_C/GPS/GPS.o ./Core/Src/DRIVERS_C/GPS/GPS.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS
 

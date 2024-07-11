@@ -1,0 +1,2 @@
+../Core/Src/telemetry_manager.c:11:6:SensorManager_Init	1
+../Core/Src/telemetry_manager.c:22:6:SensorManager_UpdateData	1

@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -68,7 +68,7 @@ main-build: Aerosentinel_Argus.elf secondary-outputs
 
 # Tool invocations
 Aerosentinel_Argus.elf Aerosentinel_Argus.map: $(OBJS) $(USER_OBJS) C:\Users\yohan\Documents\aerosentinel-argus\STM32H723VGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Aerosentinel_Argus.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\yohan\Documents\aerosentinel-argus\STM32H723VGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Aerosentinel_Argus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Aerosentinel_Argus.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\yohan\Documents\aerosentinel-argus\STM32H723VGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Aerosentinel_Argus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
