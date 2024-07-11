@@ -57,8 +57,9 @@ To make sure the build process has been successful, you can check the console fo
 The Aerosentinel Argus Navigation Module is designed with a modular and hierarchical software architecture, ensuring clarity and maintainability. Below is the visual representation of the software architecture:
 
 <p align="center">
-  <img src="" alt="Aerosentinel Argus Software Architecture">
+  <img src="https://github.com/user-attachments/assets/2bdded6f-abc9-4551-b408-89c27daf86a9" alt="Aerosentinel Argus Software Architecture">
 </p>
+
 This architecture comprises several key components:
 
 Peripherals Drivers: Interfaces for various sensors such as IMUs, barometers, and magnetometers.
