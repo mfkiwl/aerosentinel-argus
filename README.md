@@ -14,8 +14,9 @@ Welcome to Aerosentinel Argus Navigation Module firmware repository. Configured 
 3. [Usage](#usage)
     - [Building the Firmware](#building-the-firmware)
 5. [Features](#features)
-6. [Contributing](#contributing)
-7. [License](#license)
+6. [Software Architecture](#software-architecture)
+7. [Contributing](#contributing)
+8. [License](#license)
 
 ## Introduction
 This firmware is designed to provide precise navigation and guidance capabilities for rocketry applications using the Aerosentinel Argus Navigation Module. It implements advanced algorithms and features to ensure optimal performance, safety, and reliability during launch, ascent, and recovery phases.
@@ -49,6 +50,21 @@ To make sure the build process has been successful, you can check the console fo
 - **Comprehensive Telemetry**: Provides real-time data on altitude, velocity, acceleration, positionning and environmental conditions.
 - **Autonomous Operation**: Automatically gathers sensors & GPS data, execute extended kalman filter fusion algorithms in cascade, and send the results via UART to the Flight Computer. 
 - **Reliability**: Built to withstand harsh temperatures, vibrations, and G-forces for robust performance.
+
+## Software Architecture
+
+
+The Aerosentinel Argus Navigation Module is designed with a modular and hierarchical software architecture, ensuring clarity and maintainability. Below is the visual representation of the software architecture:
+
+<p align="center">
+  <img src="" alt="Aerosentinel Argus Software Architecture">
+</p>
+This architecture comprises several key components:
+
+Peripherals Drivers: Interfaces for various sensors such as IMUs, barometers, and magnetometers.
+Peripherals Data Management: Manages data from peripherals, including sensor fusion using Cascade Extended Kalman Filtering (EKF).
+Module Control Center: Handles states, commands, error management, data management, and communication interfaces.
+Aerosentinel Relay Protocol (A.R.P.): Ensures secure and reliable communication using data encryption, authentication mechanisms, and a robust protocol stack.
 
 ## Contributing
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
