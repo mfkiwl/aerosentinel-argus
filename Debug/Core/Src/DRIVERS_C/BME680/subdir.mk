@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/DRIVERS_C/BME680/bme680_main.c \
 ../Core/Src/DRIVERS_C/BME680/bme68x.c 
 
 OBJS += \
+./Core/Src/DRIVERS_C/BME680/bme680_main.o \
 ./Core/Src/DRIVERS_C/BME680/bme68x.o 
 
 C_DEPS += \
+./Core/Src/DRIVERS_C/BME680/bme680_main.d \
 ./Core/Src/DRIVERS_C/BME680/bme68x.d 
 
 
@@ -21,7 +24,7 @@ Core/Src/DRIVERS_C/BME680/%.o Core/Src/DRIVERS_C/BME680/%.su Core/Src/DRIVERS_C/
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-BME680
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-BME680:
-	-$(RM) ./Core/Src/DRIVERS_C/BME680/bme68x.cyclo ./Core/Src/DRIVERS_C/BME680/bme68x.d ./Core/Src/DRIVERS_C/BME680/bme68x.o ./Core/Src/DRIVERS_C/BME680/bme68x.su
+	-$(RM) ./Core/Src/DRIVERS_C/BME680/bme680_main.cyclo ./Core/Src/DRIVERS_C/BME680/bme680_main.d ./Core/Src/DRIVERS_C/BME680/bme680_main.o ./Core/Src/DRIVERS_C/BME680/bme680_main.su ./Core/Src/DRIVERS_C/BME680/bme68x.cyclo ./Core/Src/DRIVERS_C/BME680/bme68x.d ./Core/Src/DRIVERS_C/BME680/bme68x.o ./Core/Src/DRIVERS_C/BME680/bme68x.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-BME680
 

@@ -11,8 +11,8 @@
 
 void SensorManager_Init(void) {
 
-//int asm330lhh_status = ASM330LHH_Init();
-//    BME680_Init();
+//bool asm330lhh_status = ASM330LHH_Init();
+//bool bme680_status = BME680_Init();
 //    BMI323_Init();
 //    BNO055_Init();
 //    GPS_Init();

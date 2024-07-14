@@ -112,7 +112,6 @@ int32_t asm330lhh_write_wrapper(void *handle, uint8_t reg, const uint8_t *bufp, 
 /**
   * @brief  ASM330LHH Initialization Function
   *
-  * @param  handle  I2C Port (void parameter to avoid driver warning)
   * @param  asm330lhh_config     TODO -> Create this structure and add the parameter to this function.
   * @retval         Initialization Status (MANDATORY: return 1 or True -> no Error)
   *

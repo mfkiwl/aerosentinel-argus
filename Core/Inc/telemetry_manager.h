@@ -10,7 +10,7 @@
 
 
 #include "DRIVERS_H/ASM330LHH/asm330lhh_main.h"
-//#include "DRIVERS_H/BME680/bme68x.h"
+#include "DRIVERS_H/BME680/bme680_main.h"
 //#include "DRIVERS_H/BMI323/bmi323.h"
 //#include "DRIVERS_H/BNO055/bno055.h"
 //#include "DRIVERS_H/GPS/gps.h"

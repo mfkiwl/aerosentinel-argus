@@ -1,6 +1,6 @@
-Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
- ../Core/Inc/telemetry_manager.h \
- ../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h \
+Core/Src/DRIVERS_C/BME680/bme680_main.o: \
+ ../Core/Src/DRIVERS_C/BME680/bme680_main.c \
+ ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -44,9 +44,10 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
- ../Core/Inc/DRIVERS_H/BME680/bme680_main.h
-../Core/Inc/telemetry_manager.h:
-../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h:
+ ../Core/Inc/DRIVERS_H/BME680/bme68x.h \
+ ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
+ ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h
+../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
@@ -90,4 +91,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
-../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
+../Core/Inc/DRIVERS_H/BME680/bme68x.h:
+../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
+../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
