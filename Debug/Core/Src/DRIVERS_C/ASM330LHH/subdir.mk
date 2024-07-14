@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c \
 ../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.c 
 
 OBJS += \
+./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.o \
 ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.o 
 
 C_DEPS += \
+./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.d \
 ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.d 
 
 
@@ -21,7 +24,7 @@ Core/Src/DRIVERS_C/ASM330LHH/%.o Core/Src/DRIVERS_C/ASM330LHH/%.su Core/Src/DRIV
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-ASM330LHH
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-ASM330LHH:
-	-$(RM) ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.cyclo ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.d ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.o ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.su
+	-$(RM) ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.cyclo ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.d ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.o ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.su ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.cyclo ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.d ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.o ./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-ASM330LHH
 

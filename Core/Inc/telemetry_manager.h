@@ -9,13 +9,18 @@
 #define INC_TELEMETRY_MANAGER_H_
 
 
-#include "DRIVERS_H/ASM330LHH/asm330lhh_reg.h"
-#include "DRIVERS_H/BME680/bme68x.h"
-#include "DRIVERS_H/BMI323/bmi323.h"
-#include "DRIVERS_H/BNO055/bno055.h"
-#include "DRIVERS_H/GPS/gps.h"
-#include "DRIVERS_H/LIS2MDLTR/lis2mdl_reg.h"
-#include "DRIVERS_H/MS560702BA03/MS5607.h"
+#include "DRIVERS_H/ASM330LHH/asm330lhh_main.h"
+//#include "DRIVERS_H/BME680/bme68x.h"
+//#include "DRIVERS_H/BMI323/bmi323.h"
+//#include "DRIVERS_H/BNO055/bno055.h"
+//#include "DRIVERS_H/GPS/gps.h"
+//#include "DRIVERS_H/LIS2MDLTR/lis2mdl_reg.h"
+//#include "DRIVERS_H/MS560702BA03/MS5607.h"
+
+
+//extern I2C_HandleTypeDef hi2c1;
+//extern I2C_HandleTypeDef hi2c2;
+
 
 
 typedef struct {
@@ -60,6 +65,7 @@ typedef struct {
     IMU_6_Axis_Data lis2mdltr_data;
     Barometer_Data ms560702ba03_data;
 } TelemetryData;
+
 
 void SensorManager_Init(void);
 void SensorManager_UpdateData(TelemetryData *data);

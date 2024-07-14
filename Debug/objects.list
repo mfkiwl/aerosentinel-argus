@@ -1,3 +1,4 @@
+"./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.o"
 "./Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_reg.o"
 "./Core/Src/DRIVERS_C/BME680/bme68x.o"
 "./Core/Src/DRIVERS_C/BMI323/bmi3.o"

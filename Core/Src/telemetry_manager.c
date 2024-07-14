@@ -8,9 +8,10 @@
 
 #include "telemetry_manager.h"
 
+
 void SensorManager_Init(void) {
-    // Initialize all sensors
-//    ASM330LHH_Init();
+
+//int asm330lhh_status = ASM330LHH_Init();
 //    BME680_Init();
 //    BMI323_Init();
 //    BNO055_Init();
