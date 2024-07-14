@@ -5,6 +5,7 @@
 "./Core/Src/DRIVERS_C/BMI323/bmi3.o"
 "./Core/Src/DRIVERS_C/BMI323/bmi323.o"
 "./Core/Src/DRIVERS_C/BNO055/bno055.o"
+"./Core/Src/DRIVERS_C/BNO055/bno055_main.o"
 "./Core/Src/DRIVERS_C/BNO055/bno055_support.o"
 "./Core/Src/DRIVERS_C/GPS/GPS.o"
 "./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.o"

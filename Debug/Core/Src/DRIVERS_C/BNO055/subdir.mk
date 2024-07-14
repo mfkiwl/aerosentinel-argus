@@ -6,14 +6,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/DRIVERS_C/BNO055/bno055.c \
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c \
 ../Core/Src/DRIVERS_C/BNO055/bno055_support.c 
 
 OBJS += \
 ./Core/Src/DRIVERS_C/BNO055/bno055.o \
+./Core/Src/DRIVERS_C/BNO055/bno055_main.o \
 ./Core/Src/DRIVERS_C/BNO055/bno055_support.o 
 
 C_DEPS += \
 ./Core/Src/DRIVERS_C/BNO055/bno055.d \
+./Core/Src/DRIVERS_C/BNO055/bno055_main.d \
 ./Core/Src/DRIVERS_C/BNO055/bno055_support.d 
 
 
@@ -24,7 +27,7 @@ Core/Src/DRIVERS_C/BNO055/%.o Core/Src/DRIVERS_C/BNO055/%.su Core/Src/DRIVERS_C/
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-BNO055
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-BNO055:
-	-$(RM) ./Core/Src/DRIVERS_C/BNO055/bno055.cyclo ./Core/Src/DRIVERS_C/BNO055/bno055.d ./Core/Src/DRIVERS_C/BNO055/bno055.o ./Core/Src/DRIVERS_C/BNO055/bno055.su ./Core/Src/DRIVERS_C/BNO055/bno055_support.cyclo ./Core/Src/DRIVERS_C/BNO055/bno055_support.d ./Core/Src/DRIVERS_C/BNO055/bno055_support.o ./Core/Src/DRIVERS_C/BNO055/bno055_support.su
+	-$(RM) ./Core/Src/DRIVERS_C/BNO055/bno055.cyclo ./Core/Src/DRIVERS_C/BNO055/bno055.d ./Core/Src/DRIVERS_C/BNO055/bno055.o ./Core/Src/DRIVERS_C/BNO055/bno055.su ./Core/Src/DRIVERS_C/BNO055/bno055_main.cyclo ./Core/Src/DRIVERS_C/BNO055/bno055_main.d ./Core/Src/DRIVERS_C/BNO055/bno055_main.o ./Core/Src/DRIVERS_C/BNO055/bno055_main.su ./Core/Src/DRIVERS_C/BNO055/bno055_support.cyclo ./Core/Src/DRIVERS_C/BNO055/bno055_support.d ./Core/Src/DRIVERS_C/BNO055/bno055_support.o ./Core/Src/DRIVERS_C/BNO055/bno055_support.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-BNO055
 
