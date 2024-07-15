@@ -1,6 +1,6 @@
-Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
- ../Core/Inc/telemetry_manager.h \
- ../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h \
+Core/Src/DRIVERS_C/MS560702BA03/MS5607_main.o: \
+ ../Core/Src/DRIVERS_C/MS560702BA03/MS5607_main.c \
+ ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -44,14 +44,8 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
- ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h \
- ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
- ../Core/Inc/DRIVERS_H/BNO055/bno055.h \
- ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h \
- ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h
-../Core/Inc/telemetry_manager.h:
-../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h:
+ ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h
+../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
@@ -95,9 +89,4 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
-../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h:
-../Core/Inc/DRIVERS_H/BNO055/bno055_main.h:
-../Core/Inc/DRIVERS_H/BNO055/bno055.h:
-../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h:
-../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h:
+../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h:

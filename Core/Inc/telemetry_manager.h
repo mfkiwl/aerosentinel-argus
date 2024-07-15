@@ -15,7 +15,7 @@
 #include "DRIVERS_H/BNO055/bno055_main.h"
 //#include "DRIVERS_H/GPS/gps.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
-//#include "DRIVERS_H/MS560702BA03/MS5607.h"
+#include "DRIVERS_H/MS560702BA03/MS5607_main.h"
 
 
 //extern I2C_HandleTypeDef hi2c1;

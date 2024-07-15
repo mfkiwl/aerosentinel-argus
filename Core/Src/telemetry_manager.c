@@ -17,7 +17,7 @@ void SensorManager_Init(void) {
 //bool bno055_status = BNO055_Init();
 //    GPS_Init();
 //bool lis2mdltr_status = LIS2MDLTR_Init();
-//    MS560702BA03_Init();
+//bool ms560702ba03_status = MS560702BA03_Init();
 }
 
 void SensorManager_UpdateData(TelemetryData *data) {
