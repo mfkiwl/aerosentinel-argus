@@ -49,7 +49,15 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055.h ../Core/Inc/DRIVERS_H/GPS/GPS.h \
  ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h \
- ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h
+ ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h \
+ ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h ../FATFS/App/fatfs.h \
+ ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
+ ../Core/Inc/main.h ../FATFS/Target/bsp_driver_sd.h \
+ ../FATFS/Target/fatfs_platform.h \
+ ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
+ ../Middlewares/Third_Party/FatFs/src/diskio.h \
+ ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h
 ../Core/Inc/telemetry_manager.h:
 ../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
@@ -102,3 +110,15 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Core/Inc/DRIVERS_H/GPS/GPS.h:
 ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h:
 ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h:
+../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:
+../FATFS/App/fatfs.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../Middlewares/Third_Party/FatFs/src/integer.h:
+../FATFS/Target/ffconf.h:
+../Core/Inc/main.h:
+../FATFS/Target/bsp_driver_sd.h:
+../FATFS/Target/fatfs_platform.h:
+../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
+../Middlewares/Third_Party/FatFs/src/diskio.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../FATFS/Target/sd_diskio.h:

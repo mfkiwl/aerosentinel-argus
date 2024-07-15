@@ -9,6 +9,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Middlewares/Third_Party/FatFs/src/option/subdir.mk
+-include Middlewares/Third_Party/FatFs/src/subdir.mk
+-include FATFS/Target/subdir.mk
+-include FATFS/App/subdir.mk
 -include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/DRIVERS_C/MS560702BA03/subdir.mk
@@ -17,6 +21,7 @@ RM := rm -rf
 -include Core/Src/DRIVERS_C/BNO055/subdir.mk
 -include Core/Src/DRIVERS_C/BMI323/subdir.mk
 -include Core/Src/DRIVERS_C/BME680/subdir.mk
+-include Core/Src/DRIVERS_C/BLACKBOX/subdir.mk
 -include Core/Src/DRIVERS_C/ASM330LHH/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
