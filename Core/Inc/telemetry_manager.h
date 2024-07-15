@@ -16,6 +16,7 @@
 #include "DRIVERS_H/GPS/GPS.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
 #include "DRIVERS_H/MS560702BA03/MS5607_main.h"
+#include "DRIVERS_H/BLACKBOX/blackbox.h"
 
 
 typedef bool (*sensor_init_retval)(void);
