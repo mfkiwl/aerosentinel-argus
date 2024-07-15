@@ -1,5 +1,3 @@
 ../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:37:9:asm330lhh_platform_read	48	static
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:56:9:asm330lhh_read_wrapper	24	static
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:83:9:asm330lhh_platform_write	48	static
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:101:9:asm330lhh_write_wrapper	24	static
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:119:6:ASM330LHH_Init	8	static
+../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:55:9:asm330lhh_platform_write	48	static
+../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:77:6:ASM330LHH_Init	8	static

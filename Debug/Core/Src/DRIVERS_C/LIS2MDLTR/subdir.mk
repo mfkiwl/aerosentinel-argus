@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.c \
 ../Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.c 
 
 OBJS += \
+./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.o \
 ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.o 
 
 C_DEPS += \
+./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.d \
 ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.d 
 
 
@@ -21,7 +24,7 @@ Core/Src/DRIVERS_C/LIS2MDLTR/%.o Core/Src/DRIVERS_C/LIS2MDLTR/%.su Core/Src/DRIV
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-LIS2MDLTR
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-LIS2MDLTR:
-	-$(RM) ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.cyclo ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.d ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.o ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.su
+	-$(RM) ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.cyclo ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.d ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.o ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.su ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.cyclo ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.d ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.o ./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-LIS2MDLTR
 
