@@ -13,13 +13,39 @@
 #include "DRIVERS_H/BME680/bme680_main.h"
 #include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BNO055/bno055_main.h"
-//#include "DRIVERS_H/GPS/gps.h"
+#include "DRIVERS_H/GPS/GPS.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
 #include "DRIVERS_H/MS560702BA03/MS5607_main.h"
 
 
-//extern I2C_HandleTypeDef hi2c1;
-//extern I2C_HandleTypeDef hi2c2;
+typedef bool (*sensor_init_retval)(void);
+
+typedef enum {
+    TELEMETRY_INIT_SUCCESS,         /*!< Initialization Successful of all the sensors */
+    TELEMETRY_INIT_PARTIAL_SUCCESS, /*!< Initialization error on some of the sensors */
+    TELEMETRY_INIT_FAILURE          /*!< Initialization error all the sensors */
+}telemetry_init_status;
+
+sensor_init_retval init_functions[] = {
+	ASM330LHH_Init,
+	BME680_Init,
+	BMI323_Init,
+	BNO055_Init,
+	GPS_Init,
+	LIS2MDLTR_Init,
+	MS560702BA03_Init
+};
+
+const char *sensor_names[] = {
+	"ASM330LHH",
+	"BME680",
+	"BMI323",
+	"BNO055",
+	"GPS",
+	"LIS2MDLTR",
+	"MS560702BA03"
+};
+
 
 
 
@@ -67,7 +93,7 @@ typedef struct {
 } TelemetryData;
 
 
-void SensorManager_Init(void);
+telemetry_init_status SensorManager_Init(void);
 void SensorManager_UpdateData(TelemetryData *data);
 
 

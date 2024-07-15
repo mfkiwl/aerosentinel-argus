@@ -9,15 +9,32 @@
 #include "telemetry_manager.h"
 
 
-void SensorManager_Init(void) {
+telemetry_init_status SensorManager_Init(void) {
 
-//bool asm330lhh_status = ASM330LHH_Init();
-//bool bme680_status = BME680_Init();
-//bool bmi323_status = BMI323_Init();
-//bool bno055_status = BNO055_Init();
-//    GPS_Init();
-//bool lis2mdltr_status = LIS2MDLTR_Init();
-//bool ms560702ba03_status = MS560702BA03_Init();
+    size_t num_sensors = sizeof(init_functions) / sizeof(init_functions[0]);
+    bool all_success = true;
+    bool any_success = false;
+
+    for (size_t i = 0; i < num_sensors; ++i) {
+        bool status = init_functions[i]();
+        if (!status) {
+            printf("%s initialization failed.\n", sensor_names[i]);
+            all_success = false;
+        } else {
+            any_success = true;
+        }
+    }
+
+    if (all_success) {
+        printf("All sensors initialized successfully.\n");
+        return TELEMETRY_INIT_SUCCESS;
+    } else if (any_success) {
+        printf("Partial initialization success.\n");
+        return TELEMETRY_INIT_PARTIAL_SUCCESS;
+    } else {
+        printf("All sensors initialization failed.\n");
+        return TELEMETRY_INIT_FAILURE;
+    }
 }
 
 void SensorManager_UpdateData(TelemetryData *data) {
