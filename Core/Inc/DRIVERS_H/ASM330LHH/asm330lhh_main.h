@@ -14,10 +14,8 @@
 #include <stdbool.h>
 
 
-int32_t asm330lhh_platform_read(I2C_HandleTypeDef *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
-int32_t asm330lhh_platform_write(I2C_HandleTypeDef *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
-int32_t asm330lhh_read_wrapper(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
-int32_t asm330lhh_write_wrapper(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
+int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
+int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
 
 bool ASM330LHH_Init();
 

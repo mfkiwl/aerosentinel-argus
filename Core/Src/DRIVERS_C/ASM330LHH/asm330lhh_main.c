@@ -23,8 +23,8 @@ extern I2C_HandleTypeDef hi2c4;
   * @{
   *
   */
-
 /**
+
   * @brief  I2C PLATFORM READING FUNCTION
   *
   * @param  handle  I2C Port
@@ -34,41 +34,13 @@ extern I2C_HandleTypeDef hi2c4;
   * @retval         interface status (MANDATORY: return 0 -> no Error)
   *
   */
-int32_t asm330lhh_platform_read(I2C_HandleTypeDef *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C read operation using HAL_I2C_Mem_Read
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Read(handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Read((I2C_HandleTypeDef *)handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
 }
-
-
-/**
-  * @brief  I2C PLATFORM READING FUNCTION WRAPPER
-  *
-  * @param  handle  I2C Port (void parameter to avoid driver warning)
-  * @param  reg     register to read
-  * @param  bufp    pointer to buffer that store the data read(ptr)
-  * @param  len     number of consecutive register to read
-  * @retval         interface status (MANDATORY: return 0 -> no Error)
-  *
-  */
-int32_t asm330lhh_read_wrapper(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len) {
-    return asm330lhh_platform_read((I2C_HandleTypeDef *)handle, reg, bufp, len);
-}
-
-/**
-  * @}
-  *
-  */
-
-/**
-  * @defgroup    ASM330LH I2C Platform Write Group
-  * @brief       This section provide a set of functions used to write on the ASM330LHH I2C Port
-  *              MANDATORY: return 0 -> no Error.
-  * @{
-  *
-  */
 
 /**
   * @brief  I2C PLATFORM WRITING FUNCTION
@@ -80,26 +52,12 @@ int32_t asm330lhh_read_wrapper(void *handle, uint8_t reg, uint8_t *bufp, uint16_
   * @retval         interface status (MANDATORY: return 0 -> no Error)
   *
   */
-int32_t asm330lhh_platform_write(I2C_HandleTypeDef *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C write operation using HAL_I2C_Mem_Write
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Write(handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Write((I2C_HandleTypeDef *)handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
-}
-
-/**
-  * @brief  I2C PLATFORM WRITING FUNCTION WRAPPER
-  *
-  * @param  handle  I2C Port (void parameter to avoid driver warning)
-  * @param  reg     register to read
-  * @param  bufp    pointer to buffer that store the data read(ptr)
-  * @param  len     number of consecutive register to read
-  * @retval         interface status (MANDATORY: return 0 -> no Error)
-  *
-  */
-int32_t asm330lhh_write_wrapper(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len) {
-    return asm330lhh_platform_write((I2C_HandleTypeDef *)handle, reg, (uint8_t *)bufp, len);
 }
 
 /**
@@ -119,8 +77,8 @@ int32_t asm330lhh_write_wrapper(void *handle, uint8_t reg, const uint8_t *bufp, 
 bool ASM330LHH_Init(){
 
 	//Assign Read/Write functions to the device
-	asm330lhh.read_reg = asm330lhh_read_wrapper;
-	asm330lhh.write_reg = asm330lhh_write_wrapper;
+	asm330lhh.read_reg = asm330lhh_platform_read;
+	asm330lhh.write_reg = asm330lhh_platform_write;
 	//Assign I2C Port of device
 	asm330lhh.handle =  &hi2c4;
 
