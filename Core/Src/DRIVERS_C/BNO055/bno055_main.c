@@ -15,7 +15,7 @@ extern I2C_HandleTypeDef hi2c2;
 
 
 /**
-  * @defgroup    ASM330LH I2C Platform Read Group
+  * @defgroup    ASM330LH I2C Platform Read/Write Group
   * @brief       This section provide a set of functions used to read on the bno055 I2C Port
   *              MANDATORY: return 0 -> no Error.
   * @{
@@ -40,34 +40,6 @@ s8 bno055_platform_read(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt)
   return (status == HAL_OK) ? 0 : -1;
 }
 
-
-/**
-  * @brief  I2C PLATFORM READING FUNCTION WRAPPER
-  *
-  * @param  handle  I2C Port (void parameter to avoid driver warning)
-  * @param  reg     register to read
-  * @param  bufp    pointer to buffer that store the data read(ptr)
-  * @param  len     number of consecutive register to read
-  * @retval         interface status (MANDATORY: return 0 -> no Error)
-  *
-  */
-s8 bno055_read_wrapper(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt) {
-    return bno055_platform_read(dev_addr, reg_addr, reg_data, cnt);
-}
-
-/**
-  * @}
-  *
-  */
-
-/**
-  * @defgroup    ASM330LH I2C Platform Write Group
-  * @brief       This section provide a set of functions used to write on the bno055 I2C Port
-  *              MANDATORY: return 0 -> no Error.
-  * @{
-  *
-  */
-
 /**
   * @brief  I2C PLATFORM WRITING FUNCTION
   *
@@ -84,20 +56,6 @@ s8 bno055_platform_write(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt)
   HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&hi2c2, dev_addr, reg_addr, I2C_MEMADD_SIZE_8BIT, reg_data, cnt, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
-}
-
-/**
-  * @brief  I2C PLATFORM WRITING FUNCTION WRAPPER
-  *
-  * @param  handle  I2C Port (void parameter to avoid driver warning)
-  * @param  reg     register to read
-  * @param  bufp    pointer to buffer that store the data read(ptr)
-  * @param  len     number of consecutive register to read
-  * @retval         interface status (MANDATORY: return 0 -> no Error)
-  *
-  */
-s8 bno055_write_wrapper(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt) {
-    return bno055_platform_write(dev_addr, reg_addr, reg_data, cnt);
 }
 
 /**
@@ -126,8 +84,8 @@ void bno055_delay_msec(u32 msecs)
   *
   */
 bool BNO055_Init(){
-	bno055_dev.bus_write = bno055_write_wrapper;
-	bno055_dev.bus_read = bno055_read_wrapper;
+	bno055_dev.bus_write = bno055_platform_write;
+	bno055_dev.bus_read = bno055_platform_read;
 	bno055_dev.delay_msec = bno055_delay_msec;
 	bno055_dev.dev_addr = BNO055_I2C_ADDR1;
 

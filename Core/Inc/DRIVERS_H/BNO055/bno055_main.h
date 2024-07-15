@@ -16,9 +16,8 @@
 
 
 s8 bno055_platform_read(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
-s8 bno055_read_wrapper(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
 s8 bno055_platform_write(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
-s8 bno055_write_wrapper(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
+
 void bno055_delay_msec(u32 msecs);
 
 bool BNO055_Init();
