@@ -1,4 +1,4 @@
-../Core/Src/DRIVERS_C/GPS/GPS.c:11:8:convertDegMinToDecDeg	1
-../Core/Src/DRIVERS_C/GPS/GPS.c:26:6:GPS_Init	1
-../Core/Src/DRIVERS_C/GPS/GPS.c:32:6:GPS_CallBack	2
-../Core/Src/DRIVERS_C/GPS/GPS.c:43:6:GPS_Process	8
+../Core/Src/DRIVERS_C/GPS/GPS.c:7:8:convertDegMinToDecDeg	1
+../Core/Src/DRIVERS_C/GPS/GPS.c:22:6:GPS_Init	1
+../Core/Src/DRIVERS_C/GPS/GPS.c:30:6:GPS_CallBack	2
+../Core/Src/DRIVERS_C/GPS/GPS.c:41:6:GPS_Process	8
