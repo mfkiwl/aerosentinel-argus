@@ -14,10 +14,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-int8_t bme680_platform_read(SPI_HandleTypeDef *handle, uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
-int8_t bme680_read_wrapper(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
-int8_t bme680_platform_write(SPI_HandleTypeDef *handle, uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
-int8_t bme680_write_wrapper(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);
+int8_t bme680_platform_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
+int8_t bme680_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);
 
 bool BME680_Init();
 
