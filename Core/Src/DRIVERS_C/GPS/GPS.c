@@ -1,10 +1,6 @@
 #include "DRIVERS_H/GPS/GPSConfig.h"
 #include "DRIVERS_H/GPS/GPS.h"
-#include "stm32h7xx_hal_uart.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+
 
 GPS_t GPS;
 //##################################################################################################################
@@ -23,10 +19,12 @@ double convertDegMinToDecDeg (float degMin)
   return decDeg;
 }
 //##################################################################################################################
-void	GPS_Init(void)
+bool GPS_Init(void)
 {
 	GPS.rxIndex=0;
-	HAL_UART_Receive_IT(&_GPS_USART,&GPS.rxTmp,1);	
+	HAL_StatusTypeDef status = HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
+
+	return (status == HAL_OK) ? 1 : 0;
 }
 //##################################################################################################################
 void	GPS_CallBack(void)
@@ -37,7 +35,7 @@ void	GPS_CallBack(void)
 		GPS.rxBuffer[GPS.rxIndex] = GPS.rxTmp;
 		GPS.rxIndex++;
 	}	
-	HAL_UART_Receive_IT(&_GPS_USART,&GPS.rxTmp,1);
+	HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
 }
 //##################################################################################################################
 void	GPS_Process(void)
@@ -67,6 +65,6 @@ void	GPS_Process(void)
 		memset(GPS.rxBuffer,0,sizeof(GPS.rxBuffer));
 		GPS.rxIndex=0;
 	}
-	HAL_UART_Receive_IT(&_GPS_USART,&GPS.rxTmp,1);
+	HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
 }
 //##################################################################################################################
