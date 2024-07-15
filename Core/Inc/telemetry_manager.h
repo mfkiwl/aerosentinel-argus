@@ -11,7 +11,7 @@
 
 #include "DRIVERS_H/ASM330LHH/asm330lhh_main.h"
 #include "DRIVERS_H/BME680/bme680_main.h"
-//#include "DRIVERS_H/BMI323/bmi323.h"
+#include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BNO055/bno055_main.h"
 //#include "DRIVERS_H/GPS/gps.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
