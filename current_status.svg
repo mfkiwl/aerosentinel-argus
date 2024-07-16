@@ -4,10 +4,6 @@
             <style>
 @import "compass/css3";
 
-$complete: #2ECC71;
-$active: #3498DB;
-$mute: #DFE3E4;
-
 .progress {
   list-style: none;
   margin: 0;
@@ -15,7 +11,7 @@ $mute: #DFE3E4;
   display: table;
   table-layout: fixed;
   width: 100%;
-  color: darken($mute, 33%);
+  color: darken(#DFE3E4, 33%);
 
   > li {
     position: relative;
@@ -27,7 +23,7 @@ $mute: #DFE3E4;
       content: attr(data-step);
       display: block;
       margin: 0 auto;
-      background: $mute;
+      background: #DFE3E4;
       width: 3em;
       height: 3em;
       text-align: center; //IE8 doesn't inherit this style
@@ -41,7 +37,7 @@ $mute: #DFE3E4;
       content: '';
       position: absolute;
       display: block;
-      background: $mute;
+      background: #DFE3E4;
       width: 100%;
       height: 0.5em;
       top: 1.25em;
@@ -53,20 +49,20 @@ $mute: #DFE3E4;
       display: none;
     }
     &.is-complete {
-      color: $complete;
+      color: #2ECC71;
       
       &:before,
       &:after {
         color: #FFF;
-        background: $complete;
+        background: #2ECC71;
       }
     }
     &.is-active {
-      color: $active;
+      color: #3498DB;
       
       &:before {
         color: #FFF;
-        background: $active;
+        background: #3498DB;
       }
     }
   }
@@ -101,7 +97,7 @@ h1 {
   margin-bottom: 3em;
 }
 a {
-  color: $active;
+  color: #3498DB;
   text-decoration: none;
   
   &:hover {
