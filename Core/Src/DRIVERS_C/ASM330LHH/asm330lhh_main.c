@@ -36,11 +36,46 @@ extern I2C_HandleTypeDef hi2c4;
   */
 int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
 {
-  // Perform the I2C read operation using HAL_I2C_Mem_Read
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Read((I2C_HandleTypeDef *)handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
-  // Return the appropriate value based on the HAL status
-  return (status == HAL_OK) ? 0 : -1;
+    HAL_StatusTypeDef status;
+    uint32_t errorCode;
+
+    // Perform the I2C read operation using HAL_I2C_Mem_Read
+    status = HAL_I2C_Mem_Read(&hi2c4, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
+
+    // Check the status and print detailed error information
+    if (status != HAL_OK) {
+        // Get the error code
+        errorCode = HAL_I2C_GetError(handle);
+        printf("I2C Read Status: %d\n", status);
+        printf("I2C Error Code: 0x%08lX\n", errorCode);
+
+        // Print specific error details
+        if (errorCode & HAL_I2C_ERROR_BERR) {
+            printf("Error: Bus Error\n");
+        }
+        if (errorCode & HAL_I2C_ERROR_ARLO) {
+            printf("Error: Arbitration Lost\n");
+        }
+        if (errorCode & HAL_I2C_ERROR_AF) {
+            printf("Error: Acknowledge Failure\n");
+        }
+        if (errorCode & HAL_I2C_ERROR_OVR) {
+            printf("Error: Overrun/Underrun\n");
+        }
+        if (errorCode & HAL_I2C_ERROR_DMA) {
+            printf("Error: DMA Transfer Error\n");
+        }
+        if (errorCode & HAL_I2C_ERROR_TIMEOUT) {
+            printf("Error: Timeout Error\n");
+        }
+    } else {
+        printf("I2C Read Success: %x\n", *bufp);
+    }
+
+    // Return the appropriate value based on the HAL status
+    return (status == HAL_OK) ? 0 : -1;
 }
+
 
 /**
   * @brief  I2C PLATFORM WRITING FUNCTION
@@ -55,7 +90,7 @@ int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16
 int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C write operation using HAL_I2C_Mem_Write
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Write((I2C_HandleTypeDef *)handle, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&hi2c4, (ASM330LHH_I2C_ADD_L << 1), reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
 }
@@ -65,6 +100,10 @@ int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp,
   *
   */
 
+void asm330lhh_delay_msec(uint32_t msecs)
+{
+    HAL_Delay(msecs);
+}
 
 
 /**
@@ -81,20 +120,26 @@ bool ASM330LHH_Init(){
 	asm330lhh.write_reg = asm330lhh_platform_write;
 	//Assign I2C Port of device
 	asm330lhh.handle =  &hi2c4;
+	asm330lhh.mdelay = asm330lhh_delay_msec;
 
 
 	/* Check device ID */
 		whoamI = 0;
-		asm330lhh_device_id_get(&asm330lhh, &whoamI);
+		//asm330lhh_device_id_get(&asm330lhh, &whoamI);
 
-		if ( whoamI != ASM330LHH_ID ) {
-			printf("ASM330LHH ID Error!!");
+//		if ( whoamI != ASM330LHH_ID ) {
+//			printf("ASM330LHH ID Error!! Should be : %hhu \n",whoamI);
+//			return 0;
+//		}
+		int32_t ret = asm330lhh_device_id_get(&asm330lhh, &whoamI);
+
+			printf("%d \n", ret);
 			return 0;
-		}
-		printf("ASM330LHH 6-Axis Automotive IMU Found!");
+
+		//printf("ASM330LHH 6-Axis Automotive IMU Found!");
 
 		//TODO -> Configure the device if recognised successfully.
-		return 1;
+		//return 1;
 
 
 }

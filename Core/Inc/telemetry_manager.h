@@ -15,7 +15,7 @@
 #include "DRIVERS_H/BNO055/bno055_main.h"
 #include "DRIVERS_H/GPS/GPS.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
-#include "DRIVERS_H/MS560702BA03/MS5607_main.h"
+//#include "DRIVERS_H/MS560702BA03/MS5607_main.h"
 #include "DRIVERS_H/BLACKBOX/blackbox.h"
 
 
@@ -27,25 +27,8 @@ typedef enum {
     TELEMETRY_INIT_FAILURE          /*!< Initialization error all the sensors */
 }telemetry_init_status;
 
-sensor_init_retval init_functions[] = {
-	ASM330LHH_Init,
-	BME680_Init,
-	BMI323_Init,
-	BNO055_Init,
-	GPS_Init,
-	LIS2MDLTR_Init,
-	MS560702BA03_Init
-};
-
-const char *sensor_names[] = {
-	"ASM330LHH",
-	"BME680",
-	"BMI323",
-	"BNO055",
-	"GPS",
-	"LIS2MDLTR",
-	"MS560702BA03"
-};
+extern sensor_init_retval init_functions[];
+extern const char *sensor_names[];
 
 
 

@@ -1,2 +1,2 @@
-../Core/Src/telemetry_manager.c:12:23:SensorManager_Init	24	static
-../Core/Src/telemetry_manager.c:40:6:SensorManager_UpdateData	16	static
+../Core/Src/telemetry_manager.c:31:23:SensorManager_Init	24	static
+../Core/Src/telemetry_manager.c:59:6:SensorManager_UpdateData	16	static

@@ -49,7 +49,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055.h ../Core/Inc/DRIVERS_H/GPS/GPS.h \
  ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h \
- ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h \
  ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h ../FATFS/App/fatfs.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
@@ -109,7 +108,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Core/Inc/DRIVERS_H/BNO055/bno055.h:
 ../Core/Inc/DRIVERS_H/GPS/GPS.h:
 ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h:
-../Core/Inc/DRIVERS_H/MS560702BA03/MS5607_main.h:
 ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:
 ../FATFS/App/fatfs.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:

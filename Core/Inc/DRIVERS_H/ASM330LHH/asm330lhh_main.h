@@ -16,6 +16,7 @@
 
 int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len);
 int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len);
+void asm330lhh_delay_msec(uint32_t msecs);
 
 bool ASM330LHH_Init();
 
