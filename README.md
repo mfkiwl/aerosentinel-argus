@@ -53,13 +53,13 @@ This architecture comprises several key components:
 - [**Aerosentinel Relay Protocol (A.R.P.)**](https://github.com/yaxsomo/aerosentinel-relay-protocol): Ensures secure and reliable communication using data encryption, authentication mechanisms, and a robust protocol stack.
 
 ## Current Status
-
-Test Progress Bar
-
 <div align="center">
     <img src="current_status.svg" width="100%" heigth="auto" alt="css-in-readme">
 </div>
 
+<div align="center">
+Argus boards received on 16-07-2024 and are starting testing phase. I'm ensuring that all components power up correctly and communicate as expected.
+</div>
 
 ## Contributing
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
