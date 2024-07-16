@@ -56,7 +56,9 @@ This architecture comprises several key components:
 
 Test Progress Bar
 
-
+<div align="center">
+    <img src="current_status.svg" alt="css-in-readme">
+</div>
 
 
 ## Contributing
