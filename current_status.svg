@@ -86,7 +86,7 @@ section {
   left: auto;
 }
 .progress-bar span {
-  transition: opacity .3s ease-in-out;
+  opacity: 100;
 }
 .progress-bar li:not(.is-active) span {
   opacity: 0;
