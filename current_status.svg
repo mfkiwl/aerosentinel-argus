@@ -78,29 +78,34 @@
 }
             </style>
 <div class="progress">
-  <div class="circle done">
+  <div class="circle active">
     <span class="label">1</span>
-    <span class="title">Personal</span>
+    <span class="title">Initial Testing</span>
   </div>
   <span class="bar done"></span>
-  <div class="circle done">
+  <div class="circle">
     <span class="label">2</span>
-    <span class="title">Address</span>
+    <span class="title">Basic Functionnality Verification</span>
   </div>
   <span class="bar half"></span>
-  <div class="circle done">
+  <div class="circle">
     <span class="label">3</span>
-    <span class="title">Payment</span>
+    <span class="title">Integration Testing</span>
   </div>
   <span class="bar"></span>
   <div class="circle">
     <span class="label">4</span>
-    <span class="title">Review</span>
+    <span class="title">Algorithms Implementation</span>
   </div>
   <span class="bar"></span>
   <div class="circle">
     <span class="label">5</span>
-    <span class="title">Finish</span>
+    <span class="title">Field Testing</span>
+  </div>
+  <span class="bar"></span>
+  <div class="circle">
+    <span class="label">5</span>
+    <span class="title">Final Validation</span>
   </div>
 </div>	    
 	    </div>
