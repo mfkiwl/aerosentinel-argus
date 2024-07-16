@@ -162,16 +162,12 @@ section {
 		    
 <section>
   <ol class="progress-bar">
-    <li class="is-active"><span>Objective &amp; Template</span></li>  
-    <li><span>Options</span></li>  
-    <li><span>Step</span></li>
-    <li><span>In a Nutshell</span></li>  
-    <li><span>Step</span></li>
-    <li><span>Step</span></li>
-    <li><span>Launch Date</span></li>  
-    <li><span>Step</span></li>
-    <li><span>Step</span></li>
-    <li><span>Agreement</span></li>  
+    <li class="is-active"><span>Initial Testing</span></li>  
+    <li><span>Basic Functionnality Verification</span></li>  
+    <li><span>Firmware Development</span></li>
+    <li><span>Field Testing</span></li>  
+    <li><span>Final Validation</span></li>
+    <li><span>Integration in Ecosystem</span></li> 
   </ol>
 </section>
 
