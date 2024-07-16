@@ -13,8 +13,9 @@ Welcome to Aerosentinel Argus Navigation Module firmware repository. Configured 
     - [Installation](#installation)
 3. [Features](#features)
 4. [Software Architecture](#software-architecture)
-5. [Contributing](#contributing)
-6. [License](#license)
+5. [Current Status](#current-status)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Introduction
 This firmware is designed to provide precise navigation and guidance capabilities for rocketry applications using the Aerosentinel Argus Navigation Module. It implements advanced algorithms and features to ensure optimal performance, safety, and reliability during launch, ascent, and recovery phases.
