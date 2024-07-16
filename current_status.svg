@@ -1,6 +1,5 @@
 <svg fill="none" viewBox="0 0 400 400" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
     <foreignObject width="100%" height="100%">
-        <div xmlns="http://www.w3.org/1999/xhtml">
             <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
@@ -102,6 +101,5 @@ h3::before {
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing diam donec adipiscing tristique risus.</p>
 	</li>
 </ol>
-        </div>
     </foreignObject>
 </svg>
