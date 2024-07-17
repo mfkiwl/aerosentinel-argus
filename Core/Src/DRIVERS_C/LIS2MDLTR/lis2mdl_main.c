@@ -37,7 +37,7 @@ extern I2C_HandleTypeDef hi2c1;
 int32_t lis2mdltr_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C read operation using HAL_I2C_Mem_Read
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Read((I2C_HandleTypeDef *)handle, LIS2MDL_I2C_ADD, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Read((I2C_HandleTypeDef *)handle, LIS2MDL_I2C_ADD << 1, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
 }
@@ -57,7 +57,7 @@ int32_t lis2mdltr_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16
 int32_t lis2mdltr_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C write operation using HAL_I2C_Mem_Write
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Write((I2C_HandleTypeDef *)handle, LIS2MDL_I2C_ADD, reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Write((I2C_HandleTypeDef *)handle, LIS2MDL_I2C_ADD << 1, reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
 }
@@ -91,6 +91,7 @@ bool LIS2MDLTR_Init(){
 
 		if ( whoamI != LIS2MDL_ID ) {
 			printf("LIS2MDLTR ID Error!!");
+			printf("Got ID : 0x%02X \n", whoamI);
 			return 0;
 		}
 		printf("LIS2MDLTR High Performance 3-Axis Magnetometer Found!");

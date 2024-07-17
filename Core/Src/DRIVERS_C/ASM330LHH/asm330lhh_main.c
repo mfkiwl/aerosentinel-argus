@@ -40,7 +40,7 @@ int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16
     uint32_t errorCode;
 
     // Perform the I2C read operation using HAL_I2C_Mem_Read
-    status = HAL_I2C_Mem_Read(&hi2c4, ASM330LHH_I2C_ADD_L, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
+    status = HAL_I2C_Mem_Read(&hi2c4, ASM330LHH_I2C_ADD_L << 1, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
 
     // Check the status and print detailed error information
     if (status != HAL_OK) {
@@ -90,7 +90,7 @@ int32_t asm330lhh_platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16
 int32_t asm330lhh_platform_write(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len)
 {
   // Perform the I2C write operation using HAL_I2C_Mem_Write
-  HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&hi2c4, (ASM330LHH_I2C_ADD_L << 1), reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
+  HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&hi2c4, ASM330LHH_I2C_ADD_L << 1, reg, I2C_MEMADD_SIZE_8BIT, (uint8_t *)bufp, len, 100);
   // Return the appropriate value based on the HAL status
   return (status == HAL_OK) ? 0 : -1;
 }
@@ -122,24 +122,28 @@ bool ASM330LHH_Init(){
 	asm330lhh.handle =  &hi2c4;
 	asm330lhh.mdelay = asm330lhh_delay_msec;
 
+	int intf_status = asm330lhh_i2c_interface_set(&asm330lhh,ASM330LHH_I2C_ENABLE);
+	asm330lhh_device_conf_set(&asm330lhh, 1);
+
+	printf("Intf func status : %d \n", intf_status);
 
 	/* Check device ID */
 		whoamI = 0;
-		//asm330lhh_device_id_get(&asm330lhh, &whoamI);
+		asm330lhh_device_id_get(&asm330lhh, &whoamI);
 
-//		if ( whoamI != ASM330LHH_ID ) {
-//			printf("ASM330LHH ID Error!! Should be : %hhu \n",whoamI);
-//			return 0;
-//		}
-		int32_t ret = asm330lhh_device_id_get(&asm330lhh, &whoamI);
-
-			printf("%d \n", ret);
+		if ( whoamI != ASM330LHH_ID ) {
+			printf("ASM330LHH ID Error!! Should be : 0x%02X \n",whoamI);
 			return 0;
+		}
+		//int32_t ret = asm330lhh_device_id_get(&asm330lhh, &whoamI);
 
-		//printf("ASM330LHH 6-Axis Automotive IMU Found!");
+			//printf("%d \n", ret);
+			//return 0;
+
+		printf("ASM330LHH 6-Axis Automotive IMU Found!");
 
 		//TODO -> Configure the device if recognised successfully.
-		//return 1;
+		return 1;
 
 
 }

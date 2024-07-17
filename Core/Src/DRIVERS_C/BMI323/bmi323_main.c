@@ -9,10 +9,19 @@
 
 #include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BMI323/bmi323.h"
+#include "main.h" // Include the header that defines SPI2_CSB_Pin and SPI2_CSB_GPIO_Port
+
 
 extern SPI_HandleTypeDef hspi1;
 struct bmi3_dev bmi323;
 
+void CSB1_SetHigh(void) {
+    HAL_GPIO_WritePin(SPI1_CSB_GPIO_Port, SPI1_CSB_Pin, GPIO_PIN_SET);
+}
+
+void CSB1_SetLow(void) {
+    HAL_GPIO_WritePin(SPI1_CSB_GPIO_Port, SPI1_CSB_Pin, GPIO_PIN_RESET);
+}
 
 /**
   * @defgroup    BMI323 SPI Platform Read/Write Group
@@ -35,11 +44,12 @@ struct bmi3_dev bmi323;
   */
 int8_t bmi323_platform_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr) {
     HAL_StatusTypeDef status;
-
+    CSB1_SetLow();
     status = HAL_SPI_Transmit((SPI_HandleTypeDef *)intf_ptr, &reg_addr, 1, 100);
     if (status != HAL_OK) return -1;
 
     status = HAL_SPI_Receive((SPI_HandleTypeDef *)intf_ptr, reg_data, length, 100);
+    CSB1_SetHigh();
     return (status == HAL_OK) ? 0 : -1;
 }
 
@@ -58,8 +68,10 @@ int8_t bmi323_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t
     uint8_t tx_buffer[length + 1];
     tx_buffer[0] = reg_addr;
     memcpy(&tx_buffer[1], reg_data, length);
+    CSB1_SetLow();
 
     HAL_StatusTypeDef status = HAL_SPI_Transmit((SPI_HandleTypeDef *)intf_ptr, tx_buffer, length + 1, 100);
+    CSB1_SetHigh();
     return (status == HAL_OK) ? 0 : -1;
 }
 
@@ -67,6 +79,10 @@ int8_t bmi323_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t
   * @}
   *
   */
+
+void bmi323_delay_func(uint32_t period) {
+    HAL_Delay(period); // Assuming HAL_Delay is in milliseconds
+}
 
 
 /**
@@ -77,6 +93,8 @@ int8_t bmi323_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t
   *
   */
 bool BMI323_Init(){
+	printf("Initiating BMI323.\n");
+	CSB1_SetHigh();
 
 	//Device interface selection and assignment
     bmi323.intf_ptr = &hspi1;
@@ -85,6 +103,7 @@ bool BMI323_Init(){
 	//Assign Read/Write functions to the device
     bmi323.read = bmi323_platform_read;
     bmi323.write = bmi323_platform_write;
+    bmi323.delay_us = bmi323_delay_func;
 
     int8_t bmi323_status = bmi323_init(&bmi323);
 

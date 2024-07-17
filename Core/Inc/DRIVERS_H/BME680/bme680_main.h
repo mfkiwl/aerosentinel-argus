@@ -14,8 +14,9 @@
 #include <stdbool.h>
 #include <string.h>
 
-int8_t bme680_platform_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
-int8_t bme680_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);
+int8_t bme680_platform_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t length);
+int8_t bme680_platform_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t length);
+void bme680_delay_func(uint32_t period);
 
 bool BME680_Init();
 

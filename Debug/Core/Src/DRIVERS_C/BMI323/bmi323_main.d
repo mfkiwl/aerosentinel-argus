@@ -47,7 +47,7 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
  ../Core/Inc/DRIVERS_H/BMI323/bmi323.h \
  ../Core/Inc/DRIVERS_H/BMI323/bmi3.h \
  ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h
+ ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h ../Core/Inc/main.h
 ../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
@@ -96,3 +96,4 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
 ../Core/Inc/DRIVERS_H/BMI323/bmi3.h:
 ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h:
 ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h:
+../Core/Inc/main.h:
