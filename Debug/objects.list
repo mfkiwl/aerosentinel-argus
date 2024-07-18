@@ -14,7 +14,6 @@
 "./Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_reg.o"
 "./Core/Src/DRIVERS_C/MS560702BA03/MS5607.o"
 "./Core/Src/DRIVERS_C/MS560702BA03/MS5607_main.o"
-"./Core/Src/bmi323_task.o"
 "./Core/Src/common_porting.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32h7xx_hal_msp.o"

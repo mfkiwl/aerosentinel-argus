@@ -19,7 +19,8 @@
 #include "DRIVERS_H/BLACKBOX/blackbox.h"
 
 
-typedef bool (*sensor_init_retval)(void);
+
+typedef int8_t (*sensor_init_retval)(void);
 
 typedef enum {
     TELEMETRY_INIT_SUCCESS,         /*!< Initialization Successful of all the sensors */
@@ -37,10 +38,6 @@ typedef struct {
     float magnetic_field[3]; // X, Y, Z magnetic field in Gauss
 } Magnetometer_3_Axis_Data;
 
-typedef struct {
-    float acceleration[3]; // X, Y, Z acceleration
-    float gyroscope[3];    // X, Y, Z gyroscope
-} IMU_6_Axis_Data;
 
 typedef struct {
     float orientation[3];  // Euler angles: Pitch, Roll, Yaw
@@ -79,6 +76,7 @@ typedef struct {
 
 telemetry_init_status SensorManager_Init(void);
 void SensorManager_UpdateData(TelemetryData *data);
+void TestTelemetry();
 
 
 #endif /* INC_TELEMETRY_MANAGER_H_ */

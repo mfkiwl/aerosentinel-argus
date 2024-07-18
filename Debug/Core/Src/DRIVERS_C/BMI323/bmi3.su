@@ -60,8 +60,8 @@
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:4740:15:set_gyro_config	32	static
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:4809:15:validate_bw_avg_gyr_mode	32	static
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:4846:15:validate_gyr_odr_range	32	static
-../Core/Src/DRIVERS_C/BMI323/bmi3.c:4873:15:get_accel_sensor_data	64	static
-../Core/Src/DRIVERS_C/BMI323/bmi3.c:4913:15:get_gyro_sensor_data	56	static
+../Core/Src/DRIVERS_C/BMI323/bmi3.c:4873:8:get_accel_sensor_data	64	static
+../Core/Src/DRIVERS_C/BMI323/bmi3.c:4913:8:get_gyro_sensor_data	56	static
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:4953:15:get_step_counter_sensor_data	32	static
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:4987:15:get_orient_output_data	32	static
 ../Core/Src/DRIVERS_C/BMI323/bmi3.c:5022:15:get_gyro_config	24	static

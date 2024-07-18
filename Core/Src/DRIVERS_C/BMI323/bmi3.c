@@ -214,7 +214,7 @@ static int8_t get_accel_config(struct bmi3_accel_config *config, struct bmi3_dev
  * @return < 0 -> Fail
  *
  */
-static int8_t get_accel_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev);
+int8_t get_accel_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev);
 
 /*!
  * @brief This internal API sets gyroscope configurations like ODR, gyro mode,
@@ -284,7 +284,7 @@ static int8_t validate_gyr_odr_range(uint8_t *odr, uint8_t *range, struct bmi3_d
  * @return < 0 -> Fail
  *
  */
-static int8_t get_gyro_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev);
+int8_t get_gyro_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev);
 
 /*!
  * @brief This internal API gets the step counter data from the register.
@@ -4870,7 +4870,7 @@ static int8_t validate_gyr_odr_range(uint8_t *odr, uint8_t *range, struct bmi3_d
 /*!
  * @brief This internal API gets the accelerometer data from the register.
  */
-static int8_t get_accel_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev)
+int8_t get_accel_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev)
 {
     /* Variable to store result of API */
     int8_t rslt;
@@ -4910,7 +4910,7 @@ static int8_t get_accel_sensor_data(struct bmi3_sens_axes_data *data, uint8_t re
 /*!
  * @brief This internal API gets the gyroscope data from the register.
  */
-static int8_t get_gyro_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev)
+int8_t get_gyro_sensor_data(struct bmi3_sens_axes_data *data, uint8_t reg_addr, struct bmi3_dev *dev)
 {
     /* Variable to store result of API */
     int8_t rslt;

@@ -14,14 +14,6 @@ extern SPI_HandleTypeDef hspi1;
 extern volatile uint16_t bhi260_fifo_ready;
 
 #if defined(FIFO_WM_INT)
-extern volatile uint16_t bma425_fifo_ready;
-extern volatile uint16_t bma400_fifo_ready;
-extern volatile uint16_t bma456an_fifo_ready;
-extern volatile uint16_t bma456h_fifo_ready;
-extern volatile uint16_t bma456mm_fifo_ready;
-extern volatile uint16_t bma456w_fifo_ready;
-extern volatile uint16_t bmi160_fifo_ready;
-extern volatile uint16_t bmi270_fifo_ready;
 extern volatile uint16_t bmi323_fifo_ready;
 #endif
 
@@ -33,35 +25,7 @@ volatile uint8_t int2_flag = 0;
 volatile uint8_t int3_flag = 0;
 
 
-#if defined(USE_SHUTTLE20)
-void Enable_MCU_INT_Pin(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	
-	/*Configure GPIO pin : INT1_Pin */
-	GPIO_InitStruct.Pin = INT1_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-	HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
-}
-
-int Get_MCU_INT_Pin_Status(void)
-{
-	int rslt;
-	if(HAL_GPIO_ReadPin(INT1_GPIO_Port, INT1_Pin) == GPIO_PIN_SET)
-	{
-		rslt = BHI260_GPIO_PIN_HIGH;
-	}
-	else
-	{
-		rslt = BHI260_GPIO_PIN_LOW;
-	}
-
-	return rslt;
-}
-#elif defined(USE_SHUTTLE30)
 void Enable_MCU_INT_Pin(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -90,25 +54,11 @@ int Get_MCU_INT_Pin_Status(void)
 	return rslt;
 }
 
-#endif
+
 
 void Enable_MCU_INT1_Pin(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	
-#if defined(USE_SHUTTLE20)
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	
-	/*Configure GPIO pin : INT1_Pin PA10*/
-	GPIO_InitStruct.Pin = INT1_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
-
-	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-#elif defined(USE_SHUTTLE30)
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	
 	/*Configure GPIO pin : INT2_Pin PB3*/
@@ -119,28 +69,13 @@ void Enable_MCU_INT1_Pin(void)
 	HAL_GPIO_Init(INT2_GPIO_Port, &GPIO_InitStruct);
 
 	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI3_IRQn, 1, 0);
-  	HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-#endif
+	  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+	  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
 void Disable_MCU_INT1_Pin(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	
-#if defined(USE_SHUTTLE20)
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	
-	/*Configure GPIO pin : INT1_Pin PA10*/
-	GPIO_InitStruct.Pin = INT1_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
-
-	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-	HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-#elif defined(USE_SHUTTLE30)
 	__HAL_RCC_GPIOB_CLK_ENABLE();
 	
 	/*Configure GPIO pin : INT2_Pin PB3*/
@@ -150,28 +85,13 @@ void Disable_MCU_INT1_Pin(void)
 	HAL_GPIO_Init(INT2_GPIO_Port, &GPIO_InitStruct);
 
 	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0);
-  	HAL_NVIC_DisableIRQ(EXTI3_IRQn);
-#endif
+	  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+	  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
 void Enable_MCU_INT2_Pin(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	
-#if defined(USE_SHUTTLE20)
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	
-	/*Configure GPIO pin : INT2_Pin PB3*/
-	GPIO_InitStruct.Pin = INT2_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(INT2_GPIO_Port, &GPIO_InitStruct);
-
-	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0);
-  	HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-#elif defined(USE_SHUTTLE30)	
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	
 	/*Configure GPIO pin : INT1_Pin PA10*/
@@ -181,29 +101,13 @@ void Enable_MCU_INT2_Pin(void)
 	HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
 
 	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
-#endif
+	  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+	  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
 void Disable_MCU_INT2_Pin(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	
-#if defined(USE_SHUTTLE20)
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	
-	/*Configure GPIO pin : INT2_Pin PB3*/
-	GPIO_InitStruct.Pin = INT2_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(INT2_GPIO_Port, &GPIO_InitStruct);
-
-	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0);
-  	HAL_NVIC_DisableIRQ(EXTI3_IRQn);
-#elif defined(USE_SHUTTLE30)	
 	/*Configure GPIO pin : INT1_Pin PA10*/
 	GPIO_InitStruct.Pin = INT1_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -211,49 +115,10 @@ void Disable_MCU_INT2_Pin(void)
 	HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
 
 	/* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-	HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
-
-#endif
+	  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+	  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
-//void Enable_MCU_INT3_Pin(void)
-//{
-//	GPIO_InitTypeDef GPIO_InitStruct = {0};
-//
-//#if defined(USE_SHUTTLE30)
-//	__HAL_RCC_GPIOA_CLK_ENABLE();
-//
-//	/*Configure GPIO pin : INT3_Pin PA9*/
-//	GPIO_InitStruct.Pin = INT3_Pin;
-//	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	HAL_GPIO_Init(INT3_GPIO_Port, &GPIO_InitStruct);
-//
-//	/* EXTI interrupt init*/
-//	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
-//  	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-//
-//#endif
-//}
-//
-//void Disable_MCU_INT3_Pin(void)
-//{
-//	GPIO_InitTypeDef GPIO_InitStruct = {0};
-//
-//#if defined(USE_SHUTTLE30)
-//	/*Configure GPIO pin : INT3_Pin PA9*/
-//	GPIO_InitStruct.Pin = INT3_Pin;
-//	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-//	GPIO_InitStruct.Pull = GPIO_NOPULL;
-//	HAL_GPIO_Init(INT3_GPIO_Port, &GPIO_InitStruct);
-//
-//	/* EXTI interrupt init*/
-//	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
-//	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-//
-//#endif
-//}
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -333,24 +198,18 @@ void bst_delay_us(uint32_t period, void *intf_ptr)
 	}
 }
 
-//void UART_Printf(uint8_t* buff, uint16_t size)
-//{
-//    //HAL_UART_Transmit_DMA(&huart2, buff, size);
-//    HAL_UART_Transmit(&UART_HANDLE, buff, size, BUS_TIMEOUT);
-//}
-
 char chBuffer[512];
 void PDEBUG(char *format, ...)
 {
 #if defined(DEBUG_EN)
-    va_list ap;
-    char timestamp[16];
-    va_start(ap, format);
-    vsnprintf(chBuffer, sizeof(chBuffer), format, ap);
+    //va_list ap;
+    //char timestamp[16];
+    //va_start(ap, format);
+    //vsnprintf(chBuffer, sizeof(chBuffer), format, ap);
     //sprintf(timestamp, "[%d]", xTaskGetTickCount()); //xTaskGetTickCountFromISR()
-    printf((uint8_t *)timestamp, strlen(timestamp));
+    //printf((uint8_t *)timestamp, strlen(timestamp));
     //UART_Printf((uint8_t *)chBuffer,strlen(chBuffer));
-    va_end(ap);
+    //va_end(ap);
 #endif
 }
 

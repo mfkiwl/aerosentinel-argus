@@ -23,8 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h" // printf function
-#include "bmi323_task.h"
-//#include "telemetry_manager.h"
+#include "telemetry_manager.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -195,16 +194,14 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   //I2C_Scan(&hi2c4);
-  //SensorManager_Init();
+  SensorManager_Init();
 
-  //Test BMI323
-  struct bmi3_dev bmi323dev;
-  uint8_t bmi323_dev_addr;
-	int8_t rslt = BMI3_OK;
-	struct bmi3_dev *dev;
-	dev = &bmi323dev;
-	Init_BMI323(dev);
-	printf("After Init!!");
+  TestTelemetry();
+
+
+
+
+
 
 
 
@@ -216,7 +213,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
 	  //count++; //Increment count variable
 	  //printf("Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count); // Hello World Test
