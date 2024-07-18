@@ -14,12 +14,13 @@
 #include <stdbool.h>
 #include "DRIVERS_H/BNO055/bno055.h"
 
+#define BUS_TIMEOUT             1000
 
-s8 bno055_platform_read(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
-s8 bno055_platform_write(u8 dev_addr, u8 reg_addr, u8 *reg_data, u8 cnt);
+signed char bno055_platform_read(unsigned char slave_address7, unsigned char subaddress, unsigned char *pBuffer, unsigned char ReadNumbr);
+signed char bno055_platform_write(unsigned char slave_address7, unsigned char subaddress, unsigned char *pBuffer, unsigned char WriteNumbr);
 
 void bno055_delay_msec(u32 msecs);
 
-bool BNO055_Init();
+int8_t BNO055_Init();
 
 #endif /* INC_DRIVERS_H_BNO055_BNO055_MAIN_H_ */

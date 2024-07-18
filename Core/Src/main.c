@@ -196,7 +196,7 @@ int main(void)
   //I2C_Scan(&hi2c4);
   SensorManager_Init();
 
-  TestTelemetry();
+  //TestTelemetry();
 
 
 

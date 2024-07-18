@@ -9,11 +9,13 @@
 #include "telemetry_manager.h"
 
 
+
+
 sensor_init_retval init_functions[] = {
     //ASM330LHH_Init,
     //BME680_Init,
-	Init_BMI323,
-    //BNO055_Init,
+	//Init_BMI323,
+    BNO055_Init,
     //GPS_Init,
     //LIS2MDLTR_Init,
     //MS560702BA03_Init
@@ -22,8 +24,8 @@ sensor_init_retval init_functions[] = {
 const char *sensor_names[] = {
     //"ASM330LHH",
     //"BME680",
-    "BMI323",
-    //"BNO055",
+    //"BMI323",
+    "BNO055",
     //"GPS",
     //"LIS2MDLTR",
     // "MS560702BA03"

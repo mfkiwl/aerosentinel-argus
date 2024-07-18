@@ -1,4 +1,4 @@
-../Core/Src/telemetry_manager.c:32:23:SensorManager_Init	5
-../Core/Src/telemetry_manager.c:60:6:SensorManager_UpdateData	1
-../Core/Src/telemetry_manager.c:72:6:delay_us_func	3
-../Core/Src/telemetry_manager.c:85:6:TestTelemetry	2
+../Core/Src/telemetry_manager.c:34:23:SensorManager_Init	5
+../Core/Src/telemetry_manager.c:62:6:SensorManager_UpdateData	1
+../Core/Src/telemetry_manager.c:74:6:delay_us_func	3
+../Core/Src/telemetry_manager.c:87:6:TestTelemetry	2
