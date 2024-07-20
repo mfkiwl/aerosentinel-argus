@@ -9,29 +9,23 @@
 #include "telemetry_manager.h"
 
 
+AHRS_9_Axis_Data bno055_fusion_data;
+IMU_6_Axis_Data bmi323_sensor_data;
 
+TelemetryData telemetry;
 
 sensor_init_retval init_functions[] = {
-    //ASM330LHH_Init,
-    //BME680_Init,
-	//Init_BMI323,
-    BNO055_Init,
-    //GPS_Init,
-    //LIS2MDLTR_Init,
-    //MS560702BA03_Init
+	Init_BMI323,
+	BNO055_Init,
 };
 
 const char *sensor_names[] = {
-    //"ASM330LHH",
-    //"BME680",
-    //"BMI323",
-    "BNO055",
-    //"GPS",
-    //"LIS2MDLTR",
-    // "MS560702BA03"
+	"BMI323",
+	"BNO055",
 };
 
 telemetry_init_status SensorManager_Init(void) {
+	printf("Sensors Initialization routine started. \n");
 
     size_t num_sensors = sizeof(init_functions) / sizeof(init_functions[0]);
     bool all_success = true;
@@ -61,7 +55,8 @@ telemetry_init_status SensorManager_Init(void) {
 
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
-
+	telemetry.bmi323_data = bmi323_data_poll();
+	telemetry.bno055_data = bno_read_fusion_data();
 //    ASM330LHH_ReadData(&data->asm330lhh_data);
 //    BME680_ReadData(&data->bme680_data);
 //    BMI323_ReadData(&data->bmi323_data);
@@ -85,13 +80,17 @@ void delay_us_func(uint32_t period)
 }
 
 void TestTelemetry(){
-    // Call the function multiple times to see if data changes
 	for(int i = 0; i < 20 ; i++){
-	IMU_6_Axis_Data sensor_data = bmi323_data_poll();
-	   printf("Accelerometer Data:\n");
-	    printf("X: %f m/s^2, Y: %f m/s^2, Z: %f m/s^2\n", sensor_data.acceleration[0], sensor_data.acceleration[1], sensor_data.acceleration[2]);
-	    printf("Gyroscope Data:\n");
-	    printf("X: %f dps, Y: %f dps, Z: %f dps\n", sensor_data.gyroscope[0], sensor_data.gyroscope[1], sensor_data.gyroscope[2]);
-        delay_us_func(150000);
-	}
-	}
+
+	// Sensor Data Read
+	SensorManager_UpdateData(&telemetry);
+
+	// Sensor Data Print
+	bmi323_print_sensor_data(&telemetry.bmi323_data);
+	bno055_print_fusion_data(&telemetry.bno055_data);
+
+	printf("// --------------------------------------------- // \n");
+
+    delay_us_func(150000);
+    	}
+}

@@ -42,6 +42,7 @@ int8_t bmi3_interface_init(struct bmi3_dev *bmi, uint8_t intf);
 int8_t Init_BMI323();
 void BMI323_ReadData();
 IMU_6_Axis_Data bmi323_data_poll();
+void bmi323_print_sensor_data(IMU_6_Axis_Data *data);
 
 int8_t bmi323_platform_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
 int8_t bmi323_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);

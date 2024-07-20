@@ -103,7 +103,7 @@ int8_t bmi3_interface_init(struct bmi3_dev *bmi, uint8_t intf)
 	/* Bus configuration : I2C */
 	if (intf == BMI3_I2C_INTF)
 	{
-		printf("I2C Interface \n");
+		//printf("I2C Interface \n");
 
 		/* To initialize the user I2C function */
 		bmi323_dev_addr = BMI3_ADDR_I2C_SEC;
@@ -114,7 +114,7 @@ int8_t bmi3_interface_init(struct bmi3_dev *bmi, uint8_t intf)
 	/* Bus configuration : SPI */
 	else if (intf == BMI3_SPI_INTF)
 	{
-		printf("SPI Interface \n");
+		//printf("SPI Interface \n");
 		bmi->intf = BMI3_SPI_INTF;
 		bmi->read = (bmi3_read_fptr_t)SensorAPI_SPIx_Read;
 		bmi->write = (bmi3_write_fptr_t)SensorAPI_SPIx_Write;
@@ -149,7 +149,7 @@ int8_t Init_BMI323()
 
 	/* Initialize bmi323. */
 	rslt = bmi323_init(dev);
-	printf("bmi323_init: %d \n",rslt);
+	//printf("bmi323_init: %d \n",rslt);
 
 	if (rslt != BMI3_OK)
 	{
@@ -168,7 +168,7 @@ int8_t Init_BMI323()
 		return rslt;
 	}
 
-	printf("Chip ID:0x%02x\r\n", chipid);
+	//printf("Chip ID:0x%02x\r\n", chipid);
 
 	//rslt = bmi323_get_config_version(&ver_major, &ver_minor, dev);
 	//printf("The firmware version: v%d.%d\r\n", ver_major, ver_minor);
@@ -179,7 +179,7 @@ int8_t Init_BMI323()
 	struct bmi3_axes_remap remap = { 0 };
 
 	rslt = bmi323_get_remap_axes(&remap, &dev);
-	printf("get_remap_axes: %d \n", rslt);
+	//printf("get_remap_axes: %d \n", rslt);
 
 	/* @note: XYZ axis denotes x = x, y = y, z = z
 	* Similarly,
@@ -199,59 +199,59 @@ int8_t Init_BMI323()
 	if (rslt == BMI323_OK)
 	{
 		rslt = bmi323_set_remap_axes(remap, &dev);
-		printf("set_remap_axes: %d \n", rslt);
+		//printf("set_remap_axes: %d \n", rslt);
 
 		if (rslt != BMI323_OK)
 		{
-			printf("bmi323_set_remap_axes() failed\r\n");
+			//printf("bmi323_set_remap_axes() failed\r\n");
 		}
 	}
 	else
 	{
-		printf("bmi323_get_remap_axes() failed\r\n");
+		//printf("bmi323_get_remap_axes() failed\r\n");
 	}
 
 #endif
 #if defined(ACC_GYRO_SELFTEST)
 	rslt = bmi323_perform_self_test(BMI3_ST_BOTH_ACC_GYR, &st_result_status, dev);
-	printf("Perform_self_test: %d \n", rslt);
+	//printf("Perform_self_test: %d \n", rslt);
 
 	if ((rslt == BMI323_OK) && (st_result_status.self_test_rslt == BMI323_TRUE))
 	{
-		printf("ACC self-test is successfully completed \n");
+		//printf("ACC self-test is successfully completed \n");
 	}
 	if ((rslt == BMI323_OK) && (st_result_status.self_test_rslt == BMI323_FALSE))
 	{
-		printf("Self-test is not successfully completed\n");
+		//printf("Self-test is not successfully completed\n");
 
 		switch (st_result_status.self_test_err_rslt)
 		{
 			case BMI3_SC_ST_ABORTED_MASK:
-				printf("SC_ST_ABORTED\n");
+				//printf("SC_ST_ABORTED\n");
 				break;
 			case BMI3_ST_IGNORED_MASK:
-				printf("BMI323_ST_IGNORED\n");
+				//printf("BMI323_ST_IGNORED\n");
 				break;
 			case BMI3_SC_ST_PRECON_ERR_MASK:
-				printf("BMI323_SC_ST_PRECON_ERR\n");
+				//printf("BMI323_SC_ST_PRECON_ERR\n");
 				break;
 			case BMI3_MODE_CHANGE_WHILE_SC_ST_MASK:
-				printf("BMI323_MODE_CHANGE_WHILE_SC_ST\n");
+				//printf("BMI323_MODE_CHANGE_WHILE_SC_ST\n");
 				break;
 			default:
 				break;
 		}
 	}
 
-	printf("Result of acc_x_axis is %d\n", st_result_status.acc_sens_x_ok);
-	printf("Result of acc_y_axis is %d\n", st_result_status.acc_sens_y_ok);
-	printf("Result of acc_z_axis is %d\n", st_result_status.acc_sens_z_ok);
-	printf("Result of gyr_x_axis is %d\n", st_result_status.gyr_sens_x_ok);
-	printf("Result of gyr_y_axis is %d\n", st_result_status.gyr_sens_y_ok);
-	printf("Result of gyr_z_axis is %d\n", st_result_status.gyr_sens_z_ok);
-	printf("Result of gyr_drive_ok is %d\n", st_result_status.gyr_drive_ok);
-	printf("Result of self-test error is %d\n", st_result_status.self_test_err_rslt);
-	printf("Result of ST_result is %d\n", st_result_status.self_test_rslt);
+	//printf("Result of acc_x_axis is %d\n", st_result_status.acc_sens_x_ok);
+	//printf("Result of acc_y_axis is %d\n", st_result_status.acc_sens_y_ok);
+	//printf("Result of acc_z_axis is %d\n", st_result_status.acc_sens_z_ok);
+	//printf("Result of gyr_x_axis is %d\n", st_result_status.gyr_sens_x_ok);
+	//printf("Result of gyr_y_axis is %d\n", st_result_status.gyr_sens_y_ok);
+	//printf("Result of gyr_z_axis is %d\n", st_result_status.gyr_sens_z_ok);
+	//printf("Result of gyr_drive_ok is %d\n", st_result_status.gyr_drive_ok);
+	//printf("Result of self-test error is %d\n", st_result_status.self_test_err_rslt);
+	//printf("Result of ST_result is %d\n", st_result_status.self_test_rslt);
 #endif
 
 	#if defined(ACC_GYRO)
@@ -324,22 +324,22 @@ int8_t Open_BMI323_ACC()
 		rslt = bmi323_set_sensor_config(&config, 1, dev);
 		if (rslt != BMI3_OK)
 		{
-			printf("Open ACC failed, rslt=%d\r\n", rslt);
+			//printf("Open ACC failed, rslt=%d\r\n", rslt);
 		}
 		else
 		{
-			printf("Open ACC set successfully\r\n");
+			//printf("Open ACC set successfully\r\n");
 
 			/* Get the configuration settings for validation */
 			rslt = bmi323_get_sensor_config(&config, 1, dev);
 			if (rslt == BMI3_OK)
 			{
-				printf("Get ACC configuration successful\r\n");
-				printf("acc_mode = %d\r\n", config.cfg.acc.acc_mode);
-				printf("bwp = %d\r\n", config.cfg.acc.bwp);
-				printf("odr = %d\r\n", config.cfg.acc.odr);
-				printf("Range = %d\r\n", config.cfg.acc.range);
-				printf("avg_num = %d\r\n", config.cfg.acc.avg_num);
+				//printf("Get ACC configuration successful\r\n");
+				//printf("acc_mode = %d\r\n", config.cfg.acc.acc_mode);
+				//printf("bwp = %d\r\n", config.cfg.acc.bwp);
+				//printf("odr = %d\r\n", config.cfg.acc.odr);
+				//printf("Range = %d\r\n", config.cfg.acc.range);
+				//printf("avg_num = %d\r\n", config.cfg.acc.avg_num);
 			}
 		}
 	}
@@ -364,14 +364,14 @@ int8_t Close_BMI323_ACC()
 		rslt = bmi323_set_sensor_config(&config, 1, dev);
 		if (rslt != BMI3_OK)
 		{
-			printf("Close ACC failed, rslt=%d\r\n", rslt);
+			//printf("Close ACC failed, rslt=%d\r\n", rslt);
 		}
 		else
 		{
-			printf("Open ACC successfully\r\n");
+			//printf("Open ACC successfully\r\n");
 		}
 	}
-	printf("Close_BMI323_ACC: %d \n",rslt);
+	//printf("Close_BMI323_ACC: %d \n",rslt);
 
 	return rslt;
 }
@@ -436,22 +436,22 @@ int8_t Open_BMI323_GYRO()
 		rslt = bmi323_set_sensor_config(&config, 1, dev);
 		if (rslt != BMI3_OK)
 		{
-			printf("Open GYRO failed\r\n");
+			//printf("Open GYRO failed\r\n");
 		}
 		else
 		{
-			printf("Open GYRO successfully\r\n");
+			//printf("Open GYRO successfully\r\n");
 
 			/* Get the configuration settings for validation */
 			rslt = bmi323_get_sensor_config(&config, 1, dev);
 			if (rslt == BMI3_OK)
 			{
-				printf("Get BMI2_GYRO Configuration successful\r\n");
-				printf("gyr_mode = %d\r\n", config.cfg.gyr.gyr_mode);
-				printf("ODR = %d\r\n", config.cfg.gyr.odr);
-				printf("Range = %d\r\n", config.cfg.gyr.range);
-				printf("bwp = %d\r\n", config.cfg.gyr.bwp);
-				printf("avg_num = %d\r\n", config.cfg.gyr.avg_num);
+				//printf("Get BMI2_GYRO Configuration successful\r\n");
+				//printf("gyr_mode = %d\r\n", config.cfg.gyr.gyr_mode);
+				//printf("ODR = %d\r\n", config.cfg.gyr.odr);
+				//printf("Range = %d\r\n", config.cfg.gyr.range);
+				//printf("bwp = %d\r\n", config.cfg.gyr.bwp);
+				//printf("avg_num = %d\r\n", config.cfg.gyr.avg_num);
 			}
 		}
 	}
@@ -484,7 +484,7 @@ int8_t Close_BMI323_GYRO()
 			PDEBUG("Open GYRO successfully\r\n");
 		}
 	}
-	printf("Close_BMI323_GYRO: %d \n",rslt);
+	//printf("Close_BMI323_GYRO: %d \n",rslt);
 
 	return rslt;
 }
@@ -502,15 +502,15 @@ int8_t Open_BMI323_FIFO()
 
 	/* Set the FIFO flush in FIFO control register to clear the FIFO data */
     	rslt = bmi323_set_regs(BMI3_REG_FIFO_CTRL, data, 2, dev);
-    	printf("bmi323_set_regs: %d \n", rslt);
+    	//printf("bmi323_set_regs: %d \n", rslt);
 
 	/* Clear FIFO configuration register */
 	rslt = bmi3_set_fifo_config(BMI3_FIFO_ALL_EN, BMI3_DISABLE, dev);
-	printf("bmi323_set_fifo_config: %d \n", rslt);
+	//printf("bmi323_set_fifo_config: %d \n", rslt);
 
 	/*Example: 100Hz ODR, read data per second*/
 	/* Set FIFO configuration by enabling accelerometer and gyroscope*/
-	printf("FIFO Header is disabled\r\n");
+	//printf("FIFO Header is disabled\r\n");
 
 	#if defined(FIFO_POLL) || defined(FIFO_WM_INT)
 		#if defined(ACC_ONLY)
@@ -518,7 +518,7 @@ int8_t Open_BMI323_FIFO()
 		rslt = bmi3_set_fifo_wm(150, dev);//6*50=300 bytes, 50HZ ODR, read data every second
 		if (rslt != BMI3_OK)
 		{
-			printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
+			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
 		}
 		rslt = bmi3_set_fifo_config(BMI3_FIFO_ACC_EN , BMI3_ENABLE, dev);
 		#elif defined(GYRO_ONLY)
@@ -526,7 +526,7 @@ int8_t Open_BMI323_FIFO()
 		rslt = bmi3_set_fifo_wm(150, dev);//6*50=300 bytes, 50HZ ODR, read data every second
 		if (rslt != BMI3_OK)
 		{
-			printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
+			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
 		}
 		rslt = bmi3_set_fifo_config(BMI3_FIFO_GYR_EN , BMI3_ENABLE, dev);
 		#elif defined(ACC_GYRO)
@@ -534,13 +534,13 @@ int8_t Open_BMI323_FIFO()
 		rslt = bmi3_set_fifo_wm(300, dev);//12*50=600, 100HZ ODR, read data every second
 		if (rslt != BMI3_OK)
 		{
-			printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
+			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
 		}
 		rslt = bmi3_set_fifo_config(BMI3_FIFO_ACC_EN | BMI3_FIFO_GYR_EN , BMI3_ENABLE, dev);
 		#endif
 		if (rslt != BMI3_OK)
 		{
-			printf("Set fifo config failed\r\n");
+			//printf("Set fifo config failed\r\n");
 		}
 	#endif
 
@@ -560,7 +560,7 @@ int8_t Open_BMI323_FIFO()
 
 	/* Map the interrupt configuration */
 	rslt = bmi323_map_interrupt(map_int, dev);
-	printf("bmi323_map_interrupt: %d \n", rslt);
+	//printf("bmi323_map_interrupt: %d \n", rslt);
 	#endif
 
 	/* Update FIFO structure */
@@ -577,7 +577,7 @@ int8_t Close_BMI323_FIFO()
 	rslt = bmi3_set_fifo_config(BMI3_FIFO_ALL_EN, BMI3_DISABLE, dev);
 	if (rslt != BMI3_OK)
 	{
-		printf("Clear FIFO configuration register error, error code: %d\r\n", rslt);
+		//printf("Clear FIFO configuration register error, error code: %d\r\n", rslt);
 		return rslt;
 	}
 
@@ -596,47 +596,47 @@ void BMI323_ReadData()
 			fifoframe.data = fifo_data;
 
 			rslt = bmi323_get_fifo_length(&fifoframe.available_fifo_len, dev);
-	            	printf("bmi323_get_fifo_length: %d \n", rslt);
+	            	//printf("bmi323_get_fifo_length: %d \n", rslt);
 
 	            	//fifoframe.length = (uint16_t)(fifoframe.available_fifo_len * 2) + dev->dummy_byte;
 			fifoframe.length = (uint16_t)(fifoframe.available_fifo_len * 2) + 2;
-			printf("Fifo length=%d\r\n", fifoframe.length);
+			//printf("Fifo length=%d\r\n", fifoframe.length);
 			if(fifoframe.length > 0)
 			{
 				/* Read FIFO data */
 				rslt = bmi323_read_fifo_data(&fifoframe, dev);
-				printf("bmi323_read_fifo_data: %d \n", rslt);
+				//printf("bmi323_read_fifo_data: %d \n", rslt);
 
 				if (rslt == BMI323_OK)
 				{
-					printf("Read %d bytes from fifo\r\n", fifoframe.length);
+					//printf("Read %d bytes from fifo\r\n", fifoframe.length);
 					/* Parse the FIFO data to extract accelerometer data from the FIFO buffer */
 					rslt = bmi323_extract_accel(fifo_accel_data, &fifoframe, dev);
 
 					if (rslt == BMI3_OK)
 					{
-						printf("Parsed accelerometer data frames: %d\r\n", fifoframe.avail_fifo_accel_frames);
+						//printf("Parsed accelerometer data frames: %d\r\n", fifoframe.avail_fifo_accel_frames);
 						/* Print the parsed accelerometer data from the FIFO buffer */
 						for(idx = 0 ; idx < fifoframe.avail_fifo_accel_frames ; idx++)
 						{
-							printf("ACCEL[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_accel_data[idx].x, fifo_accel_data[idx].y, fifo_accel_data[idx].z);
+							//printf("ACCEL[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_accel_data[idx].x, fifo_accel_data[idx].y, fifo_accel_data[idx].z);
 						}
 					} else {
-						printf("Accelerometer data frame parsing error : %d",rslt);
+						//printf("Accelerometer data frame parsing error : %d",rslt);
 					}
 					/* Parse the FIFO data to extract gyroscope data from the FIFO buffer */
 					rslt = bmi323_extract_gyro(fifo_gyr_data, &fifoframe, dev);
 
 					if (rslt == BMI3_OK)
 					{
-						printf("Parsed gyroscope data frames: %d\r\n", fifoframe.avail_fifo_gyro_frames);
+						//printf("Parsed gyroscope data frames: %d\r\n", fifoframe.avail_fifo_gyro_frames);
 						/* Print the parsed accelerometer data from the FIFO buffer */
 						for(idx = 0 ; idx < fifoframe.avail_fifo_gyro_frames ; idx++)
 						{
-							printf("GYRO[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_gyr_data[idx].x, fifo_gyr_data[idx].y, fifo_gyr_data[idx].z);
+							//printf("GYRO[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_gyr_data[idx].x, fifo_gyr_data[idx].y, fifo_gyr_data[idx].z);
 						}
 					} else {
-						printf("Gyroscope data frame parsing error : %d",rslt);
+						//printf("Gyroscope data frame parsing error : %d",rslt);
 					}
 
 				}
@@ -678,8 +678,18 @@ IMU_6_Axis_Data bmi323_data_poll() {
             imu_data.gyroscope[2] = gyro_lsb_to_dps_2000(sensor_data[1].sens_data.gyr.z);  // Assuming ±2000°/s range
         }
     } else {
-        printf("Failed to get sensor data. Error code: %d\n", rslt);
+        //printf("Failed to get sensor data. Error code: %d\n", rslt);
     }
 
     return imu_data;
+}
+
+
+void bmi323_print_sensor_data(IMU_6_Axis_Data *data){
+	printf("BMI323 IMU: \n");
+    printf("Acceleration: -> ");
+    printf("X: %f m/s^2, Y: %f m/s^2, Z: %f m/s^2\n", data->acceleration[0], data->acceleration[1], data->acceleration[2]);
+    printf("Angular Rate -> ");
+    printf("X: %f dps, Y: %f dps, Z: %f dps\n", data->gyroscope[0], data->gyroscope[1], data->gyroscope[2]);
+    printf("----- \n");
 }

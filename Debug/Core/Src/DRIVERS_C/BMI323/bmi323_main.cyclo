@@ -11,11 +11,12 @@
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:95:7:gyro_lsb_to_dps_2000	1
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:99:8:bmi3_interface_init	3
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:136:8:Init_BMI323	3
-../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:277:8:Open_BMI323_ACC	4
-../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:350:8:Close_BMI323_ACC	3
-../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:379:8:Open_BMI323_GYRO	4
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:277:8:Open_BMI323_ACC	3
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:350:8:Close_BMI323_ACC	2
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:379:8:Open_BMI323_GYRO	3
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:462:8:Close_BMI323_GYRO	3
-../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:492:8:Open_BMI323_FIFO	3
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:492:8:Open_BMI323_FIFO	1
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:572:8:Close_BMI323_FIFO	2
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:587:6:BMI323_ReadData	8
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:652:17:bmi323_data_poll	4
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:688:6:bmi323_print_sensor_data	1

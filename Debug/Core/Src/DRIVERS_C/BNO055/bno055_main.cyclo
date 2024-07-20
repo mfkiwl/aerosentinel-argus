@@ -1,4 +1,8 @@
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:221:13:bno055_platform_read	1
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:244:13:bno055_platform_write	1
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:270:6:DelayUs	3
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:291:8:BNO055_Init	2
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:222:13:bno055_platform_read	1
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:245:13:bno055_platform_write	1
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:271:6:DelayUs	3
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:292:8:BNO055_Init	4
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:370:18:bno_read_fusion_data	1
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:424:6:bno055_print_fusion_data	1
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:446:21:bno_read_converted_data	2
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:497:6:print_bno055_data	1

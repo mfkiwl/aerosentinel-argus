@@ -17,5 +17,6 @@
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:462:8:Close_BMI323_GYRO	56	static
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:492:8:Open_BMI323_FIFO	48	static
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:572:8:Close_BMI323_FIFO	16	static
-../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:587:6:BMI323_ReadData	32	static
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:587:6:BMI323_ReadData	16	static
 ../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:652:17:bmi323_data_poll	96	static
+../Core/Src/DRIVERS_C/BMI323/bmi323_main.c:688:6:bmi323_print_sensor_data	32	static

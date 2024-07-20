@@ -13,6 +13,7 @@
 #include "DRIVERS_H/BME680/bme680_main.h"
 #include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BNO055/bno055_main.h"
+
 #include "DRIVERS_H/GPS/GPS.h"
 #include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
 //#include "DRIVERS_H/MS560702BA03/MS5607_main.h"
@@ -39,12 +40,7 @@ typedef struct {
 } Magnetometer_3_Axis_Data;
 
 
-typedef struct {
-    float orientation[3];  // Euler angles: Pitch, Roll, Yaw
-    float acceleration[3]; // X, Y, Z acceleration
-    float gyroscope[3];    // X, Y, Z gyroscope
-    float magnetometer[3]; // X, Y, Z magnetic field
-} AHRS_9_Axis_Data;
+
 
 typedef struct {
     float temperature;  // Temperature in degrees Celsius
