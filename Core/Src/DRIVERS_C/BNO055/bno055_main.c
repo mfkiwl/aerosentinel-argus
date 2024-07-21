@@ -347,7 +347,7 @@ int8_t BNO055_Init(){
 		{
 			printf("bno055_init failed, comres=%d\r\n", comres);
 		}
-		//HAL_Delay(1000); // 1 second
+		HAL_Delay(1000); // 1 second
 
 //		comres +=bno055_set_temp_unit(BNO055_TEMP_UNIT_CELSIUS);
 //		comres +=bno055_set_accel_unit(BNO055_ACCEL_UNIT_MSQ);

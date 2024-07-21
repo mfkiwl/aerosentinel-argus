@@ -22,9 +22,6 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -38,8 +35,6 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
@@ -49,9 +44,10 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
  ../Core/Inc/DRIVERS_H/BMI323/bmi323.h \
  ../Core/Inc/DRIVERS_H/BMI323/bmi3.h \
  ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h ../Core/Inc/main.h \
- ../Core/Inc/common_porting.h ../Core/Inc/user_define.h \
- ../Core/Inc/user_define.h
+ ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
+ ../Core/Inc/DRIVERS_H/BMI323/common_porting.h \
+ ../Core/Inc/DRIVERS_H/BMI323/user_define.h \
+ ../Core/Inc/DRIVERS_H/BMI323/user_define.h
 ../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
@@ -74,9 +70,6 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_exti.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -90,8 +83,6 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
@@ -102,7 +93,6 @@ Core/Src/DRIVERS_C/BMI323/bmi323_main.o: \
 ../Core/Inc/DRIVERS_H/BMI323/bmi3.h:
 ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h:
 ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h:
-../Core/Inc/main.h:
-../Core/Inc/common_porting.h:
-../Core/Inc/user_define.h:
-../Core/Inc/user_define.h:
+../Core/Inc/DRIVERS_H/BMI323/common_porting.h:
+../Core/Inc/DRIVERS_H/BMI323/user_define.h:
+../Core/Inc/DRIVERS_H/BMI323/user_define.h:

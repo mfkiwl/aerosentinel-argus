@@ -9,30 +9,20 @@
 
 #include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BMI323/bmi323.h"
-#include "main.h" // Include the header that defines SPI2_CSB_Pin and SPI2_CSB_GPIO_Port
-
-#include "common_porting.h"
-#include "user_define.h"
+#include "DRIVERS_H/BMI323/common_porting.h"
+#include "DRIVERS_H/BMI323/user_define.h"
 #include "DRIVERS_H/BMI323/bmi3_defs.h"
 
-extern SPI_HandleTypeDef hspi1;
+//extern SPI_HandleTypeDef hspi1;
 struct bmi3_dev bmi323;
 
-volatile uint16_t bmi323_fifo_ready = 1;
-extern volatile uint8_t int1_flag;
-extern volatile uint8_t int2_flag;
+
 struct bmi3_dev bmi323dev;
 struct bmi3_dev *dev = &bmi323dev;
 uint8_t bmi323_dev_addr;
 struct bmi3_sensor_data sensor_data = { 0 };
 struct bmi3_sensor_data sensor_data_AG[3] = { 0 };
-uint16_t idx = 0;
-uint8_t fifo_data[2048] = {0};
-struct bmi3_fifo_sens_axes_data fifo_accel_data[400] = { {0} };
-struct bmi3_fifo_sens_axes_data fifo_gyr_data[400] = { {0} };
-struct bmi3_fifo_temperature_data fifo_temp_data[266];
 float temperature_value;
-struct bmi3_fifo_frame fifoframe = {0};
 
 
 /*!
@@ -100,26 +90,9 @@ int8_t bmi3_interface_init(struct bmi3_dev *bmi, uint8_t intf)
 {
 	int8_t rslt = BMI3_OK;
 
-	/* Bus configuration : I2C */
-	if (intf == BMI3_I2C_INTF)
-	{
-		//printf("I2C Interface \n");
-
-		/* To initialize the user I2C function */
-		bmi323_dev_addr = BMI3_ADDR_I2C_SEC;
-		bmi->intf = BMI3_I2C_INTF;
-		bmi->read = (bmi3_read_fptr_t)BMI323_SensorAPI_I2Cx_Read;
-		bmi->write = (bmi3_write_fptr_t)BMI323_SensorAPI_I2Cx_Write;
-	}
-	/* Bus configuration : SPI */
-	else if (intf == BMI3_SPI_INTF)
-	{
-		//printf("SPI Interface \n");
 		bmi->intf = BMI3_SPI_INTF;
 		bmi->read = (bmi3_read_fptr_t)SensorAPI_SPIx_Read;
 		bmi->write = (bmi3_write_fptr_t)SensorAPI_SPIx_Write;
-	}
-
 
 	/* Assign device address to interface pointer */
 	bmi->intf_ptr = &bmi323_dev_addr;
@@ -257,18 +230,6 @@ int8_t Init_BMI323()
 	#if defined(ACC_GYRO)
 	Open_BMI323_ACC(dev);
 	Open_BMI323_GYRO(dev);
-	#endif
-
-	#if defined(FIFO_POLL)
-	Open_BMI323_FIFO(dev);
-	#elif defined(FIFO_WM_INT)
-	Open_BMI323_FIFO(dev);
-	Enable_MCU_INT2_Pin();
-	#endif
-
-
-	#if !defined(FIFO_WM_INT)
-	Disable_MCU_INT2_Pin();
 	#endif
 
 	return rslt;
@@ -477,175 +438,17 @@ int8_t Close_BMI323_GYRO()
 		rslt = bmi323_set_sensor_config(&config, 1, dev);
 		if (rslt != BMI3_OK)
 		{
-			PDEBUG("Close GYRO failed, rslt=%d\r\n", rslt);
+			//printf("Close GYRO failed, rslt=%d\r\n", rslt);
 		}
 		else
 		{
-			PDEBUG("Open GYRO successfully\r\n");
+			//printf("Open GYRO successfully\r\n");
 		}
 	}
 	//printf("Close_BMI323_GYRO: %d \n",rslt);
 
 	return rslt;
 }
-
-int8_t Open_BMI323_FIFO()
-{
-	int8_t rslt = BMI3_OK;
-
-	#if defined(FIFO_WM_INT)
-	struct bmi3_int_pin_config int_cfg;
-	struct bmi3_map_int map_int = { 0 };
-	#endif
-	/* Array to define set FIFO flush */
-    	uint8_t data[2] = { BMI323_ENABLE, 0 };
-
-	/* Set the FIFO flush in FIFO control register to clear the FIFO data */
-    	rslt = bmi323_set_regs(BMI3_REG_FIFO_CTRL, data, 2, dev);
-    	//printf("bmi323_set_regs: %d \n", rslt);
-
-	/* Clear FIFO configuration register */
-	rslt = bmi3_set_fifo_config(BMI3_FIFO_ALL_EN, BMI3_DISABLE, dev);
-	//printf("bmi323_set_fifo_config: %d \n", rslt);
-
-	/*Example: 100Hz ODR, read data per second*/
-	/* Set FIFO configuration by enabling accelerometer and gyroscope*/
-	//printf("FIFO Header is disabled\r\n");
-
-	#if defined(FIFO_POLL) || defined(FIFO_WM_INT)
-		#if defined(ACC_ONLY)
-		/* Set the water-mark level */
-		rslt = bmi3_set_fifo_wm(150, dev);//6*50=300 bytes, 50HZ ODR, read data every second
-		if (rslt != BMI3_OK)
-		{
-			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
-		}
-		rslt = bmi3_set_fifo_config(BMI3_FIFO_ACC_EN , BMI3_ENABLE, dev);
-		#elif defined(GYRO_ONLY)
-		/* Set the water-mark level */
-		rslt = bmi3_set_fifo_wm(150, dev);//6*50=300 bytes, 50HZ ODR, read data every second
-		if (rslt != BMI3_OK)
-		{
-			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
-		}
-		rslt = bmi3_set_fifo_config(BMI3_FIFO_GYR_EN , BMI3_ENABLE, dev);
-		#elif defined(ACC_GYRO)
-		/* Set the water-mark level */
-		rslt = bmi3_set_fifo_wm(300, dev);//12*50=600, 100HZ ODR, read data every second
-		if (rslt != BMI3_OK)
-		{
-			//printf("bmi3_set_fifo_wm error, error code: %d\r\n", rslt);
-		}
-		rslt = bmi3_set_fifo_config(BMI3_FIFO_ACC_EN | BMI3_FIFO_GYR_EN , BMI3_ENABLE, dev);
-		#endif
-		if (rslt != BMI3_OK)
-		{
-			//printf("Set fifo config failed\r\n");
-		}
-	#endif
-
-	#if defined(FIFO_WM_INT)
-	bmi3_get_int_pin_config(&int_cfg, dev);
-
-	int_cfg.pin_type = BMI3_INT2;
-	int_cfg.pin_cfg[1].lvl = BMI3_INT_ACTIVE_HIGH;
-	int_cfg.pin_cfg[1].od = BMI3_INT_PUSH_PULL;;
-	int_cfg.pin_cfg[1].output_en= BMI3_INT_OUTPUT_ENABLE;
-
-	bmi3_set_int_pin_config(&int_cfg, dev);
-
-	/* Map the FIFO water-mark interrupt to INT1 */
-	/* Note: User can map the interrupt to INT1 or INT2 */
-	map_int.fifo_watermark_int = BMI3_INT2;
-
-	/* Map the interrupt configuration */
-	rslt = bmi323_map_interrupt(map_int, dev);
-	//printf("bmi323_map_interrupt: %d \n", rslt);
-	#endif
-
-	/* Update FIFO structure */
-	fifoframe.data = fifo_data;
-
-	return rslt;
-}
-
-int8_t Close_BMI323_FIFO()
-{
-	int8_t rslt = BMI3_OK;
-
-	/* Clear FIFO configuration register */
-	rslt = bmi3_set_fifo_config(BMI3_FIFO_ALL_EN, BMI3_DISABLE, dev);
-	if (rslt != BMI3_OK)
-	{
-		//printf("Clear FIFO configuration register error, error code: %d\r\n", rslt);
-		return rslt;
-	}
-
-	return rslt;
-}
-
-void BMI323_ReadData()
-{
-		int8_t rslt = BMI3_OK;
-		if(bmi323_fifo_ready == 1){
-			bmi323_fifo_ready = 0;
-			memset(fifo_data, 0, sizeof(fifo_data));
-			fifoframe.length = 0;
-
-			/* Update FIFO structure */
-			fifoframe.data = fifo_data;
-
-			rslt = bmi323_get_fifo_length(&fifoframe.available_fifo_len, dev);
-	            	//printf("bmi323_get_fifo_length: %d \n", rslt);
-
-	            	//fifoframe.length = (uint16_t)(fifoframe.available_fifo_len * 2) + dev->dummy_byte;
-			fifoframe.length = (uint16_t)(fifoframe.available_fifo_len * 2) + 2;
-			//printf("Fifo length=%d\r\n", fifoframe.length);
-			if(fifoframe.length > 0)
-			{
-				/* Read FIFO data */
-				rslt = bmi323_read_fifo_data(&fifoframe, dev);
-				//printf("bmi323_read_fifo_data: %d \n", rslt);
-
-				if (rslt == BMI323_OK)
-				{
-					//printf("Read %d bytes from fifo\r\n", fifoframe.length);
-					/* Parse the FIFO data to extract accelerometer data from the FIFO buffer */
-					rslt = bmi323_extract_accel(fifo_accel_data, &fifoframe, dev);
-
-					if (rslt == BMI3_OK)
-					{
-						//printf("Parsed accelerometer data frames: %d\r\n", fifoframe.avail_fifo_accel_frames);
-						/* Print the parsed accelerometer data from the FIFO buffer */
-						for(idx = 0 ; idx < fifoframe.avail_fifo_accel_frames ; idx++)
-						{
-							//printf("ACCEL[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_accel_data[idx].x, fifo_accel_data[idx].y, fifo_accel_data[idx].z);
-						}
-					} else {
-						//printf("Accelerometer data frame parsing error : %d",rslt);
-					}
-					/* Parse the FIFO data to extract gyroscope data from the FIFO buffer */
-					rslt = bmi323_extract_gyro(fifo_gyr_data, &fifoframe, dev);
-
-					if (rslt == BMI3_OK)
-					{
-						//printf("Parsed gyroscope data frames: %d\r\n", fifoframe.avail_fifo_gyro_frames);
-						/* Print the parsed accelerometer data from the FIFO buffer */
-						for(idx = 0 ; idx < fifoframe.avail_fifo_gyro_frames ; idx++)
-						{
-							//printf("GYRO[%d] X : %d , Y : %d , Z : %d\r\n", idx , fifo_gyr_data[idx].x, fifo_gyr_data[idx].y, fifo_gyr_data[idx].z);
-						}
-					} else {
-						//printf("Gyroscope data frame parsing error : %d",rslt);
-					}
-
-				}
-			}
-
-		}
-
-}
-
 
 
 // Function to get and return the sensor data

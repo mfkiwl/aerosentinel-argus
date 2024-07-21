@@ -35,7 +35,8 @@ SOFTWARE.
 extern "C" {
 #endif
 
-#include "stm32h7xx_hal.h"
+#include "stm32h7xx.h"
+#include "main.h"
 
 /* MS5607 SPI COMMANDS */
 #define RESET_COMMAND                 0x1E
@@ -55,8 +56,8 @@ typedef enum OSRFactors{
 
 /* MS5607 System States Enumeration*/
 typedef enum MS5607States{
-  MS5607_STATE_FAILED,
-  MS5607_STATE_READY
+  MS5607_STATE_READY,
+  MS5607_STATE_FAILED
 }MS5607StateTypeDef;
 
 /* MS5607 PROM Data Structure */
@@ -92,7 +93,7 @@ struct MS5607Readings{
  *           - 0 or MS5607_STATE_FAILED: Was not abe to communicate with sensor
  *           - 1 or MS5607_STATE_READY: Sensor initialized OK and ready to use
  */
-MS5607StateTypeDef MS5607_Init(SPI_HandleTypeDef *, GPIO_TypeDef *, uint16_t);
+int8_t MS5607_Init();
 
 /**
  * @brief  Reads MS5607 PROM Content

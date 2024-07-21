@@ -15,13 +15,17 @@ IMU_6_Axis_Data bmi323_sensor_data;
 TelemetryData telemetry;
 
 sensor_init_retval init_functions[] = {
-	Init_BMI323,
-	BNO055_Init,
+	//Init_BMI323,
+	//BNO055_Init,
+	//BME680_Init,
+	MS5607_Init,
 };
 
 const char *sensor_names[] = {
-	"BMI323",
-	"BNO055",
+	//"BMI323",
+	//"BNO055",
+	//"BME680",
+	"MS5607",
 };
 
 telemetry_init_status SensorManager_Init(void) {
@@ -91,6 +95,6 @@ void TestTelemetry(){
 
 	printf("// --------------------------------------------- // \n");
 
-    delay_us_func(150000);
+    HAL_Delay(150);
     	}
 }

@@ -29,13 +29,12 @@ SOFTWARE.
  */
 
 #include <DRIVERS_H/MS560702BA03/MS5607.h>
+#include <stdio.h>
 
 /* Private SPI Handler */
-static SPI_HandleTypeDef *hspi;
+extern SPI_HandleTypeDef hspi4;
 
-/* Private GPIO CS Pin Variables */
-static GPIO_TypeDef *CS_GPIO_Port;
-static uint16_t CS_Pin;
+
 
 /* SPI Transmission Data */
 static uint8_t SPITransmitData;
@@ -57,23 +56,24 @@ static struct MS5607Readings readings;
  * This will reset the device and perform the PROM reading to find the conversion values and if
  * the communication is working.
  */
-MS5607StateTypeDef MS5607_Init(SPI_HandleTypeDef *hspix, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
-  hspi = hspix;
-  CS_GPIO_Port = GPIOx;
-  CS_Pin = GPIO_Pin;
+int8_t MS5607_Init() {
 
   enableCSB();
   SPITransmitData = RESET_COMMAND;
-  HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
+  HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
+  while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
   HAL_Delay(3);
   disableCSB();
 
   MS5607PromRead(&promData);
 
-  if (promData.reserved == 0x00 || promData.reserved == 0xff)
+  if (promData.reserved == 0x00 || promData.reserved == 0xff) {
+	 printf("MS5607 Init fail!");
     return MS5607_STATE_FAILED;
-  else
+  } else {
+	  printf("MS5607 Init success!");
     return MS5607_STATE_READY;
+  }
 }
 
 /* Performs a reading on the devices PROM. */
@@ -87,9 +87,11 @@ void MS5607PromRead(struct promData *prom){
   for (address = 0; address < 8; address++) {
     SPITransmitData = PROM_READ(address);
     enableCSB();
-    HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
+    HAL_StatusTypeDef tx_status = HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 1000);
+    while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
     /* Receive two bytes at once and stores it directly at the structure */
-    HAL_SPI_Receive(hspi, structPointer, 2, 10);
+    HAL_StatusTypeDef rx_status = HAL_SPI_Receive(&hspi4, (uint8_t *)structPointer, 4, 1000);
+    while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
     disableCSB();
     structPointer++;
   }
@@ -114,7 +116,8 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
   enableCSB();
   /* Assemble the conversion command based on previously set OSR */
   SPITransmitData = CONVERT_D1_COMMAND | Pressure_OSR;
-  HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
+  HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
+  while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
 
   if(Pressure_OSR == 0x00)
     HAL_Delay(1);
@@ -134,8 +137,8 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
   enableCSB();
 
   SPITransmitData = READ_ADC_COMMAND;
-  HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
-  HAL_SPI_Receive(hspi, reply, 3, 10);
+  HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
+  HAL_SPI_Receive(&hspi4, reply, 3, 10);
 
   disableCSB();
 
@@ -146,7 +149,7 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
 
   /* Assemble the conversion command based on previously set OSR */
   SPITransmitData = CONVERT_D2_COMMAND | Temperature_OSR;
-  HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
+  HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
 
   if(Temperature_OSR == 0x00)
     HAL_Delay(1);
@@ -165,8 +168,8 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
   enableCSB();
 
   SPITransmitData = READ_ADC_COMMAND;
-  HAL_SPI_Transmit(hspi, &SPITransmitData, 1, 10);
-  HAL_SPI_Receive(hspi, reply, 3, 10);
+  HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
+  HAL_SPI_Receive(&hspi4, reply, 3, 10);
 
   disableCSB();
 
@@ -227,12 +230,12 @@ int32_t MS5607GetPressurePa(void){
 
 /* Sets the CS pin */
 void enableCSB(void){
-  HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(SPI4_CS_GPIO_Port, SPI4_CS_Pin, GPIO_PIN_RESET);
 }
 
 /* Sets the CS pin */
 void disableCSB(void){
-  HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SPI4_CS_GPIO_Port, SPI4_CS_Pin, GPIO_PIN_SET);
 }
 
 /* Sets the OSR for temperature */
