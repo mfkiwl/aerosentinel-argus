@@ -67,7 +67,7 @@ void SensorManager_UpdateData(TelemetryData *data) {
 //    BNO055_ReadData(&data->bno055_data);
 //    GPS_ReadData(&data->gps_data);
 //    LIS2MDLTR_ReadData(&data->lis2mdltr_data);
-//    MS560702BA03_ReadData(&data->ms560702ba03_data);
+    telemetry.ms5607_data = MS5607_ReadData();
 }
 
 void delay_us_func(uint32_t period)
@@ -90,8 +90,9 @@ void TestTelemetry(){
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-	bmi323_print_sensor_data(&telemetry.bmi323_data);
-	bno055_print_fusion_data(&telemetry.bno055_data);
+	//bmi323_print_sensor_data(&telemetry.bmi323_data);
+	//bno055_print_fusion_data(&telemetry.bno055_data);
+	ms5607_print_barometer_data(&telemetry.ms5607_data);
 
 	printf("// --------------------------------------------- // \n");
 

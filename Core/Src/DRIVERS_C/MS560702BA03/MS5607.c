@@ -68,10 +68,10 @@ int8_t MS5607_Init() {
   MS5607PromRead(&promData);
 
   if (promData.reserved == 0x00 || promData.reserved == 0xff) {
-	 printf("MS5607 Init fail!");
+	 //printf("MS5607 Init fail! \n");
     return MS5607_STATE_FAILED;
   } else {
-	  printf("MS5607 Init success!");
+	  //printf("MS5607 Init success! \n");
     return MS5607_STATE_READY;
   }
 }
@@ -87,11 +87,9 @@ void MS5607PromRead(struct promData *prom){
   for (address = 0; address < 8; address++) {
     SPITransmitData = PROM_READ(address);
     enableCSB();
-    HAL_StatusTypeDef tx_status = HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 1000);
-    while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
+    HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
     /* Receive two bytes at once and stores it directly at the structure */
-    HAL_StatusTypeDef rx_status = HAL_SPI_Receive(&hspi4, (uint8_t *)structPointer, 4, 1000);
-    while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
+    HAL_SPI_Receive(&hspi4, structPointer, 2, 10);
     disableCSB();
     structPointer++;
   }
@@ -246,4 +244,22 @@ void MS5607SetTemperatureOSR(MS5607OSRFactors tOSR){
 /* Sets the OSR for pressure */
 void MS5607SetPressureOSR(MS5607OSRFactors pOSR){
   Pressure_OSR = pOSR;
+}
+
+
+Barometer_2_Axis MS5607_ReadData(){
+	Barometer_2_Axis data = {0};
+	MS5607UncompensatedRead(&uncompValues);
+	MS5607Convert(&uncompValues, &readings);
+	data.temperature = MS5607GetTemperatureC();
+	data.pressure = MS5607GetPressurePa();
+	MS5607Update();
+	return data;
+}
+
+
+void ms5607_print_barometer_data(Barometer_2_Axis *data) {
+	printf("MS5607 Barometer: \n");
+	printf("Pressure: %ld Pa, Temperature: %f °C \n", data->pressure, data->temperature);
+    printf("----- \n");
 }

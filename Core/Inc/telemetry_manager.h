@@ -66,7 +66,7 @@ typedef struct {
 	AHRS_9_Axis_Data bno055_data;
     GPS_Data gps_data;
     IMU_6_Axis_Data lis2mdltr_data;
-    Barometer_Data ms560702ba03_data;
+    Barometer_2_Axis ms5607_data;
 } TelemetryData;
 
 

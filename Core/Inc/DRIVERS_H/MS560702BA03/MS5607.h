@@ -84,6 +84,12 @@ struct MS5607Readings{
   int32_t  temperature;
 };
 
+typedef struct {
+	int32_t pressure;
+	double temperature;
+} Barometer_2_Axis;
+
+
 /**
  * @brief  Initializes MS5607 Sensor
  * @param  SPI Handle address
@@ -171,6 +177,9 @@ void MS5607SetTemperatureOSR(MS5607OSRFactors);
  * @retval None
  */
 void MS5607SetPressureOSR(MS5607OSRFactors);
+
+Barometer_2_Axis MS5607_ReadData();
+void ms5607_print_barometer_data(Barometer_2_Axis *data);
 
 #ifdef __cplusplus
 }
