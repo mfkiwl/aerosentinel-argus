@@ -17,6 +17,7 @@
 struct bmi3_dev bmi323;
 
 
+
 struct bmi3_dev bmi323dev;
 struct bmi3_dev *dev = &bmi323dev;
 uint8_t bmi323_dev_addr;
@@ -24,6 +25,9 @@ struct bmi3_sensor_data sensor_data = { 0 };
 struct bmi3_sensor_data sensor_data_AG[3] = { 0 };
 float temperature_value;
 
+uint8_t selfcal_selection;
+uint8_t apply_corr_sc;
+struct bmi3_self_calib_rslt *selfcal_rslt;
 
 /*!
  * @brief This function converts lsb to meter per second squared for 16 bit accelerometer at
@@ -36,19 +40,19 @@ float lsb_to_mps2(int16_t val, float g_range, uint8_t bit_width)
     return (GRAVITY_EARTH * val * g_range) / half_scale;
 }
 
-float accel_lsb_to_mps2_2g(int16_t val) {
+float accel_lsb_to_mg_2g(int16_t val) {
     return (val / 16384.0f) * GRAVITY_EARTH;
 }
 
-float accel_lsb_to_mps2_4g(int16_t val) {
+float accel_lsb_to_mg_4g(int16_t val) {
     return (val / 8192.0f) * GRAVITY_EARTH;
 }
 
-float accel_lsb_to_mps2_8g(int16_t val) {
+float accel_lsb_to_mg_8g(int16_t val) {
     return (val / 4096.0f) * GRAVITY_EARTH;
 }
 
-float accel_lsb_to_mps2_16g(int16_t val) {
+float accel_lsb_to_mg_16g(int16_t val) {
     return (val / 2048.0f) * GRAVITY_EARTH;
 }
 /*!
@@ -67,23 +71,23 @@ float lsb_to_dps(int16_t val, float dps, uint8_t bit_width)
 }
 
 float gyro_lsb_to_dps_125(int16_t val) {
-    return val / 262.1f;
+    return val / 262.144f;
 }
 
 float gyro_lsb_to_dps_250(int16_t val) {
-    return val / 131.1f;
+    return val / 131.072f;
 }
 
 float gyro_lsb_to_dps_500(int16_t val) {
-    return val / 65.5f;
+    return val / 65.536f;
 }
 
 float gyro_lsb_to_dps_1000(int16_t val) {
-    return val / 32.8f;
+    return val / 32.768f;
 }
 
 float gyro_lsb_to_dps_2000(int16_t val) {
-    return val / 16.4f;
+    return val / 16.384f;
 }
 
 int8_t bmi3_interface_init(struct bmi3_dev *bmi, uint8_t intf)
@@ -138,44 +142,44 @@ int8_t Init_BMI323()
 	//printf("The firmware version: v%d.%d\r\n", ver_major, ver_minor);
 
 	/*Axis mapping according phisical structure*/
-#if 0//For axis remap
-	/* Strusture instance of axes remap */
-	struct bmi3_axes_remap remap = { 0 };
-
-	rslt = bmi323_get_remap_axes(&remap, &dev);
-	//printf("get_remap_axes: %d \n", rslt);
-
-	/* @note: XYZ axis denotes x = x, y = y, z = z
-	* Similarly,
-	*    ZYX, x = z, y = y, z = x
-	*/
-	remap.axis_map = BMI3_MAP_ZYX_AXIS;
-
-	/* Invert the x axis of accelerometer and gyroscope */
-	remap.invert_x = BMI3_MAP_NEGATIVE;
-
-	/* Invert the y axis of accelerometer and gyroscope */
-	remap.invert_y = BMI3_MAP_NEGATIVE;
-
-	/* Invert the z axis of accelerometer and gyroscope */
-	remap.invert_z = BMI3_MAP_NEGATIVE;
-
-	if (rslt == BMI323_OK)
-	{
-		rslt = bmi323_set_remap_axes(remap, &dev);
-		//printf("set_remap_axes: %d \n", rslt);
-
-		if (rslt != BMI323_OK)
-		{
-			//printf("bmi323_set_remap_axes() failed\r\n");
-		}
-	}
-	else
-	{
-		//printf("bmi323_get_remap_axes() failed\r\n");
-	}
-
-#endif
+//#if 0//For axis remap
+//	/* Strusture instance of axes remap */
+//	struct bmi3_axes_remap remap = { 0 };
+//
+//	rslt = bmi323_get_remap_axes(&remap, &dev);
+//	//printf("get_remap_axes: %d \n", rslt);
+//
+//	/* @note: XYZ axis denotes x = x, y = y, z = z
+//	* Similarly,
+//	*    ZYX, x = z, y = y, z = x
+//	*/
+//	remap.axis_map = BMI3_MAP_ZYX_AXIS;
+//
+//	/* Invert the x axis of accelerometer and gyroscope */
+//	remap.invert_x = BMI3_MAP_NEGATIVE;
+//
+//	/* Invert the y axis of accelerometer and gyroscope */
+//	remap.invert_y = BMI3_MAP_NEGATIVE;
+//
+//	/* Invert the z axis of accelerometer and gyroscope */
+//	remap.invert_z = BMI3_MAP_NEGATIVE;
+//
+//	if (rslt == BMI323_OK)
+//	{
+//		rslt = bmi323_set_remap_axes(remap, &dev);
+//		//printf("set_remap_axes: %d \n", rslt);
+//
+//		if (rslt != BMI323_OK)
+//		{
+//			//printf("bmi323_set_remap_axes() failed\r\n");
+//		}
+//	}
+//	else
+//	{
+//		//printf("bmi323_get_remap_axes() failed\r\n");
+//	}
+//
+//#endif
 #if defined(ACC_GYRO_SELFTEST)
 	rslt = bmi323_perform_self_test(BMI3_ST_BOTH_ACC_GYR, &st_result_status, dev);
 	//printf("Perform_self_test: %d \n", rslt);
@@ -223,6 +227,8 @@ int8_t Init_BMI323()
 	Open_BMI323_GYRO(dev);
 	#endif
 
+	//rslt += bmi3_perform_gyro_sc(BMI3_SC_SENSITIVITY_EN, 1, selfcal_rslt, dev);
+
 	return rslt;
 }
 
@@ -257,7 +263,7 @@ int8_t Open_BMI323_ACC()
 		config.cfg.acc.bwp = BMI3_ACC_BW_ODR_HALF;
 
 		/* Set number of average samples for accel. */
-		config.cfg.acc.avg_num = BMI3_ACC_AVG4;
+		config.cfg.acc.avg_num = BMI3_ACC_AVG64;
 
 		/* Enable the accel mode where averaging of samples
 		* will be done based on above set bandwidth and ODR.
@@ -267,10 +273,10 @@ int8_t Open_BMI323_ACC()
 	#endif
 
 
-		config.cfg.acc.odr      = BMI3_ACC_ODR_50HZ;
+		config.cfg.acc.odr      = BMI3_ACC_ODR_100HZ;
 
 		/* Gravity range of the sensor (+/- 2G, 4G, 8G, 16G). */
-		config.cfg.acc.range     = BMI3_ACC_RANGE_4G;
+		config.cfg.acc.range     = BMI3_ACC_RANGE_8G;
 
 		/* Set the configurations */
 		rslt = bmi323_set_sensor_config(&config, 1, dev);
@@ -340,7 +346,7 @@ int8_t Open_BMI323_GYRO()
 	rslt = bmi323_get_sensor_config(&config, 1, dev);
 	if (rslt == BMI3_OK)
 	{
-		config.cfg.gyr.odr = BMI3_GYR_ODR_50HZ;
+		config.cfg.gyr.odr = BMI3_GYR_ODR_100HZ;
 		/* Gyroscope Angular Rate Measurement Range. By default the range is 2000dps. */
 		config.cfg.gyr.range = BMI3_GYR_RANGE_2000DPS;
 
@@ -350,7 +356,7 @@ int8_t Open_BMI323_GYRO()
 		*	  0   odr_half	 BW = gyr_odr/2
 		*	  1  odr_quarter BW = gyr_odr/4
 		*/
-		config.cfg.gyr.bwp = BMI3_GYR_BW_ODR_QUARTER;
+		config.cfg.gyr.bwp = BMI3_GYR_BW_ODR_HALF;
 		/* By default the gyro is disabled. Gyro is enabled by selecting the mode. */
 		config.cfg.gyr.gyr_mode = BMI3_GYR_MODE_LOW_PWR;
 		/* Value    Name    Description
@@ -381,7 +387,7 @@ int8_t Open_BMI323_GYRO()
 		*  101     avg_32  Averaging of 32 samples
 		*  110     avg_64  Averaging of 64 samples
 		*/
-		config.cfg.gyr.avg_num = BMI3_GYR_AVG4;
+		config.cfg.gyr.avg_num = BMI3_GYR_AVG64;
 	#endif
 
 		/* Set the configurations */
@@ -460,9 +466,9 @@ IMU_6_Axis_Data bmi323_data_poll() {
 
         // Fill accelerometer data
         if (sensor_data[0].type == BMI3_ACCEL) {
-            imu_data.acceleration[0] = accel_lsb_to_mps2_4g(sensor_data[0].sens_data.acc.x);  // Assuming ±4g range
-            imu_data.acceleration[1] = accel_lsb_to_mps2_4g(sensor_data[0].sens_data.acc.y);  // Assuming ±4g range
-            imu_data.acceleration[2] = accel_lsb_to_mps2_4g(sensor_data[0].sens_data.acc.z);  // Assuming ±4g range
+            imu_data.acceleration[0] = accel_lsb_to_mg_8g(sensor_data[0].sens_data.acc.x) / 10;  // Assuming ±4g range
+            imu_data.acceleration[1] = accel_lsb_to_mg_8g(sensor_data[0].sens_data.acc.y) / 10;  // Assuming ±4g range
+            imu_data.acceleration[2] = accel_lsb_to_mg_8g(sensor_data[0].sens_data.acc.z) / 10;  // Assuming ±4g range
         }
 
         // Fill gyroscope data

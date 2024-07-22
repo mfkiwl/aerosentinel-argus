@@ -60,8 +60,8 @@ telemetry_init_status SensorManager_Init(void) {
 
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
-//	telemetry.bmi323_data = bmi323_data_poll();
-	telemetry.bno055_data = bno_read_fusion_data();
+	telemetry.bmi323_data = bmi323_data_poll();
+//	telemetry.bno055_data = bno_read_fusion_data();
 //	telemetry.bme680_data = bme680_data_poll();
 //    telemetry.ms5607_data = MS5607_ReadData();
 //    ASM330LHH_ReadData(&data->asm330lhh_data);
@@ -90,8 +90,8 @@ void TestTelemetry(){
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-//	bmi323_print_sensor_data(&telemetry.bmi323_data);
-	bno055_print_fusion_data(&telemetry.bno055_data);
+	bmi323_print_sensor_data(&telemetry.bmi323_data);
+//	bno055_print_fusion_data(&telemetry.bno055_data);
 //	ms5607_print_barometer_data(&telemetry.ms5607_data);
 //	bme680_print_barometer_data(&telemetry.bme680_data);
 
