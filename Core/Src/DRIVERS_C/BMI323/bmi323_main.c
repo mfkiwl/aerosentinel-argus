@@ -20,7 +20,6 @@ struct bmi3_dev bmi323;
 struct bmi3_dev bmi323dev;
 struct bmi3_dev *dev = &bmi323dev;
 uint8_t bmi323_dev_addr;
-
 struct bmi3_sensor_data sensor_data = { 0 };
 struct bmi3_sensor_data sensor_data_AG[3] = { 0 };
 float temperature_value;

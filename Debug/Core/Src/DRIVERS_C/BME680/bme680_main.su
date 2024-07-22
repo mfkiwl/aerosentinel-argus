@@ -1,6 +1,6 @@
 ../Core/Src/DRIVERS_C/BME680/bme680_main.c:33:8:bme680_platform_read	32	static
 ../Core/Src/DRIVERS_C/BME680/bme680_main.c:49:8:bme680_platform_write	24	static
-../Core/Src/DRIVERS_C/BME680/bme680_main.c:73:6:bme680_delay_func	16	static
-../Core/Src/DRIVERS_C/BME680/bme680_main.c:86:8:BME680_Init	16	static
-../Core/Src/DRIVERS_C/BME680/bme680_main.c:145:18:bme680_data_poll	72	static
-../Core/Src/DRIVERS_C/BME680/bme680_main.c:168:6:bme680_print_barometer_data	40	static
+../Core/Src/DRIVERS_C/BME680/bme680_main.c:73:6:bme680_delay_func	24	static
+../Core/Src/DRIVERS_C/BME680/bme680_main.c:95:8:BME680_Init	16	static
+../Core/Src/DRIVERS_C/BME680/bme680_main.c:154:18:bme680_data_poll	72	static
+../Core/Src/DRIVERS_C/BME680/bme680_main.c:177:6:bme680_print_barometer_data	40	static

@@ -72,7 +72,16 @@ int8_t bme680_platform_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t
 
 void bme680_delay_func(uint32_t period, void *intf_ptr)
 {
-	HAL_Delay(period/1000);
+	uint32_t i;
+
+	while(period--)
+	{
+		for(i = 0; i < 84; i++)
+		{
+			;
+		}
+	}
+	//HAL_Delay(period/1000);
 }
 
 
@@ -167,7 +176,7 @@ Barometer_4_Axis bme680_data_poll(){
 
 void bme680_print_barometer_data(Barometer_4_Axis *data){
 	printf("BME680 Barometer: \n");
-	printf("Pressure: %f Pa, Temperature: %f °C, Humidity: %f , Gas Res: %f  \n", data->pressure, data->temperature, data->humidity, data->gas_resistance);
+	printf("Pressure: %f Pa, Temperature: %f degC, Humidity: %f , Gas Res: %f  Ohms\n", data->pressure, data->temperature, data->humidity, data->gas_resistance);
     printf("----- \n");
 }
 

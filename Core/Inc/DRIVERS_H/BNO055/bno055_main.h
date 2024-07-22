@@ -16,13 +16,23 @@
 
 #define BUS_TIMEOUT             1000
 
+typedef struct{
+	double w;
+	double x;
+	double y;
+	double z;
+} quaternion_vect;
+
 typedef struct {
-    double orientation[3];  // Euler angles: Pitch, Roll, Yaw
+    float orientation[3];  // Euler angles: Pitch, Roll, Yaw
+    float orientation_q[3];  // Euler angles from quaternion conversion : Pitch, Roll, Yaw
     double acceleration[3]; // X, Y, Z acceleration
     double gyroscope[3];    // X, Y, Z gyroscope
+    float gravity[3]; // X, Y, Z gravity
     double magnetometer[3]; // X, Y, Z magnetic field
+    float temperature;
+    quaternion_vect quaternion[4]; 	// W, X, Y, Z quaternion vectors
 } AHRS_9_Axis_Data;
-
 
 typedef struct {
     // Accelerometer data

@@ -52,6 +52,20 @@ static struct MS5607UncompensatedValues uncompValues;
 /* Compensated values structure */
 static struct MS5607Readings readings;
 
+void ms5607_delay_func(uint32_t period)
+{
+	uint32_t i;
+
+	while(period--)
+	{
+		for(i = 0; i < 84; i++)
+		{
+			;
+		}
+	}
+	//HAL_Delay(period/1000);
+}
+
 /** Reset and prepare for general usage.
  * This will reset the device and perform the PROM reading to find the conversion values and if
  * the communication is working.
@@ -62,7 +76,8 @@ int8_t MS5607_Init() {
   SPITransmitData = RESET_COMMAND;
   HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
   while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
-  HAL_Delay(3);
+//  HAL_Delay(3);
+  ms5607_delay_func(3000);
   disableCSB();
 
   MS5607PromRead(&promData);
@@ -118,15 +133,20 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
   while(hspi4.State == HAL_SPI_STATE_BUSY);  // wait for xmission complete
 
   if(Pressure_OSR == 0x00)
-    HAL_Delay(1);
+//    HAL_Delay(1);
+  	ms5607_delay_func(1000);
   else if(Pressure_OSR == 0x02)
-    HAL_Delay(2);
+//    HAL_Delay(2);
+  ms5607_delay_func(2000);
   else if(Pressure_OSR == 0x04)
-    HAL_Delay(3);
+//    HAL_Delay(3);
+  ms5607_delay_func(3000);
   else if(Pressure_OSR == 0x06)
-    HAL_Delay(5);
+//    HAL_Delay(5);
+  ms5607_delay_func(5000);
   else
-    HAL_Delay(10);
+//    HAL_Delay(10);
+  ms5607_delay_func(10000);
 
   disableCSB();
 
@@ -150,15 +170,20 @@ void MS5607UncompensatedRead(struct MS5607UncompensatedValues *uncompValues){
   HAL_SPI_Transmit(&hspi4, &SPITransmitData, 1, 10);
 
   if(Temperature_OSR == 0x00)
-    HAL_Delay(1);
+//    HAL_Delay(1);
+  ms5607_delay_func(1000);
   else if(Temperature_OSR == 0x02)
-    HAL_Delay(2);
+//    HAL_Delay(2);
+  ms5607_delay_func(2000);
   else if(Temperature_OSR == 0x04)
-    HAL_Delay(3);
+//    HAL_Delay(3);
+  ms5607_delay_func(3000);
   else if(Temperature_OSR == 0x06)
-    HAL_Delay(5);
+//    HAL_Delay(5);
+  ms5607_delay_func(5000);
   else
-    HAL_Delay(10);
+//    HAL_Delay(10);
+  ms5607_delay_func(10000);
 
   disableCSB();
 
@@ -260,6 +285,6 @@ Barometer_2_Axis MS5607_ReadData(){
 
 void ms5607_print_barometer_data(Barometer_2_Axis *data) {
 	printf("MS5607 Barometer: \n");
-	printf("Pressure: %ld Pa, Temperature: %f °C \n", data->pressure, data->temperature);
+	printf("Pressure: %ld Pa, Temperature: %f degC \n", data->pressure, data->temperature);
     printf("----- \n");
 }

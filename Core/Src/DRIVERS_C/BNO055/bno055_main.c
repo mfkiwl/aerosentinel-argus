@@ -15,6 +15,16 @@ extern I2C_HandleTypeDef hi2c2;
 #define BNO_I2C_HANDLE	(hi2c2)
 uint8_t BNO_GTXBuffer[512], BNO_GRXBuffer[2048];
 
+struct bno055_euler_float_t *euler_temp_data;
+struct bno055_quaternion_t *quaternion_temp_data;
+struct bno055_accel_double_t *accel_temp_data;
+struct bno055_gyro_double_t *gyro_temp_xyz;
+struct bno055_gravity_float_t *gravity_temp_data;
+double *mag_x_temp_data;
+double *mag_y_temp_data;
+double *mag_z_temp_data;
+float *temp_temp_data;
+
 /* Variable used to return value of communication routine*/
 s32 comres = BNO055_ERROR;
 /* Variable used to return value of current operational mode*/
@@ -270,17 +280,17 @@ signed char bno055_platform_write(unsigned char slave_address7, unsigned char su
 
 void DelayUs(unsigned int Delay)
 {
-//	uint32_t i;
-//
-//	while(Delay--)
-//	{
-//		for(i = 0; i < 84; i++)
-//		{
-//			;
-//		}
-//	}
+	uint32_t i;
 
-	HAL_Delay(Delay);
+	while(Delay--)
+	{
+		for(i = 0; i < 84; i++)
+		{
+			;
+		}
+	}
+
+	//HAL_Delay(Delay);
 }
 
 
@@ -349,7 +359,7 @@ int8_t BNO055_Init(){
 //		{
 //			printf("bno055_init failed, comres=%d\r\n", comres);
 //		}
-		HAL_Delay(1000); // 1 second
+	    DelayUs(1000000); // 1 second
 
 //		comres +=bno055_set_temp_unit(BNO055_TEMP_UNIT_CELSIUS);
 //		comres +=bno055_set_accel_unit(BNO055_ACCEL_UNIT_MSQ);
@@ -377,43 +387,41 @@ AHRS_9_Axis_Data bno_read_fusion_data(){
     AHRS_9_Axis_Data data = {0};
 
     // Read Euler angles (Orientation)
-    comres += bno055_read_euler_h(&euler_data_h);
-    comres += bno055_read_euler_r(&euler_data_r);
-    comres += bno055_read_euler_p(&euler_data_p);
-    data.orientation[0] = euler_data_p;
-    data.orientation[1] = euler_data_r;
-    data.orientation[2] = euler_data_h;
+    comres += bno055_convert_float_euler_hpr_deg(euler_temp_data);
+    data.orientation[0] = euler_temp_data->p;
+    data.orientation[1] = euler_temp_data->r;
+    data.orientation[2] = euler_temp_data->h;
 
     // Read Quaternion data (Optional, not used in this example)
-    comres += bno055_read_quaternion_w(&quaternion_data_w);
-    comres += bno055_read_quaternion_x(&quaternion_data_x);
-    comres += bno055_read_quaternion_y(&quaternion_data_y);
-    comres += bno055_read_quaternion_z(&quaternion_data_z);
+    comres += bno055_read_quaternion_wxyz(quaternion_temp_data);
+    data.quaternion->w = quaternion_temp_data->w;
+    data.quaternion->x = quaternion_temp_data->x;
+    data.quaternion->y = quaternion_temp_data->y;
+    data.quaternion->z = quaternion_temp_data->z;
 
     // Read Linear acceleration
-    comres += bno055_read_linear_accel_x(&linear_accel_data_x);
-    comres += bno055_read_linear_accel_y(&linear_accel_data_y);
-    comres += bno055_read_linear_accel_z(&linear_accel_data_z);
-    data.acceleration[0] = linear_accel_data_x;
-    data.acceleration[1] = linear_accel_data_y;
-    data.acceleration[2] = linear_accel_data_z;
+    comres += bno055_convert_double_accel_xyz_mg(accel_temp_data);
+    data.acceleration[0] = accel_temp_data->x / 1000; // Division by 1000 -> Converts millig to g
+    data.acceleration[1] = accel_temp_data->y / 1000; // Division by 1000 -> Converts millig to g
+    data.acceleration[2] = accel_temp_data->z / 1000; // Division by 1000 -> Converts millig to g
+
+    comres += bno055_convert_double_gyro_xyz_dps(gyro_temp_xyz);
+    data.gyroscope[0] = gyro_temp_xyz->x;
+    data.gyroscope[1] = gyro_temp_xyz->y;
+    data.gyroscope[2] = gyro_temp_xyz->z;
 
     // Read Gravity data
-    comres += bno055_read_gravity_x(&gravity_data_x);
-    comres += bno055_read_gravity_y(&gravity_data_y);
-    comres += bno055_read_gravity_z(&gravity_data_z);
-    // Gravity data can be used as gyroscope data
-    data.gyroscope[0] = gravity_data_x;
-    data.gyroscope[1] = gravity_data_y;
-    data.gyroscope[2] = gravity_data_z;
+    comres += bno055_convert_float_gravity_xyz_msq(gravity_temp_data);
+    data.gravity[0] = gravity_temp_data->x;
+    data.gravity[1] = gravity_temp_data->y;
+    data.gravity[2] = gravity_temp_data->z;
 
     // Read Magnetometer data
-    comres += bno055_read_mag_x(&mag_datax);
-    comres += bno055_read_mag_y(&mag_datay);
-    comres += bno055_read_mag_z(&mag_dataz);
-    data.magnetometer[0] = mag_datax;
-    data.magnetometer[1] = mag_datay;
-    data.magnetometer[2] = mag_dataz;
+    comres += bno055_convert_double_mag_x_uT(&data.magnetometer[0]);
+    comres += bno055_convert_double_mag_y_uT(&data.magnetometer[1]);
+    comres += bno055_convert_double_mag_z_uT(&data.magnetometer[2]);
+
+    comres += bno055_convert_float_temp_celsius(&data.temperature);
 
     // Check communication results (Optional, for debugging)
     if (comres != 0) {
@@ -427,119 +435,34 @@ void bno055_print_fusion_data(AHRS_9_Axis_Data *data) {
 printf("BNO055 AHRS: \n");
 // Print orientation (Pitch, Roll, Yaw)
 printf("Orientation -> ");
-printf("Pitch: %.2f m/s^2, Roll: %.2f m/s^2, Yaw: %.2f m/s^2\n", data->orientation[0], data->orientation[1], data->orientation[2]);
+printf("Pitch: %.2f deg, Roll: %.2f deg, Yaw: %.2f deg \n", data->orientation[0], data->orientation[1], data->orientation[2]);
+
+//printf("Orientation from Quaternions -> ");
+//printf("Pitch: %.2f deg, Roll: %.2f deg, Yaw: %.2f deg \n", data->orientation_q[0], data->orientation_q[1], data->orientation_q[2]);
+
+// Print quaternion (W, X, Y, Z vectors)
+printf("Quaternion -> ");
+printf("W: %.2f , X: %.2f , Y: %.2f , Z: %.2f \n", data->quaternion->w, data->quaternion->x, data->quaternion->y, data->quaternion->z);
 
 // Print acceleration (X, Y, Z)
 printf("Acceleration -> ");
-printf("X: %.2f m/s^2, Y: %.2f m/s^2, Z: %.2f m/s^2\n", data->acceleration[0], data->acceleration[1], data->acceleration[2]);
+printf("X: %.2f g, Y: %.2f g, Z: %.2f g \n", data->acceleration[0], data->acceleration[1], data->acceleration[2]);
 
 // Print gyroscope data (X, Y, Z)
 printf("Angular Rate -> ");
-printf("X: %.2f m/s^2, Y: %.2f m/s^2, Z: %.2f m/s^2\n", data->gyroscope[0], data->gyroscope[1], data->gyroscope[2]);
+printf("X: %.2f dps, Y: %.2f dps, Z: %.2f dps \n", data->gyroscope[0], data->gyroscope[1], data->gyroscope[2]);
+
+// Print gravity data (X, Y, Z)
+printf("Gravity -> ");
+printf("X: %.2f m/s^2, Y: %.2f m/s^2, Z: %.2f m/s^2\n", data->gravity[0], data->gravity[1], data->gravity[2]);
 
 // Print magnetometer data (X, Y, Z)
 printf("Magnetometer -> ");
-printf("X: %.2f m/s^2, Y: %.2f m/s^2, Z: %.2f m/s^2\n", data->magnetometer[0], data->magnetometer[1], data->magnetometer[2]);
+printf("X: %.2f µT, Y: %.2f µT, Z: %.2f µT \n", data->magnetometer[0], data->magnetometer[1], data->magnetometer[2]);
+
+// Print magnetometer data (X, Y, Z)
+printf("Temperature -> ");
+printf("Temperature: %.2f degC \n", data->temperature);
 
 printf("----- \n");
 }
-
-
-AHRS_Converted_Data bno_read_converted_data() {
-    int8_t comres = 0;
-
-    // Initialize the return structure
-    AHRS_Converted_Data data = {0};
-
-    // Read converted accelerometer data
-    comres += bno055_convert_double_accel_x_mg(&data.accel_x_mg);
-    comres += bno055_convert_double_accel_y_mg(&data.accel_y_mg);
-    comres += bno055_convert_double_accel_z_mg(&data.accel_z_mg);
-    comres += bno055_convert_double_accel_xyz_mg(&data.accel_xyz_mg);
-
-    // Read converted magnetometer data
-    comres += bno055_convert_double_mag_x_uT(&data.mag_x_uT);
-    comres += bno055_convert_double_mag_y_uT(&data.mag_y_uT);
-    comres += bno055_convert_double_mag_z_uT(&data.mag_z_uT);
-    comres += bno055_convert_double_mag_xyz_uT(&data.mag_xyz_uT);
-
-    // Read converted gyroscope data
-    comres += bno055_convert_double_gyro_x_dps(&data.gyro_x_dps);
-    comres += bno055_convert_double_gyro_y_dps(&data.gyro_y_dps);
-    comres += bno055_convert_double_gyro_z_dps(&data.gyro_z_dps);
-    comres += bno055_convert_double_gyro_xyz_dps(&data.gyro_xyz_dps);
-
-    // Read converted Euler angles data
-    comres += bno055_convert_double_euler_h_deg(&data.euler_h_deg);
-    comres += bno055_convert_double_euler_r_deg(&data.euler_r_deg);
-    comres += bno055_convert_double_euler_p_deg(&data.euler_p_deg);
-    comres += bno055_convert_double_euler_hpr_deg(&data.euler_hpr_deg);
-
-    // Read converted linear acceleration data
-    comres += bno055_convert_double_linear_accel_x_msq(&data.linear_accel_x_ms2);
-    comres += bno055_convert_double_linear_accel_y_msq(&data.linear_accel_y_ms2);
-    comres += bno055_convert_double_linear_accel_z_msq(&data.linear_accel_z_ms2);
-    comres += bno055_convert_double_linear_accel_xyz_msq(&data.linear_accel_xyz_ms2);
-
-    // Read converted gravity data
-    comres += bno055_convert_gravity_double_x_msq(&data.gravity_x_ms2);
-    comres += bno055_convert_gravity_double_y_msq(&data.gravity_y_ms2);
-    comres += bno055_convert_gravity_double_z_msq(&data.gravity_z_ms2);
-    comres += bno055_convert_double_gravity_xyz_msq(&data.gravity_xyz_ms2);
-
-    // Check communication results (Optional, for debugging)
-    if (comres != BNO055_SUCCESS) {
-        printf("Communication error: %d\n", comres);
-    }
-
-    return data;
-}
-
-
-void print_bno055_data(AHRS_Converted_Data *data) {
-    // Print accelerometer data
-    printf("Accelerometer Data:\n");
-    printf("X: %.2f m/s^2, %.2f mg\n", data->accel_x_ms2, data->accel_x_mg);
-    printf("Y: %.2f m/s^2, %.2f mg\n", data->accel_y_ms2, data->accel_y_mg);
-    printf("Z: %.2f m/s^2, %.2f mg\n", data->accel_z_ms2, data->accel_z_mg);
-    printf("XYZ: [%.2f, %.2f, %.2f] m/s^2\n", data->accel_xyz_ms2.x, data->accel_xyz_ms2.y, data->accel_xyz_ms2.z);
-    printf("XYZ: [%.2f, %.2f, %.2f] mg\n", data->accel_xyz_mg.x, data->accel_xyz_mg.y, data->accel_xyz_mg.z);
-
-    // Print magnetometer data
-    printf("\nMagnetometer Data:\n");
-    printf("X: %.2f uT\n", data->mag_x_uT);
-    printf("Y: %.2f uT\n", data->mag_y_uT);
-    printf("Z: %.2f uT\n", data->mag_z_uT);
-    printf("XYZ: [%.2f, %.2f, %.2f] uT\n", data->mag_xyz_uT.x, data->mag_xyz_uT.y, data->mag_xyz_uT.z);
-
-    // Print gyroscope data
-    printf("\nGyroscope Data:\n");
-    printf("X: %.2f dps, %.2f rps\n", data->gyro_x_dps, data->gyro_x_rps);
-    printf("Y: %.2f dps, %.2f rps\n", data->gyro_y_dps, data->gyro_y_rps);
-    printf("Z: %.2f dps, %.2f rps\n", data->gyro_z_dps, data->gyro_z_rps);
-    printf("XYZ: [%.2f, %.2f, %.2f] dps\n", data->gyro_xyz_dps.x, data->gyro_xyz_dps.y, data->gyro_xyz_dps.z);
-    printf("XYZ: [%.2f, %.2f, %.2f] rps\n", data->gyro_xyz_rps.x, data->gyro_xyz_rps.y, data->gyro_xyz_rps.z);
-
-    // Print Euler angles data
-    printf("\nEuler Angles Data:\n");
-    printf("Heading: %.2f degrees, %.2f radians\n", data->euler_h_deg, data->euler_h_rad);
-    printf("Roll: %.2f degrees, %.2f radians\n", data->euler_r_deg, data->euler_r_rad);
-    printf("Pitch: %.2f degrees, %.2f radians\n", data->euler_p_deg, data->euler_p_rad);
-    printf("HPR: [%.2f, %.2f, %.2f] degrees\n", data->euler_hpr_deg.h, data->euler_hpr_deg.r, data->euler_hpr_deg.p);
-    printf("HPR: [%.2f, %.2f, %.2f] radians\n", data->euler_hpr_rad.h, data->euler_hpr_rad.r, data->euler_hpr_rad.p);
-
-    // Print linear acceleration data
-    printf("\nLinear Acceleration Data:\n");
-    printf("X: %.2f m/s^2\n", data->linear_accel_x_ms2);
-    printf("Y: %.2f m/s^2\n", data->linear_accel_y_ms2);
-    printf("Z: %.2f m/s^2\n", data->linear_accel_z_ms2);
-    printf("XYZ: [%.2f, %.2f, %.2f] m/s^2\n", data->linear_accel_xyz_ms2.x, data->linear_accel_xyz_ms2.y, data->linear_accel_xyz_ms2.z);
-
-    // Print gravity data
-    printf("\nGravity Data:\n");
-    printf("X: %.2f m/s^2\n", data->gravity_x_ms2);
-    printf("Y: %.2f m/s^2\n", data->gravity_y_ms2);
-    printf("Z: %.2f m/s^2\n", data->gravity_z_ms2);
-    printf("XYZ: [%.2f, %.2f, %.2f] m/s^2\n", data->gravity_xyz_ms2.x, data->gravity_xyz_ms2.y, data->gravity_xyz_ms2.z);
-}
-
