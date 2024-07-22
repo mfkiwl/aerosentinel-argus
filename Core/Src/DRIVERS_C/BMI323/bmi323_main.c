@@ -20,6 +20,7 @@ struct bmi3_dev bmi323;
 struct bmi3_dev bmi323dev;
 struct bmi3_dev *dev = &bmi323dev;
 uint8_t bmi323_dev_addr;
+
 struct bmi3_sensor_data sensor_data = { 0 };
 struct bmi3_sensor_data sensor_data_AG[3] = { 0 };
 float temperature_value;
@@ -114,24 +115,15 @@ int8_t Init_BMI323()
 
 	rslt = bmi3_interface_init(dev, BMI3_SPI_INTF);
 
-	printf("bmi3_interface_init : %d \n",rslt);
-
-	//bmi3_soft_reset(dev);
-	//HAL_Delay(100);
 	bst_delay_us(100000, dev->intf_ptr);
 
 	/* Initialize bmi323. */
 	rslt = bmi323_init(dev);
-	//printf("bmi323_init: %d \n",rslt);
 
 	if (rslt != BMI3_OK)
 	{
 		printf("bmi323_init() failed, error code: %d\r\n", rslt);
 		return rslt;
-	}
-	else
-	{
-		printf("BMI323 initialized successfully\r\n");
 	}
 
 	rslt = bmi3_get_regs(BMI3_REG_CHIP_ID, &chipid, 1, dev);

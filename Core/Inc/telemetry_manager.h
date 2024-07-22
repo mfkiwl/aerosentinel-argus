@@ -42,12 +42,7 @@ typedef struct {
 
 
 
-typedef struct {
-    float temperature;  // Temperature in degrees Celsius
-    float humidity;     // Relative humidity in %
-    float pressure;     // Pressure in hPa
-    float gas_resistance; // Gas resistance in Ohms
-} Barometer_Data;
+
 
 typedef struct {
     double latitude;    // Latitude in degrees
@@ -61,7 +56,7 @@ typedef struct {
 typedef struct {
     // Define a structure to hold all sensor data
 	IMU_6_Axis_Data asm330lhh_data;
-	Barometer_Data bme680_data;
+	Barometer_4_Axis bme680_data;
 	IMU_6_Axis_Data bmi323_data;
 	AHRS_9_Axis_Data bno055_data;
     GPS_Data gps_data;

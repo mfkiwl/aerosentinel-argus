@@ -15,16 +15,16 @@ IMU_6_Axis_Data bmi323_sensor_data;
 TelemetryData telemetry;
 
 sensor_init_retval init_functions[] = {
-	//Init_BMI323,
-	//BNO055_Init,
-	//BME680_Init,
+	Init_BMI323,
+	BNO055_Init,
+	BME680_Init,
 	MS5607_Init,
 };
 
 const char *sensor_names[] = {
-	//"BMI323",
-	//"BNO055",
-	//"BME680",
+	"BMI323",
+	"BNO055",
+	"BME680",
 	"MS5607",
 };
 
@@ -61,27 +61,26 @@ void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
 	telemetry.bmi323_data = bmi323_data_poll();
 	telemetry.bno055_data = bno_read_fusion_data();
+	telemetry.bme680_data = bme680_data_poll();
+    telemetry.ms5607_data = MS5607_ReadData();
 //    ASM330LHH_ReadData(&data->asm330lhh_data);
-//    BME680_ReadData(&data->bme680_data);
-//    BMI323_ReadData(&data->bmi323_data);
-//    BNO055_ReadData(&data->bno055_data);
 //    GPS_ReadData(&data->gps_data);
 //    LIS2MDLTR_ReadData(&data->lis2mdltr_data);
-    telemetry.ms5607_data = MS5607_ReadData();
+
 }
 
-void delay_us_func(uint32_t period)
-{
-	uint32_t i;
-
-	while(period--)
-	{
-		for(i = 0; i < 96; i++)
-		{
-			;
-		}
-	}
-}
+//void delay_us_func(uint32_t period)
+//{
+//	uint32_t i;
+//
+//	while(period--)
+//	{
+//		for(i = 0; i < 96; i++)
+//		{
+//			;
+//		}
+//	}
+//}
 
 void TestTelemetry(){
 	for(int i = 0; i < 20 ; i++){
@@ -90,9 +89,10 @@ void TestTelemetry(){
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-	//bmi323_print_sensor_data(&telemetry.bmi323_data);
-	//bno055_print_fusion_data(&telemetry.bno055_data);
+	bmi323_print_sensor_data(&telemetry.bmi323_data);
+	bno055_print_fusion_data(&telemetry.bno055_data);
 	ms5607_print_barometer_data(&telemetry.ms5607_data);
+	bme680_print_barometer_data(&telemetry.bme680_data);
 
 	printf("// --------------------------------------------- // \n");
 

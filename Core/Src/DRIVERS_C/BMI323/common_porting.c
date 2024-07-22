@@ -15,15 +15,7 @@ extern SPI_HandleTypeDef hspi1;
 
 void bst_delay_us(uint32_t period, void *intf_ptr)
 {
-	uint32_t i;
-
-	while(period--)
-	{
-		for(i = 0; i < 84; i++)
-		{
-			;
-		}
-	}
+	HAL_Delay(period/1000);
 }
 
 
@@ -64,4 +56,3 @@ int8_t SensorAPI_SPIx_Write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t 
 }
 
 #endif
-

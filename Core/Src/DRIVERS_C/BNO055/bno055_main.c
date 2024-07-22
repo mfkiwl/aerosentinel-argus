@@ -270,15 +270,17 @@ signed char bno055_platform_write(unsigned char slave_address7, unsigned char su
 
 void DelayUs(unsigned int Delay)
 {
-	uint32_t i;
+//	uint32_t i;
+//
+//	while(Delay--)
+//	{
+//		for(i = 0; i < 84; i++)
+//		{
+//			;
+//		}
+//	}
 
-	while(Delay--)
-	{
-		for(i = 0; i < 84; i++)
-		{
-			;
-		}
-	}
+	HAL_Delay(Delay);
 }
 
 
@@ -299,14 +301,14 @@ int8_t BNO055_Init(){
 	bno055_platform_read(BNO055_I2C_ADDR1, 0x00, &value, 1);
 
 	comres = bno055_init(&bno055_dev);
-	if(comres == BNO055_SUCCESS)
-	{
-		printf("bno055_init success, chip id=%02X\r\n", bno055_dev.chip_id);
-	}
-	else
-	{
-		printf("bno055_init failed, comres=%d\r\n", comres);
-	}
+//	if(comres == BNO055_SUCCESS)
+//	{
+//		printf("bno055_init success, chip id=%02X\r\n", bno055_dev.chip_id);
+//	}
+//	else
+//	{
+//		printf("bno055_init failed, comres=%d\r\n", comres);
+//	}
 
 	/* set the power mode as NORMAL*/
 	power_mode = BNO055_POWER_MODE_NORMAL;
@@ -338,15 +340,15 @@ int8_t BNO055_Init(){
 	    // Set the operation mode to NDOF
 	    comres += bno055_set_operation_mode(BNO055_OPERATION_MODE_NDOF);
 	    comres += bno055_get_operation_mode(&op_mode_current);
-		if(comres == BNO055_SUCCESS && op_mode_current == BNO055_OPERATION_MODE_NDOF)
-		{
-			printf("BNO Operation mode set successfully (NDOF Mode)! \n");
-			printf("BNO Current Mode (Verif) : %d \n", op_mode_current);
-		}
-		else
-		{
-			printf("bno055_init failed, comres=%d\r\n", comres);
-		}
+//		if(comres == BNO055_SUCCESS && op_mode_current == BNO055_OPERATION_MODE_NDOF)
+//		{
+//			printf("BNO Operation mode set successfully (NDOF Mode)! \n");
+//			printf("BNO Current Mode (Verif) : %d \n", op_mode_current);
+//		}
+//		else
+//		{
+//			printf("bno055_init failed, comres=%d\r\n", comres);
+//		}
 		HAL_Delay(1000); // 1 second
 
 //		comres +=bno055_set_temp_unit(BNO055_TEMP_UNIT_CELSIUS);
