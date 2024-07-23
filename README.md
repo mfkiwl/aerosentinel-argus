@@ -58,9 +58,20 @@ This architecture comprises several key components:
     <img src="current_status.svg" width="100%" heigth="auto" alt="css-in-readme">
 </div>
 
-<div align="center">
-Argus boards received on 16-07-2024 and are starting testing phase. I'm ensuring that all components power up correctly and communicate as expected.
-</div>
+**Initial Testing** (Started : 16-07-2024) :
+- (16-07-2024) Argus boards received, starting testing phase. I'm ensuring that all components power up correctly and communicate as expected.
+- (18-07-2024) Eveything seems to power up correctly, without power issues.
+- (21-07-2024) After testing the communication with pretty much all the peripherals (except for the GPS and SDMMC), I found some issues on the electronics conception :
+  - ASM330LHH not communicating -> Root cause : The device is supposed to communicate with I2C, but the CS pin (aka Protocol Selection pin) has been unfortunately setted to SPI mode (GND -> SPI Mode | VDD -> I2C Mode). Will solve this issue on V2.
+  - LIS2MDLTR not working -> Root cause : The device is supposed to communicate with I2C, but the CS pin (aka Protocol Selection pin) has been unfortunately setted to SPI mode (GND -> SPI Mode | VDD -> I2C Mode). Will solve this issue on V2.
+  - Need to change the GPS antenna connector to a female one. 
+  - Need to add a status LED, data ready LED, and calibration ok LED.
+  - Need to add a Board Reset pin on the Multiprocessor Communication connector
+  Besides that, everything else seems to work perfectly fine, and the work of the two faulty sensors has been replaced by the functionning ones.
+(TODO-> Add advancement notes for the GPS and SDMMC)
+**Basic Functionnality Verification** (Started : 22-07-2024) :
+- (22-07-2024) Started to write drivers for the functionning devices.
+- (23-07-2024) BMI323, BNO055, BME680 and MS5607 are working properly, with pretty good readings (very little noise to solve).
 
 ## Contributing
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
