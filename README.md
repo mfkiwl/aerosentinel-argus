@@ -13,7 +13,7 @@ Welcome to Aerosentinel Argus Navigation Module firmware repository. Configured 
     - [Installation](#installation)
 3. [Features](#features)
 4. [Software Architecture](#software-architecture)
-5. [Current Status](#current-status)
+5. [Current Project Status](#current-project-status)
 6. [Contributing](#contributing)
 7. [License](#license)
 
@@ -53,7 +53,7 @@ This architecture comprises several key components:
 - **Module Control Center**: Handles states, commands, error management, data management, and communication interfaces.
 - [**Aerosentinel Relay Protocol (A.R.P.)**](https://github.com/yaxsomo/aerosentinel-relay-protocol): Ensures secure and reliable communication using data encryption, authentication mechanisms, and a robust protocol stack.
 
-## Current Status
+## Current Project Status
 <div align="center">
     <img src="current_status.svg" width="100%" heigth="auto" alt="css-in-readme">
 </div>
@@ -67,8 +67,10 @@ This architecture comprises several key components:
   - Need to change the GPS antenna connector to a female one. 
   - Need to add a status LED, data ready LED, and calibration ok LED.
   - Need to add a Board Reset pin on the Multiprocessor Communication connector
-  Besides that, everything else seems to work perfectly fine, and the work of the two faulty sensors has been replaced by the functionning ones.
+
+Besides that, everything else seems to work perfectly fine, and the work of the two faulty sensors has been replaced by the functionning ones.
 (TODO-> Add advancement notes for the GPS and SDMMC)
+
 **Basic Functionnality Verification** (Started : 22-07-2024) :
 - (22-07-2024) Started to write drivers for the functionning devices.
 - (23-07-2024) BMI323, BNO055, BME680 and MS5607 are working properly, with pretty good readings (very little noise to solve).
