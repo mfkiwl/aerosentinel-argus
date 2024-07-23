@@ -9,23 +9,22 @@
 #include "telemetry_manager.h"
 
 
-AHRS_9_Axis_Data bno055_fusion_data;
-IMU_6_Axis_Data bmi323_sensor_data;
-
 TelemetryData telemetry;
 
 sensor_init_retval init_functions[] = {
-	Init_BMI323,
-	BNO055_Init,
-	BME680_Init,
-	MS5607_Init,
+//	Init_BMI323,
+//	BNO055_Init,
+//	BME680_Init,
+//	MS5607_Init,
+//	GPS_Init,
 };
 
 const char *sensor_names[] = {
-	"BMI323",
-	"BNO055",
-	"BME680",
-	"MS5607",
+//	"BMI323",
+//	"BNO055",
+//	"BME680",
+//	"MS5607",
+//	"ATGM336H",
 };
 
 telemetry_init_status SensorManager_Init(void) {
@@ -41,7 +40,7 @@ telemetry_init_status SensorManager_Init(void) {
             printf("%s initialization failed.\n", sensor_names[i]);
             all_success = false;
         } else {
-//        	printf("Success\n");
+        	printf("[%s] device found! Initialization succeded.\n", sensor_names[i]);
             any_success = true;
         }
     }
@@ -60,12 +59,16 @@ telemetry_init_status SensorManager_Init(void) {
 
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
-	telemetry.bmi323_data = bmi323_data_poll();
+//	telemetry.bmi323_data = bmi323_data_poll();
 //	telemetry.bno055_data = bno_read_fusion_data();
 //	telemetry.bme680_data = bme680_data_poll();
 //    telemetry.ms5607_data = MS5607_ReadData();
-//    ASM330LHH_ReadData(&data->asm330lhh_data);
+//    telemetry.gps_data = GPS_Data_Reception();
+    //TO IMPLEMENT
 //    GPS_ReadData(&data->gps_data);
+
+    //FOR VERSION 2 OF ARGUS
+//    ASM330LHH_ReadData(&data->asm330lhh_data);
 //    LIS2MDLTR_ReadData(&data->lis2mdltr_data);
 
 }
@@ -90,14 +93,19 @@ void TestTelemetry(){
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-	bmi323_print_sensor_data(&telemetry.bmi323_data);
+//	bmi323_print_sensor_data(&telemetry.bmi323_data);
 //	bno055_print_fusion_data(&telemetry.bno055_data);
 //	ms5607_print_barometer_data(&telemetry.ms5607_data);
 //	bme680_print_barometer_data(&telemetry.bme680_data);
+//	gps_print_positionning_data(&telemetry.gps_data);
 
 	printf("// --------------------------------------------- // \n");
 
+	//DELAY BETWEEN READINGS TO DESIGN CORRECTLY
 //    HAL_Delay(150);
-    delay_us_func(50000);
+//    delay_us_func(50000);  //50 ms
+//    delay_us_func(100000); //100 ms
+//    delay_us_func(200000); //200 ms
+//      delay_us_func(1500000); //1.5 s
     	}
 }

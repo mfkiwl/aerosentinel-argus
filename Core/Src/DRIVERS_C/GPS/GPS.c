@@ -19,12 +19,12 @@ double convertDegMinToDecDeg (float degMin)
   return decDeg;
 }
 //##################################################################################################################
-bool GPS_Init(void)
+int8_t GPS_Init(void)
 {
 	GPS.rxIndex=0;
 	HAL_StatusTypeDef status = HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
 
-	return (status == HAL_OK) ? 1 : 0;
+	return (status == HAL_OK) ? 0 : 1;
 }
 //##################################################################################################################
 void	GPS_CallBack(void)
@@ -37,8 +37,19 @@ void	GPS_CallBack(void)
 	}	
 	HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
 }
+
+// Override the weak implementation of the callback
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    // Check if the callback is for UART8
+    if (huart->Instance == UART8)
+    {
+        // Call the GPS callback function
+        GPS_CallBack();
+    }
+}
 //##################################################################################################################
-void	GPS_Process(void)
+GPS_t GPS_Data_Reception(void)
 {
 	if( (HAL_GetTick()-GPS.LastTime>50) && (GPS.rxIndex>0))
 	{
@@ -66,5 +77,25 @@ void	GPS_Process(void)
 		GPS.rxIndex=0;
 	}
 	HAL_UART_Receive_IT(&_GPS_UART,&GPS.rxTmp,1);
+
+	return GPS;
 }
 //##################################################################################################################
+// Function to print the GPS position data
+void gps_print_positionning_data(GPS_t *data)
+{
+	printf("Global Positionning System Data: \n");
+    printf("UTC Time: %02d:%02d:%02d.%03d\n", data->GPGGA.UTC_Hour, data->GPGGA.UTC_Min, data->GPGGA.UTC_Sec, data->GPGGA.UTC_MicroSec);
+    printf("Latitude: %.6f %c (Decimal: %.6f)\n", data->GPGGA.Latitude, data->GPGGA.NS_Indicator, data->GPGGA.LatitudeDecimal);
+    printf("Longitude: %.6f %c (Decimal: %.6f)\n", data->GPGGA.Longitude, data->GPGGA.EW_Indicator, data->GPGGA.LongitudeDecimal);
+    printf("Position Fix Indicator: %d\n", data->GPGGA.PositionFixIndicator);
+    printf("Satellites Used: %d\n", data->GPGGA.SatellitesUsed);
+    printf("HDOP: %.2f\n", data->GPGGA.HDOP);
+    printf("MSL Altitude: %.2f %c\n", data->GPGGA.MSL_Altitude, data->GPGGA.MSL_Units);
+    printf("Geoid Separation: %.2f %c\n", data->GPGGA.Geoid_Separation, data->GPGGA.Geoid_Units);
+    printf("Age of Differential Corrections: %d\n", data->GPGGA.AgeofDiffCorr);
+    printf("Differential Reference Station ID: %s\n", data->GPGGA.DiffRefStationID);
+    printf("Checksum: %s\n", data->GPGGA.CheckSum);
+    printf("----- \n");
+}
+

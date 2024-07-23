@@ -40,26 +40,13 @@ typedef struct {
 } Magnetometer_3_Axis_Data;
 
 
-
-
-
-
-typedef struct {
-    double latitude;    // Latitude in degrees
-    double longitude;   // Longitude in degrees
-    float altitude;     // Altitude in meters
-    float speed;        // Speed in m/s
-    float course;       // Course over ground in degrees
-    uint8_t satellites; // Number of satellites in view
-} GPS_Data;
-
 typedef struct {
     // Define a structure to hold all sensor data
 	IMU_6_Axis_Data asm330lhh_data;
 	Barometer_4_Axis bme680_data;
 	IMU_6_Axis_Data bmi323_data;
 	AHRS_9_Axis_Data bno055_data;
-    GPS_Data gps_data;
+	GPS_t gps_data;
     IMU_6_Axis_Data lis2mdltr_data;
     Barometer_2_Axis ms5607_data;
 } TelemetryData;

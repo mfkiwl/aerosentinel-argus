@@ -51,9 +51,10 @@ typedef struct
 
 extern GPS_t GPS;
 //##################################################################################################################
-bool	GPS_Init(void);
+int8_t	GPS_Init(void);
 void	GPS_CallBack(void);
-void	GPS_Process(void);
+GPS_t GPS_Data_Reception(void);
+void gps_print_positionning_data(GPS_t *data);
 //##################################################################################################################
 
 #endif
