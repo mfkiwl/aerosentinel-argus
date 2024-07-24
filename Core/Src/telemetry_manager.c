@@ -15,7 +15,7 @@ sensor_init_retval init_functions[] = {
 //	Init_BMI323,
 //	BNO055_Init,
 //	BME680_Init,
-//	MS5607_Init,
+	MS5607_Init,
 //	GPS_Init,
 };
 
@@ -23,7 +23,7 @@ const char *sensor_names[] = {
 //	"BMI323",
 //	"BNO055",
 //	"BME680",
-//	"MS5607",
+	"MS5607",
 //	"ATGM336H",
 };
 
@@ -62,8 +62,8 @@ void SensorManager_UpdateData(TelemetryData *data) {
 //	telemetry.bmi323_data = bmi323_data_poll();
 //	telemetry.bno055_data = bno_read_fusion_data();
 //	telemetry.bme680_data = bme680_data_poll();
-//    telemetry.ms5607_data = MS5607_ReadData();
-//    telemetry.gps_data = GPS_Data_Reception();
+    telemetry.ms5607_data = MS5607_ReadData();
+//  telemetry.gps_data = GPS_Data_Reception();
     //TO IMPLEMENT
 //    GPS_ReadData(&data->gps_data);
 
@@ -95,7 +95,7 @@ void TestTelemetry(){
 	// Sensor Data Print
 //	bmi323_print_sensor_data(&telemetry.bmi323_data);
 //	bno055_print_fusion_data(&telemetry.bno055_data);
-//	ms5607_print_barometer_data(&telemetry.ms5607_data);
+	ms5607_print_barometer_data(&telemetry.ms5607_data);
 //	bme680_print_barometer_data(&telemetry.bme680_data);
 //	gps_print_positionning_data(&telemetry.gps_data);
 
@@ -106,6 +106,6 @@ void TestTelemetry(){
 //    delay_us_func(50000);  //50 ms
 //    delay_us_func(100000); //100 ms
 //    delay_us_func(200000); //200 ms
-//      delay_us_func(1500000); //1.5 s
+      delay_us_func(1000000); //1 s
     	}
 }

@@ -87,6 +87,7 @@ struct MS5607Readings{
 typedef struct {
 	int32_t pressure;
 	double temperature;
+	double altitude;
 } Barometer_2_Axis;
 
 

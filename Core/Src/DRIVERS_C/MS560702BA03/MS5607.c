@@ -52,6 +52,16 @@ static struct MS5607UncompensatedValues uncompValues;
 /* Compensated values structure */
 static struct MS5607Readings readings;
 
+// Constants for the barometric formula
+#define SEA_LEVEL_PRESSURE 101325.0  // Sea level standard atmospheric pressure in Pa
+#define GAS_CONSTANT 8.31432         // Universal gas constant in N·m/(mol·K)
+#define GRAVITY 9.80665              // Acceleration due to gravity in m/s²
+#define MOLAR_MASS 0.0289644         // Molar mass of Earth's air in kg/mol
+#define TEMP_LAPSE_RATE 0.0098       // Temperature lapse rate in K/m
+#define STANDARD_TEMP 288.15         // Standard temperature at sea level in K
+#define PASCAL_TO_HECTOPASCAL 100 	 //Divide the pressure by this number to get hPa
+#define PASCAL_TO_KILOPASCAL 1000	 //Divide the pressure by this number to get kPa
+
 void ms5607_delay_func(uint32_t period)
 {
 	uint32_t i;
@@ -271,6 +281,19 @@ void MS5607SetPressureOSR(MS5607OSRFactors pOSR){
   Pressure_OSR = pOSR;
 }
 
+// Function to calculate altitude from pressure and temperature
+double calculate_altitude(double pressure, double temperature_celsius) {
+	//Method 1 : Variables to tweak
+    double temperature_kelvin = temperature_celsius + 273.15; // Convert temperature to Kelvin
+    double altitude = (temperature_kelvin / TEMP_LAPSE_RATE) *
+                      (1 - pow((pressure / SEA_LEVEL_PRESSURE), (GRAVITY * MOLAR_MASS) / (GAS_CONSTANT * TEMP_LAPSE_RATE)));
+
+	//Method 2 : Not accurate
+	//double altitude = ((((((10 * log10((pressure / 100.0) / 1013.25)) / 5.2558797) - 1) / (-6.8755856 * pow(10, -6))) / 1000) * 0.30);
+
+	return altitude;
+}
+
 
 Barometer_2_Axis MS5607_ReadData(){
 	Barometer_2_Axis data = {0};
@@ -278,6 +301,7 @@ Barometer_2_Axis MS5607_ReadData(){
 	MS5607Convert(&uncompValues, &readings);
 	data.temperature = MS5607GetTemperatureC();
 	data.pressure = MS5607GetPressurePa();
+	data.altitude = calculate_altitude(data.pressure, data.temperature);
 	MS5607Update();
 	return data;
 }
@@ -285,6 +309,6 @@ Barometer_2_Axis MS5607_ReadData(){
 
 void ms5607_print_barometer_data(Barometer_2_Axis *data) {
 	printf("MS5607 Barometer: \n");
-	printf("Pressure: %ld Pa, Temperature: %f degC \n", data->pressure, data->temperature);
+	printf("Pressure: %ld Pa, Temperature: %f degC, Altitude: %f meters \n", data->pressure, data->temperature, data->altitude);
     printf("----- \n");
 }
