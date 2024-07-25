@@ -11,36 +11,31 @@
 
 TelemetryData telemetry;
 
-sensor_init_retval init_functions[] = {
-//	Init_BMI323,
-//	BNO055_Init,
-//	BME680_Init,
-	MS5607_Init,
-//	GPS_Init,
+
+// Define the array of sensors with their initialization functions and names
+sensors_init_t sensors[] = {
+    {Init_BMI323, "BMI323"},
+    {BNO055_Init, "BNO055"},
+    {BME680_Init, "BME680"},
+    {MS5607_Init, "MS5607"},
+    {GPS_Init, "ATGM336H"}
 };
 
-const char *sensor_names[] = {
-//	"BMI323",
-//	"BNO055",
-//	"BME680",
-	"MS5607",
-//	"ATGM336H",
-};
 
 telemetry_init_status SensorManager_Init(void) {
-	printf("Sensors Initialization routine started. \n");
+    printf("Sensors Initialization routine started.\n");
 
-    size_t num_sensors = sizeof(init_functions) / sizeof(init_functions[0]);
+    size_t num_sensors = sizeof(sensors) / sizeof(sensors[0]);
     bool all_success = true;
     bool any_success = false;
 
     for (size_t i = 0; i < num_sensors; ++i) {
-        int8_t status = init_functions[i]();
+        int8_t status = sensors[i].init_function();
         if (status != 0) {
-            printf("%s initialization failed.\n", sensor_names[i]);
+            printf("%s initialization failed.\n", sensors[i].sensor_name);
             all_success = false;
         } else {
-        	printf("[%s] device found! Initialization succeded.\n", sensor_names[i]);
+            printf("[%s] device found! Initialization succeeded.\n", sensors[i].sensor_name);
             any_success = true;
         }
     }
@@ -59,11 +54,11 @@ telemetry_init_status SensorManager_Init(void) {
 
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
-//	telemetry.bmi323_data = bmi323_data_poll();
-//	telemetry.bno055_data = bno_read_fusion_data();
-//	telemetry.bme680_data = bme680_data_poll();
+	telemetry.bmi323_data = bmi323_data_poll();
+	telemetry.bno055_data = bno_read_fusion_data();
+	telemetry.bme680_data = bme680_data_poll();
     telemetry.ms5607_data = MS5607_ReadData();
-//  telemetry.gps_data = GPS_Data_Reception();
+    telemetry.gps_data = GPS_Data_Reception();
     //TO IMPLEMENT
 //    GPS_ReadData(&data->gps_data);
 
@@ -93,11 +88,11 @@ void TestTelemetry(){
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-//	bmi323_print_sensor_data(&telemetry.bmi323_data);
-//	bno055_print_fusion_data(&telemetry.bno055_data);
+	bmi323_print_sensor_data(&telemetry.bmi323_data);
+	bno055_print_fusion_data(&telemetry.bno055_data);
 	ms5607_print_barometer_data(&telemetry.ms5607_data);
-//	bme680_print_barometer_data(&telemetry.bme680_data);
-//	gps_print_positionning_data(&telemetry.gps_data);
+	bme680_print_barometer_data(&telemetry.bme680_data);
+	gps_print_positionning_data(&telemetry.gps_data);
 
 	printf("// --------------------------------------------- // \n");
 

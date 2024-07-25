@@ -21,7 +21,14 @@
 
 
 
-typedef int8_t (*sensor_init_retval)(void);
+
+
+
+// Define the structure
+typedef struct {
+    int8_t (*init_function)(void);
+    const char *sensor_name;
+} sensors_init_t;
 
 typedef enum {
     TELEMETRY_INIT_SUCCESS,         /*!< Initialization Successful of all the sensors */
@@ -29,16 +36,9 @@ typedef enum {
     TELEMETRY_INIT_FAILURE          /*!< Initialization error all the sensors */
 }telemetry_init_status;
 
-extern sensor_init_retval init_functions[];
-extern const char *sensor_names[];
-
-
-
-
 typedef struct {
     float magnetic_field[3]; // X, Y, Z magnetic field in Gauss
 } Magnetometer_3_Axis_Data;
-
 
 typedef struct {
     // Define a structure to hold all sensor data

@@ -145,7 +145,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //I2C_Scan(&hi2c2);
   SensorManager_Init();
-  TestTelemetry();
+  //TestTelemetry();
 
 
 
