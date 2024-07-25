@@ -14,8 +14,9 @@ Welcome to Aerosentinel Argus Navigation Module firmware repository. Configured 
 3. [Features](#features)
 4. [Software Architecture](#software-architecture)
 5. [Current Project Status](#current-project-status)
-6. [Contributing](#contributing)
-7. [License](#license)
+6. [Rev 2 Module update](#rev-2-module-update)
+7. [Contributing](#contributing)
+8. [License](#license)
 
 ## Introduction
 This firmware is designed to provide precise navigation and guidance capabilities for rocketry applications using the Aerosentinel Argus Navigation Module. It implements advanced algorithms and features to ensure optimal performance, safety, and reliability during launch, ascent, and recovery phases.
@@ -38,7 +39,6 @@ Before getting started, make sure you have the following installed:
 - **Reliability**: Built to withstand harsh temperatures, vibrations, and G-forces for robust performance.
 
 ## Software Architecture
-
 
 The Aerosentinel Argus Navigation Module is designed with a modular and hierarchical software architecture, ensuring clarity and maintainability. Below is the visual representation of the software architecture:
 
@@ -64,17 +64,26 @@ This architecture comprises several key components:
 - **(21-07-2024)** After testing the communication with pretty much all the peripherals (except for the GPS and SDMMC), I found some **issues on the electronics conception** :
   - **ASM330LHH not communicating** -> Root cause : The device is supposed to communicate with I2C, but the CS pin (aka Protocol Selection pin) has been unfortunately setted to SPI mode (GND -> SPI Mode | VDD -> I2C Mode).
   - **LIS2MDLTR not communicating** -> Root cause : The device is supposed to communicate with I2C, but the CS pin (aka Protocol Selection pin) has been unfortunately setted to SPI mode (GND -> SPI Mode | VDD -> I2C Mode).
-The issue with those sensors is already **being corrected for the V2**. I'm also improving some aspects of this board :
-  - Changing the GPS antenna connector to a female one. 
-  - Adding a status LED, data ready LED, and calibration ok LED.
-  - Adding a Board Reset pin on the Multiprocessor Communication connector
-
+The issue with those sensors is already **being corrected for the Rev 2 module** (See the [Rev 2 Module update](#rev-2-module-update) section). 
 Besides that, everything else seems to work perfectly fine, and the work of the two faulty sensors has been replaced by the functionning ones.
-(TODO-> Add advancement notes for the GPS and SDMMC)
+
+TODO-> Add advancement notes for the GPS and SDMMC
 
 **Basic Functionnality Verification** (Started : 22-07-2024) :
 - **(22-07-2024)** Started to write drivers for the functionning devices.
 - **(23-07-2024)** BMI323, BNO055, BME680 and MS5607 are working and communicating properly, with pretty good readings (very little noise to solve).
+- **(25-07-2024)** GPS Module responding correctly to UART commands. For now i don't have the antenna, so I cannot gather readings from satellites.
+
+## Rev 2 Module update
+As some hardware issues have been found on the Rev.1 module, I'm actively improving this second revision.
+
+**Improvements:**
+
+- **ASM330LHH & LIS2MDLTR** : Solved protocol selection on CS pins. They should be operational for the next hardware iteration.
+- **GPS Antenna Connector** : Changing the GPS antenna connector to a female one
+- **Light Emitting Diodes** : Adding a health status LED and a second LED for additional informations/alerts.
+- **Multiprocessor Communication Connector** : Adding a Board Reset pin and Module Heartbeat pin
+- **Black Box SD Card connector** : Rotated the SD Card connector to 180°
 
 ## Contributing
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when making contributions to this project.
