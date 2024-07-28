@@ -37,8 +37,6 @@ Core/Src/DRIVERS_C/BME680/bme680_main.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h ../Core/Inc/main.h
@@ -79,8 +77,6 @@ Core/Src/DRIVERS_C/BME680/bme680_main.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:

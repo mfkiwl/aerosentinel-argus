@@ -609,22 +609,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
   /* USER CODE BEGIN UART8_MspInit 1 */
 
   /* USER CODE END UART8_MspInit 1 */
-
   }
-
-}
-
-/**
-* @brief USART MSP Initialization
-* This function configures the hardware resources used in this example
-* @param husart: USART handle pointer
-* @retval None
-*/
-void HAL_USART_MspInit(USART_HandleTypeDef* husart)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-  if(husart->Instance==USART1)
+  else if(huart->Instance==USART1)
   {
   /* USER CODE BEGIN USART1_MspInit 0 */
 
@@ -645,11 +631,9 @@ void HAL_USART_MspInit(USART_HandleTypeDef* husart)
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**USART1 GPIO Configuration
     PA9     ------> USART1_TX
-    PA11     ------> USART1_NSS
-    PA8     ------> USART1_CK
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_11|GPIO_PIN_8|GPIO_PIN_10;
+    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -659,7 +643,6 @@ void HAL_USART_MspInit(USART_HandleTypeDef* husart)
   /* USER CODE BEGIN USART1_MspInit 1 */
 
   /* USER CODE END USART1_MspInit 1 */
-
   }
 
 }
@@ -692,18 +675,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
   /* USER CODE END UART8_MspDeInit 1 */
   }
-
-}
-
-/**
-* @brief USART MSP De-Initialization
-* This function freeze the hardware resources used in this example
-* @param husart: USART handle pointer
-* @retval None
-*/
-void HAL_USART_MspDeInit(USART_HandleTypeDef* husart)
-{
-  if(husart->Instance==USART1)
+  else if(huart->Instance==USART1)
   {
   /* USER CODE BEGIN USART1_MspDeInit 0 */
 
@@ -713,11 +685,9 @@ void HAL_USART_MspDeInit(USART_HandleTypeDef* husart)
 
     /**USART1 GPIO Configuration
     PA9     ------> USART1_TX
-    PA11     ------> USART1_NSS
-    PA8     ------> USART1_CK
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_11|GPIO_PIN_8|GPIO_PIN_10);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
 
   /* USER CODE BEGIN USART1_MspDeInit 1 */
 

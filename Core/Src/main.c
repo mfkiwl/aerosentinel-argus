@@ -54,7 +54,7 @@ SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi4;
 
 UART_HandleTypeDef huart8;
-USART_HandleTypeDef husart1;
+UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
@@ -71,7 +71,7 @@ static void MX_I2C4_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_UART8_Init(void);
-static void MX_USART1_Init(void);
+static void MX_USART1_UART_Init(void);
 static void MX_SPI4_Init(void);
 /* USER CODE BEGIN PFP */
 void I2C_Scan(I2C_HandleTypeDef *hi2c)
@@ -94,6 +94,25 @@ int _write(int file, char *ptr, int len){
 		ITM_SendChar((*ptr++));
 	}
 	return len;
+}
+
+void UART_Transmit_P(const char* str)
+{
+  HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
+}
+
+
+void main_delay(uint32_t period)
+{
+	uint32_t i;
+
+	while(period--)
+	{
+		for(i = 0; i < 96; i++)
+		{
+			;
+		}
+	}
 }
 
 uint32_t count = 0;
@@ -139,12 +158,12 @@ int main(void)
   MX_SPI1_Init();
   MX_SPI2_Init();
   MX_UART8_Init();
-  MX_USART1_Init();
+  MX_USART1_UART_Init();
   MX_SPI4_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   //I2C_Scan(&hi2c2);
-  SensorManager_Init();
+  //SensorManager_Init();
   //TestTelemetry();
 
 
@@ -164,9 +183,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	  count++; //Increment count variable
+	  count++; //Increment count variable
+	  char temp_buf[200];
+	  		// Use sprintf to format the device ID into the buffer
+	  sprintf(temp_buf, "USART: Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count);
+	  UART_Transmit_P(temp_buf);
 //	  printf("Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count); // Hello World Test
 //	  HAL_Delay(250);
+	  main_delay(250000);
 
   }
   /* USER CODE END 3 */
@@ -598,7 +622,7 @@ static void MX_UART8_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART1_Init(void)
+static void MX_USART1_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART1_Init 0 */
@@ -608,38 +632,30 @@ static void MX_USART1_Init(void)
   /* USER CODE BEGIN USART1_Init 1 */
 
   /* USER CODE END USART1_Init 1 */
-  husart1.Instance = USART1;
-  husart1.Init.BaudRate = 115200;
-  husart1.Init.WordLength = USART_WORDLENGTH_8B;
-  husart1.Init.StopBits = USART_STOPBITS_1;
-  husart1.Init.Parity = USART_PARITY_NONE;
-  husart1.Init.Mode = USART_MODE_TX_RX;
-  husart1.Init.CLKPolarity = USART_POLARITY_LOW;
-  husart1.Init.CLKPhase = USART_PHASE_1EDGE;
-  husart1.Init.CLKLastBit = USART_LASTBIT_DISABLE;
-  husart1.Init.ClockPrescaler = USART_PRESCALER_DIV1;
-  husart1.SlaveMode = USART_SLAVEMODE_ENABLE;
-  if (HAL_USART_Init(&husart1) != HAL_OK)
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_USARTEx_SetTxFifoThreshold(&husart1, USART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_USARTEx_SetRxFifoThreshold(&husart1, USART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
   {
     Error_Handler();
   }
-  if (HAL_USARTEx_ConfigNSS(&husart1, USART_NSS_HARD) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_USARTEx_DisableFifoMode(&husart1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_USARTEx_EnableSlaveMode(&husart1) != HAL_OK)
+  if (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK)
   {
     Error_Handler();
   }

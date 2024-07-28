@@ -36,8 +36,6 @@ Core/Src/DRIVERS_C/GPS/GPS.o: ../Core/Src/DRIVERS_C/GPS/GPS.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
  ../Core/Inc/DRIVERS_H/GPS/GPS.h
 ../Core/Inc/DRIVERS_H/GPS/GPSConfig.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
@@ -76,6 +74,4 @@ Core/Src/DRIVERS_C/GPS/GPS.o: ../Core/Src/DRIVERS_C/GPS/GPS.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
 ../Core/Inc/DRIVERS_H/GPS/GPS.h:
