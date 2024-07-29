@@ -74,6 +74,9 @@ TODO-> Add advancement notes for the GPS and SDMMC
 - **(23-07-2024)** BMI323, BNO055, BME680 and MS5607 are working and communicating properly, with pretty good readings (very little noise to solve).
 - **(25-07-2024)** GPS Module responding correctly to UART commands. For now i don't have the antenna, so I cannot gather readings from satellites.
 
+**Firmware Development**
+- **(29-07-2024)** Added scaling factor division for quaternion normalization, and tested graphically with [Aerosentinel Sensor Fusion Transformer](https://github.com/yaxsomo/aerosentinel-sensor-fusion-transformer). Impressive results!! Preparing the module for the first flight test, in a few days.
+
 ## Rev 2 Module update
 As some hardware issues have been found on the Rev.1 module, I'm actively improving this second revision.
 
