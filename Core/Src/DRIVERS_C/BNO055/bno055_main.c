@@ -11,6 +11,8 @@
 
 struct bno055_t bno055_dev;
 
+extern UART_HandleTypeDef huart1;
+
 extern I2C_HandleTypeDef hi2c2;
 #define BNO_I2C_HANDLE	(hi2c2)
 uint8_t BNO_GTXBuffer[512], BNO_GRXBuffer[2048];
@@ -392,12 +394,12 @@ AHRS_9_Axis_Data bno_read_fusion_data(){
     data.orientation[1] = euler_temp_data->r;
     data.orientation[2] = euler_temp_data->h;
 
-    // Read Quaternion data (Optional, not used in this example)
+    // Read Quaternion data -> Added scaling factor division for quaternion normalization (-1 ; +1)
     comres += bno055_read_quaternion_wxyz(quaternion_temp_data);
-    data.quaternion->w = quaternion_temp_data->w;
-    data.quaternion->x = quaternion_temp_data->x;
-    data.quaternion->y = quaternion_temp_data->y;
-    data.quaternion->z = quaternion_temp_data->z;
+    data.quaternion.w = quaternion_temp_data->w / QUAT_SCALING_FACT;
+    data.quaternion.x = quaternion_temp_data->x / QUAT_SCALING_FACT;
+    data.quaternion.y = quaternion_temp_data->y / QUAT_SCALING_FACT;
+    data.quaternion.z = quaternion_temp_data->z / QUAT_SCALING_FACT;
 
     // Read Linear acceleration
     comres += bno055_convert_double_accel_xyz_mg(accel_temp_data);
@@ -431,6 +433,15 @@ AHRS_9_Axis_Data bno_read_fusion_data(){
     return data;
 }
 
+void Send_Quat_To_IMU_Visualizer(quaternion_vect q)
+{
+char quaternionStr[100];
+float lama = 0.1;
+// Format quaternion (W, X, Y, Z vectors) as a comma-separated string
+sprintf(quaternionStr, "%.6f,%.6f,%.6f,%.6f,%.6f\r\n", q.w, q.x, q.y, q.z, lama);
+HAL_UART_Transmit(&huart1, (uint8_t*)quaternionStr, strlen(quaternionStr), HAL_MAX_DELAY);
+}
+
 void bno055_print_fusion_data(AHRS_9_Axis_Data *data) {
 printf("BNO055 AHRS: \n");
 // Print orientation (Pitch, Roll, Yaw)
@@ -442,7 +453,9 @@ printf("Pitch: %.2f deg, Roll: %.2f deg, Yaw: %.2f deg \n", data->orientation[0]
 
 // Print quaternion (W, X, Y, Z vectors)
 printf("Quaternion -> ");
-printf("W: %.2f , X: %.2f , Y: %.2f , Z: %.2f \n", data->quaternion->w, data->quaternion->x, data->quaternion->y, data->quaternion->z);
+printf("W: %.2f , X: %.2f , Y: %.2f , Z: %.2f \n", data->quaternion.w, data->quaternion.x, data->quaternion.y, data->quaternion.z);
+
+Send_Quat_To_IMU_Visualizer(data->quaternion);
 
 // Print acceleration (X, Y, Z)
 printf("Acceleration -> ");

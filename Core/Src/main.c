@@ -163,8 +163,8 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   //I2C_Scan(&hi2c2);
-  //SensorManager_Init();
-  //TestTelemetry();
+  SensorManager_Init();
+  TestTelemetry();
 
 
 
@@ -183,14 +183,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  count++; //Increment count variable
-	  char temp_buf[200];
+//	  count++; //Increment count variable
+//	  char temp_buf[200];
 	  		// Use sprintf to format the device ID into the buffer
-	  sprintf(temp_buf, "USART: Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count);
-	  UART_Transmit_P(temp_buf);
+//	  sprintf(temp_buf, "USART: Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count);
+//	  UART_Transmit_P(temp_buf);
 //	  printf("Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count); // Hello World Test
 //	  HAL_Delay(250);
-	  main_delay(250000);
+//	  main_delay(250000);
 
   }
   /* USER CODE END 3 */

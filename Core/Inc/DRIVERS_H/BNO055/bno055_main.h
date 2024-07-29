@@ -15,6 +15,7 @@
 #include "DRIVERS_H/BNO055/bno055.h"
 
 #define BUS_TIMEOUT             1000
+#define QUAT_SCALING_FACT		16384.0
 
 typedef struct{
 	double w;
@@ -31,7 +32,7 @@ typedef struct {
     float gravity[3]; // X, Y, Z gravity
     double magnetometer[3]; // X, Y, Z magnetic field
     float temperature;
-    quaternion_vect quaternion[4]; 	// W, X, Y, Z quaternion vectors
+    quaternion_vect quaternion; 	// W, X, Y, Z quaternion vectors
 } AHRS_9_Axis_Data;
 
 typedef struct {

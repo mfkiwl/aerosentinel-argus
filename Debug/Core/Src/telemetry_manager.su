@@ -1,4 +1,4 @@
 ../Core/Src/telemetry_manager.c:25:23:SensorManager_Init	24	static
-../Core/Src/telemetry_manager.c:55:6:SensorManager_UpdateData	888	static
+../Core/Src/telemetry_manager.c:55:6:SensorManager_UpdateData	176	static
 ../Core/Src/telemetry_manager.c:71:6:delay_us_func	24	static
 ../Core/Src/telemetry_manager.c:84:6:TestTelemetry	16	static

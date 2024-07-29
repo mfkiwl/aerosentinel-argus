@@ -1,6 +1,7 @@
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:232:13:bno055_platform_read	32	static
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:255:13:bno055_platform_write	32	static
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:281:6:DelayUs	24	static
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:304:8:BNO055_Init	16	static
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:382:18:bno_read_fusion_data	272	static
-../Core/Src/DRIVERS_C/BNO055/bno055_main.c:434:6:bno055_print_fusion_data	56	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:234:13:bno055_platform_read	32	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:257:13:bno055_platform_write	32	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:283:6:DelayUs	24	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:306:8:BNO055_Init	16	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:384:18:bno_read_fusion_data	176	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:436:6:Send_Quat_To_IMU_Visualizer	200	static
+../Core/Src/DRIVERS_C/BNO055/bno055_main.c:445:6:bno055_print_fusion_data	56	static

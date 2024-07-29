@@ -14,11 +14,11 @@ TelemetryData telemetry;
 
 // Define the array of sensors with their initialization functions and names
 sensors_init_t sensors[] = {
-    {Init_BMI323, "BMI323"},
+//    {Init_BMI323, "BMI323"},
     {BNO055_Init, "BNO055"},
-    {BME680_Init, "BME680"},
-    {MS5607_Init, "MS5607"},
-    {GPS_Init, "ATGM336H"}
+//    {BME680_Init, "BME680"},
+//    {MS5607_Init, "MS5607"},
+//    {GPS_Init, "ATGM336H"}
 };
 
 
@@ -54,11 +54,11 @@ telemetry_init_status SensorManager_Init(void) {
 
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
-	telemetry.bmi323_data = bmi323_data_poll();
+//	telemetry.bmi323_data = bmi323_data_poll();
 	telemetry.bno055_data = bno_read_fusion_data();
-	telemetry.bme680_data = bme680_data_poll();
-    telemetry.ms5607_data = MS5607_ReadData();
-    telemetry.gps_data = GPS_Data_Reception();
+//	telemetry.bme680_data = bme680_data_poll();
+//    telemetry.ms5607_data = MS5607_ReadData();
+//    telemetry.gps_data = GPS_Data_Reception();
     //TO IMPLEMENT
 //    GPS_ReadData(&data->gps_data);
 
@@ -82,25 +82,25 @@ void delay_us_func(uint32_t period)
 }
 
 void TestTelemetry(){
-	for(int i = 0; i < 1000 ; i++){
+	for(int i = 0; i < 10000 ; i++){
 
 	// Sensor Data Read
 	SensorManager_UpdateData(&telemetry);
 
 	// Sensor Data Print
-	bmi323_print_sensor_data(&telemetry.bmi323_data);
+//	bmi323_print_sensor_data(&telemetry.bmi323_data);
 	bno055_print_fusion_data(&telemetry.bno055_data);
-	ms5607_print_barometer_data(&telemetry.ms5607_data);
-	bme680_print_barometer_data(&telemetry.bme680_data);
-	gps_print_positionning_data(&telemetry.gps_data);
+//	ms5607_print_barometer_data(&telemetry.ms5607_data);
+//	bme680_print_barometer_data(&telemetry.bme680_data);
+//	gps_print_positionning_data(&telemetry.gps_data);
 
 	printf("// --------------------------------------------- // \n");
 
 	//DELAY BETWEEN READINGS TO DESIGN CORRECTLY
 //    HAL_Delay(150);
-//    delay_us_func(50000);  //50 ms
+    delay_us_func(50000);  //50 ms
 //    delay_us_func(100000); //100 ms
 //    delay_us_func(200000); //200 ms
-      delay_us_func(1000000); //1 s
+//      delay_us_func(1000000); //1 s
     	}
 }
