@@ -10,6 +10,9 @@
 
 
 TelemetryData telemetry;
+volatile uint32_t msTicks = 0;
+extern TIM_HandleTypeDef htim6;
+extern RTC_HandleTypeDef hrtc;
 
 
 // Define the array of sensors with their initialization functions and names
@@ -81,8 +84,45 @@ void delay_us_func(uint32_t period)
 	}
 }
 
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == TIM6)
+    {
+        msTicks++; // Increment millisecond counter
+    }
+}
+
+uint32_t Get_Timestamp(void)
+{
+    return msTicks;
+}
+
+void Get_Current_Time(char* buffer) {
+    RTC_TimeTypeDef sTime;
+    RTC_DateTypeDef sDate;
+    HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+    snprintf(buffer, 30, "%02d-%02d-%02d %02d:%02d:%02d",
+             sDate.Date, sDate.Month, 2000 + sDate.Year,
+             sTime.Hours, sTime.Minutes, sTime.Seconds);
+}
+
+
 void TestTelemetry(){
+    char timeBuffer[30];
+
+	//HAL_TIM_Base_Start_IT(&htim6);
 	for(int i = 0; i < 10000 ; i++){
+        // Print timestamp
+        //printf("Timestamp: %lu ms\n", Get_Timestamp());
+
+
+        Get_Current_Time(timeBuffer);
+        printf("Current Time: %s\n", timeBuffer);
+
+        printf("// --------------------------------------------- // \n");
 
 	// Sensor Data Read
 	SensorManager_UpdateData(&telemetry);
