@@ -1,4 +1,7 @@
-../Core/Src/telemetry_manager.c:25:23:SensorManager_Init	24	static
-../Core/Src/telemetry_manager.c:55:6:SensorManager_UpdateData	176	static
-../Core/Src/telemetry_manager.c:71:6:delay_us_func	24	static
-../Core/Src/telemetry_manager.c:84:6:TestTelemetry	16	static
+../Core/Src/telemetry_manager.c:28:23:SensorManager_Init	24	static
+../Core/Src/telemetry_manager.c:58:6:SensorManager_UpdateData	176	static
+../Core/Src/telemetry_manager.c:74:6:delay_us_func	24	static
+../Core/Src/telemetry_manager.c:88:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/telemetry_manager.c:96:10:Get_Timestamp	4	static
+../Core/Src/telemetry_manager.c:101:6:Get_Current_Time	72	static
+../Core/Src/telemetry_manager.c:113:6:TestTelemetry	48	static
