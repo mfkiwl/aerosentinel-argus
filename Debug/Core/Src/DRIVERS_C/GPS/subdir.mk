@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/DRIVERS_C/GPS/GPS.c 
+../Core/Src/DRIVERS_C/GPS/GPS.c \
+../Core/Src/DRIVERS_C/GPS/TinyGPS.c 
 
 OBJS += \
-./Core/Src/DRIVERS_C/GPS/GPS.o 
+./Core/Src/DRIVERS_C/GPS/GPS.o \
+./Core/Src/DRIVERS_C/GPS/TinyGPS.o 
 
 C_DEPS += \
-./Core/Src/DRIVERS_C/GPS/GPS.d 
+./Core/Src/DRIVERS_C/GPS/GPS.d \
+./Core/Src/DRIVERS_C/GPS/TinyGPS.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ Core/Src/DRIVERS_C/GPS/%.o Core/Src/DRIVERS_C/GPS/%.su Core/Src/DRIVERS_C/GPS/%.
 clean: clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS
 
 clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS:
-	-$(RM) ./Core/Src/DRIVERS_C/GPS/GPS.cyclo ./Core/Src/DRIVERS_C/GPS/GPS.d ./Core/Src/DRIVERS_C/GPS/GPS.o ./Core/Src/DRIVERS_C/GPS/GPS.su
+	-$(RM) ./Core/Src/DRIVERS_C/GPS/GPS.cyclo ./Core/Src/DRIVERS_C/GPS/GPS.d ./Core/Src/DRIVERS_C/GPS/GPS.o ./Core/Src/DRIVERS_C/GPS/GPS.su ./Core/Src/DRIVERS_C/GPS/TinyGPS.cyclo ./Core/Src/DRIVERS_C/GPS/TinyGPS.d ./Core/Src/DRIVERS_C/GPS/TinyGPS.o ./Core/Src/DRIVERS_C/GPS/TinyGPS.su
 
 .PHONY: clean-Core-2f-Src-2f-DRIVERS_C-2f-GPS
 

@@ -42,19 +42,49 @@ typedef struct
 {
 	uint8_t		rxBuffer[512];
 	uint16_t	rxIndex;
-	uint8_t		rxTmp;	
+	uint8_t		rxTmp;
 	uint32_t	LastTime;	
 	
 	GPGGA_t		GPGGA;
 	
 }GPS_t;
 
+typedef struct {
+    char time[11];       // hhmmss.sss
+    double latitude;     // In decimal degrees
+    char lat_dir;        // 'N' or 'S'
+    double longitude;    // In decimal degrees
+    char lon_dir;        // 'E' or 'W'
+    int fix_quality;     // GPS quality indicator
+    int num_satellites;  // Number of satellites being tracked
+    double hdop;         // Horizontal dilution of precision
+    double altitude;     // Altitude above mean sea level
+    char alt_unit;       // Altitude unit (meters)
+    double geoid_height; // Height of geoid above WGS84 ellipsoid
+    char geoid_unit;     // Geoid height unit (meters)
+} GPGGA_Data;
+
+typedef struct {
+    char time[11];      // hhmmss.sss
+    char status;        // A=active, V=void
+    double latitude;    // In decimal degrees
+    char lat_dir;       // 'N' or 'S'
+    double longitude;   // In decimal degrees
+    char lon_dir;       // 'E' or 'W'
+    double speed;       // Speed over ground in knots
+    double course;      // Course over ground in degrees
+    char date[7];       // ddmmyy
+    double magnetic_var;// Magnetic variation in degrees
+    char mag_var_dir;   // Magnetic variation direction ('E' or 'W')
+} GPRMC_Data;
+
 extern GPS_t GPS;
 //##################################################################################################################
 int8_t	GPS_Init(void);
 void	GPS_CallBack(void);
 GPS_t GPS_Data_Reception(void);
-void gps_print_positionning_data(GPS_t *data);
+void gps_print_positionning_data();
+void GPS_ReadAndPrint(void);
 //##################################################################################################################
 
 #endif
