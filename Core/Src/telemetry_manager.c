@@ -18,10 +18,10 @@ extern RTC_HandleTypeDef hrtc;
 // Define the array of sensors with their initialization functions and names
 sensors_init_t sensors[] = {
 //    {Init_BMI323, "BMI323"},
-    {BNO055_Init, "BNO055"},
+//    {BNO055_Init, "BNO055"},
 //    {BME680_Init, "BME680"},
 //    {MS5607_Init, "MS5607"},
-//    {GPS_Init, "ATGM336H"}
+    {GPS_Init, "ATGM336H"}
 };
 
 
@@ -58,12 +58,11 @@ telemetry_init_status SensorManager_Init(void) {
 void SensorManager_UpdateData(TelemetryData *data) {
     // Update data from each sensor
 //	telemetry.bmi323_data = bmi323_data_poll();
-	telemetry.bno055_data = bno_read_fusion_data();
+//	telemetry.bno055_data = bno_read_fusion_data();
 //	telemetry.bme680_data = bme680_data_poll();
 //    telemetry.ms5607_data = MS5607_ReadData();
-//    telemetry.gps_data = GPS_Data_Reception();
+    telemetry.gps_data = GPS_Data_Reception();
     //TO IMPLEMENT
-//    GPS_ReadData(&data->gps_data);
 
     //FOR VERSION 2 OF ARGUS
 //    ASM330LHH_ReadData(&data->asm330lhh_data);
@@ -85,13 +84,13 @@ void delay_us_func(uint32_t period)
 }
 
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim->Instance == TIM6)
-    {
-        msTicks++; // Increment millisecond counter
-    }
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//    if (htim->Instance == TIM6)
+//    {
+//        msTicks++; // Increment millisecond counter
+//    }
+//}
 
 uint32_t Get_Timestamp(void)
 {
@@ -111,7 +110,7 @@ void Get_Current_Time(char* buffer) {
 
 
 void TestTelemetry(){
-    char timeBuffer[30];
+    //char timeBuffer[30];
 
 	//HAL_TIM_Base_Start_IT(&htim6);
 	for(int i = 0; i < 10000 ; i++){
@@ -119,22 +118,22 @@ void TestTelemetry(){
         //printf("Timestamp: %lu ms\n", Get_Timestamp());
 
 
-        Get_Current_Time(timeBuffer);
-        printf("Current Time: %s\n", timeBuffer);
+        //Get_Current_Time(timeBuffer);
+        //printf("Current Time: %s\n", timeBuffer);
 
-        printf("// --------------------------------------------- // \n");
+        //printf("// --------------------------------------------- // \n");
 
 	// Sensor Data Read
 	SensorManager_UpdateData(&telemetry);
-
+//        GPS_ReadAndPrint();
 	// Sensor Data Print
 //	bmi323_print_sensor_data(&telemetry.bmi323_data);
-	bno055_print_fusion_data(&telemetry.bno055_data);
+//	bno055_print_fusion_data(&telemetry.bno055_data);
 //	ms5607_print_barometer_data(&telemetry.ms5607_data);
 //	bme680_print_barometer_data(&telemetry.bme680_data);
-//	gps_print_positionning_data(&telemetry.gps_data);
+	//gps_print_positionning_data();
 
-	printf("// --------------------------------------------- // \n");
+	//printf("// --------------------------------------------- // \n");
 
 	//DELAY BETWEEN READINGS TO DESIGN CORRECTLY
 //    HAL_Delay(150);
