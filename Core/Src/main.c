@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h" // printf function
 #include "telemetry_manager.h"
+#include "DRIVERS_H/BLACKBOX/blackbox.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -174,9 +175,9 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   //I2C_Scan(&hi2c2);
-  SensorManager_Init();
-  TestTelemetry();
-
+  //SensorManager_Init();
+  //TestTelemetry();
+  //SDIO_SDCard_Test();
 
 
 
@@ -194,13 +195,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //count++; //Increment count variable
+	  count++; //Increment count variable
 //	  char temp_buf[200];
 	  		// Use sprintf to format the device ID into the buffer
 //	  sprintf(temp_buf, "USART: Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count);
 //	  UART_Transmit_P(temp_buf);
-	  //printf("Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count); // Hello World Test
-	  //HAL_Delay(250);
+	  printf("Hello World from Aerosentinel Argus Navigation Module! Count =%lu \n", count); // Hello World Test
+	  HAL_Delay(250);
 	  //main_delay(250000);
 
   }
@@ -494,7 +495,7 @@ static void MX_SDMMC1_SD_Init(void)
   hsd1.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE;
   hsd1.Init.BusWide = SDMMC_BUS_WIDE_4B;
   hsd1.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-  hsd1.Init.ClockDiv = 0;
+  hsd1.Init.ClockDiv = 8;
   /* USER CODE BEGIN SDMMC1_Init 2 */
 
   /* USER CODE END SDMMC1_Init 2 */
@@ -807,8 +808,8 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15|SPI2_CSB_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PC13 PC7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_7;
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -825,6 +826,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PC7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC3 */
   GPIO_InitStruct.Pin = GPIO_PIN_3;

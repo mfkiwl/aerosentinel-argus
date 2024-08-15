@@ -16,13 +16,11 @@ RM := rm -rf
 -include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/DRIVERS_C/MS560702BA03/subdir.mk
--include Core/Src/DRIVERS_C/LIS2MDLTR/subdir.mk
 -include Core/Src/DRIVERS_C/GPS/subdir.mk
 -include Core/Src/DRIVERS_C/BNO055/subdir.mk
 -include Core/Src/DRIVERS_C/BMI323/subdir.mk
 -include Core/Src/DRIVERS_C/BME680/subdir.mk
 -include Core/Src/DRIVERS_C/BLACKBOX/subdir.mk
--include Core/Src/DRIVERS_C/ASM330LHH/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 

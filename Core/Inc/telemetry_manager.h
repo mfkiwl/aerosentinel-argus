@@ -9,13 +9,10 @@
 #define INC_TELEMETRY_MANAGER_H_
 
 
-#include "DRIVERS_H/ASM330LHH/asm330lhh_main.h"
 #include "DRIVERS_H/BME680/bme680_main.h"
 #include "DRIVERS_H/BMI323/bmi323_main.h"
 #include "DRIVERS_H/BNO055/bno055_main.h"
-
 #include "DRIVERS_H/GPS/GPS.h"
-#include "DRIVERS_H/LIS2MDLTR/lis2mdl_main.h"
 #include "DRIVERS_H/MS560702BA03/MS5607.h"
 #include "DRIVERS_H/BLACKBOX/blackbox.h"
 

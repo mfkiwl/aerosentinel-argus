@@ -1,3 +1,0 @@
-../Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.c:37:9:lis2mdltr_platform_read	48	static
-../Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.c:57:9:lis2mdltr_platform_write	48	static
-../Core/Src/DRIVERS_C/LIS2MDLTR/lis2mdl_main.c:79:6:LIS2MDLTR_Init	8	static

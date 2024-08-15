@@ -1,4 +1,0 @@
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:37:9:asm330lhh_platform_read	9
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:90:9:asm330lhh_platform_write	2
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:103:6:asm330lhh_delay_msec	1
-../Core/Src/DRIVERS_C/ASM330LHH/asm330lhh_main.c:116:6:ASM330LHH_Init	2

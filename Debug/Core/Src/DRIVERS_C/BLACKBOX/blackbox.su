@@ -1,8 +1,8 @@
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:12:6:SDIO_SDCard_Test	8312	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:39:9:SDIO_Mount_SDCard	24	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:51:6:SDIO_Get_SDCard_Info	32	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:65:9:SDIO_Open_File	32	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:77:6:SDIO_Write_File	232	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:87:6:SDIO_Read_File	224	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:113:6:SDIO_Update_File	224	static
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:139:6:SDIO_Unmount_SDCard	16	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:18:6:SDIO_SDCard_Test	8	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:45:9:SDIO_Mount_SDCard	16	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:57:6:SDIO_Get_SDCard_Info	16	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:79:9:SDIO_Open_File	32	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:91:6:SDIO_Write_File	232	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:101:6:SDIO_Read_File	224	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:127:6:SDIO_Update_File	224	static
+../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:153:6:SDIO_Unmount_SDCard	16	static

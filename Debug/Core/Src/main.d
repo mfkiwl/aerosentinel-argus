@@ -46,7 +46,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
  ../Core/Inc/telemetry_manager.h \
- ../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h \
  ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
@@ -60,8 +59,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055.h ../Core/Inc/DRIVERS_H/GPS/GPS.h \
- ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h \
  ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h \
+ ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h \
  ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
@@ -115,7 +114,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
 ../Core/Inc/telemetry_manager.h:
-../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h:
 ../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
@@ -130,6 +128,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h:
 ../Core/Inc/DRIVERS_H/BNO055/bno055.h:
 ../Core/Inc/DRIVERS_H/GPS/GPS.h:
-../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h:
 ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h:
+../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:
 ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:

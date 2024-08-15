@@ -1,6 +1,6 @@
 Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Core/Inc/telemetry_manager.h \
- ../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h \
+ ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -41,7 +41,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
  ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
@@ -54,7 +53,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
  ../Core/Inc/DRIVERS_H/BNO055/bno055.h ../Core/Inc/DRIVERS_H/GPS/GPS.h \
- ../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h \
  ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h ../Core/Inc/main.h \
  ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h ../FATFS/App/fatfs.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h \
@@ -64,7 +62,7 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h
 ../Core/Inc/telemetry_manager.h:
-../Core/Inc/DRIVERS_H/ASM330LHH/asm330lhh_main.h:
+../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
@@ -105,7 +103,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
 ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
@@ -119,7 +116,6 @@ Core/Src/telemetry_manager.o: ../Core/Src/telemetry_manager.c \
 ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h:
 ../Core/Inc/DRIVERS_H/BNO055/bno055.h:
 ../Core/Inc/DRIVERS_H/GPS/GPS.h:
-../Core/Inc/DRIVERS_H/LIS2MDLTR/lis2mdl_main.h:
 ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h:
 ../Core/Inc/main.h:
 ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:

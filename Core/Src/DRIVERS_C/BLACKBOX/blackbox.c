@@ -8,20 +8,26 @@
 #include "DRIVERS_H/BLACKBOX/blackbox.h"
 
 static char TxBuffer[200]; // Buffer for transmission
+FATFS FatFs;
+FIL Fil;
+FRESULT FR_Status;
+FATFS *pfs;
+DWORD fre_clust;
+uint32_t total, free_space;
 
 void SDIO_SDCard_Test(void) {
-    FATFS FatFs;
-    FIL Fil;
-    FATFS *FS_Ptr;
-    FRESULT FR_Status;
+
 
     do {
         // Mount the SD card
-        FR_Status = SDIO_Mount_SDCard(&FatFs, SDPath);
-        if (FR_Status != FR_OK) break;
+        FR_Status = SDIO_Mount_SDCard();
+        if (FR_Status != FR_OK) {
+        	printf("Problem mounting the SD card, check your wirings!");
+        	break;
+        };
 
         // Get and print the SD card info
-        SDIO_Get_SDCard_Info(&FatFs, &FS_Ptr);
+        SDIO_Get_SDCard_Info();
 
         // Open, write to, read from, and update the file
         FR_Status = SDIO_Open_File(&Fil, "MyTextFile.txt", FA_WRITE | FA_READ | FA_CREATE_ALWAYS);
@@ -36,8 +42,8 @@ void SDIO_SDCard_Test(void) {
     SDIO_Unmount_SDCard();
 }
 
-FRESULT SDIO_Mount_SDCard(FATFS *FatFs, const char *SDPath) {
-    FRESULT FR_Status = f_mount(FatFs, SDPath, 1);
+FRESULT SDIO_Mount_SDCard() {
+    FRESULT FR_Status = f_mount(&FatFs, SDPath, 0);
     if (FR_Status != FR_OK) {
         snprintf(TxBuffer, sizeof(TxBuffer), "Error! While Mounting SD Card, Error Code: (%i)\r\n", FR_Status);
         printf(TxBuffer);
@@ -48,18 +54,26 @@ FRESULT SDIO_Mount_SDCard(FATFS *FatFs, const char *SDPath) {
     return FR_Status;
 }
 
-void SDIO_Get_SDCard_Info(FATFS *FatFs, FATFS **FS_Ptr) {
-    DWORD FreeClusters;
-    uint32_t TotalSize, FreeSpace;
+void SDIO_Get_SDCard_Info() {
 
-    f_getfree("", &FreeClusters, FS_Ptr);
-    TotalSize = (uint32_t)(((*FS_Ptr)->n_fatent - 2) * (*FS_Ptr)->csize * 0.5);
-    FreeSpace = (uint32_t)(FreeClusters * (*FS_Ptr)->csize * 0.5);
+	//FRESULT INFO_Status;
 
-    snprintf(TxBuffer, sizeof(TxBuffer), "Total SD Card Size: %lu Bytes\r\n", TotalSize);
-    printf(TxBuffer);
-    snprintf(TxBuffer, sizeof(TxBuffer), "Free SD Card Space: %lu Bytes\r\n\n", FreeSpace);
-    printf(TxBuffer);
+	f_getfree("", &fre_clust, &pfs);
+//    if (INFO_Status != FR_OK) {
+//    	printf("Problem checking disk size.");
+//    	return;
+//    };
+
+
+    total = (uint32_t)((pfs->n_fatent - 2) * pfs->csize * 0.5);
+    float total_GB = (float)total / (1024.0 * 1024.0);
+    printf( "SD CARD Total Size: \t%.2f GB \r\n", total_GB);
+
+
+
+    free_space = (uint32_t)(fre_clust * pfs->csize * 0.5);
+    float free_space_GB = (float)free_space / (1024.0 * 1024.0);
+    printf("SD CARD Free Space: \t%.2f GB\r\n", free_space_GB);
 }
 
 FRESULT SDIO_Open_File(FIL *Fil, const char *filename, BYTE mode) {
