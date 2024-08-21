@@ -4,7 +4,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
- ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h \
+ ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
  ../Drivers/CMSIS/Include/cmsis_version.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
@@ -25,50 +25,30 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mmc.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mmc_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/telemetry_manager.h \
- ../Core/Inc/DRIVERS_H/BME680/bme680_main.h \
- ../Core/Inc/DRIVERS_H/BME680/bme68x.h \
- ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
- ../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi3.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi323.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi3.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h \
- ../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h \
- ../Core/Inc/DRIVERS_H/BNO055/bno055_main.h \
- ../Core/Inc/DRIVERS_H/BNO055/bno055.h ../Core/Inc/DRIVERS_H/GPS/GPS.h \
- ../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h \
- ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h \
- ../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h \
+ ../USB_DEVICE/App/usb_device.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../USB_DEVICE/Target/usbd_conf.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
-../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
 ../Drivers/CMSIS/Include/cmsis_version.h:
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
@@ -89,45 +69,20 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mmc.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mmc_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../FATFS/Target/bsp_driver_sd.h:
-../FATFS/Target/fatfs_platform.h:
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/sd_diskio.h:
-../Core/Inc/telemetry_manager.h:
-../Core/Inc/DRIVERS_H/BME680/bme680_main.h:
-../Core/Inc/DRIVERS_H/BME680/bme68x.h:
-../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
-../Core/Inc/DRIVERS_H/BME680/bme68x_defs.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi323_main.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi3.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi323.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi3.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi323_defs.h:
-../Core/Inc/DRIVERS_H/BMI323/bmi3_defs.h:
-../Core/Inc/DRIVERS_H/BNO055/bno055_main.h:
-../Core/Inc/DRIVERS_H/BNO055/bno055.h:
-../Core/Inc/DRIVERS_H/GPS/GPS.h:
-../Core/Inc/DRIVERS_H/MS560702BA03/MS5607.h:
-../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:
-../Core/Inc/DRIVERS_H/BLACKBOX/blackbox.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h:
+../USB_DEVICE/App/usb_device.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+../USB_DEVICE/Target/usbd_conf.h:

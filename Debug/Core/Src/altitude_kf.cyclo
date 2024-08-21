@@ -1,5 +1,0 @@
-../Core/Src/altitude_kf.c:12:14:Altitude_KF_create	2
-../Core/Src/altitude_kf.c:30:6:Altitude_KF_propagate	1
-../Core/Src/altitude_kf.c:44:6:Altitude_KF_update	1
-../Core/Src/altitude_kf.c:60:6:Altitude_KF_update_default	1
-../Core/Src/altitude_kf.c:64:6:Altitude_KF_destroy	1

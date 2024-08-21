@@ -1,6 +1,0 @@
-../Core/Src/telemetry_manager.c:28:23:SensorManager_Init	5
-../Core/Src/telemetry_manager.c:58:6:SensorManager_UpdateData	1
-../Core/Src/telemetry_manager.c:73:6:delay_us_func	3
-../Core/Src/telemetry_manager.c:95:10:Get_Timestamp	1
-../Core/Src/telemetry_manager.c:100:6:Get_Current_Time	1
-../Core/Src/telemetry_manager.c:112:6:TestTelemetry	2

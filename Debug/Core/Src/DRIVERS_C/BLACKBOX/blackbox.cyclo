@@ -1,8 +1,0 @@
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:18:6:SDIO_SDCard_Test	3
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:45:9:SDIO_Mount_SDCard	2
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:57:6:SDIO_Get_SDCard_Info	1
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:79:9:SDIO_Open_File	2
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:91:6:SDIO_Write_File	1
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:101:6:SDIO_Read_File	2
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:127:6:SDIO_Update_File	2
-../Core/Src/DRIVERS_C/BLACKBOX/blackbox.c:153:6:SDIO_Unmount_SDCard	2

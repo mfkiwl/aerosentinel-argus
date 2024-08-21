@@ -22,17 +22,11 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Core/Src/DRIVERS_C/BLACKBOX \
-Core/Src/DRIVERS_C/BME680 \
-Core/Src/DRIVERS_C/BMI323 \
-Core/Src/DRIVERS_C/BNO055 \
-Core/Src/DRIVERS_C/GPS \
-Core/Src/DRIVERS_C/MS560702BA03 \
 Core/Src \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver/Src \
-FATFS/App \
-FATFS/Target \
-Middlewares/Third_Party/FatFs/src \
-Middlewares/Third_Party/FatFs/src/option \
+Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src \
+Middlewares/ST/STM32_USB_Device_Library/Core/Src \
+USB_DEVICE/App \
+USB_DEVICE/Target \
 

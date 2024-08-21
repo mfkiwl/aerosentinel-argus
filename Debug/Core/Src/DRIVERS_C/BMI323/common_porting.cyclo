@@ -1,3 +1,0 @@
-../Core/Src/DRIVERS_C/BMI323/common_porting.c:16:6:bst_delay_us	3
-../Core/Src/DRIVERS_C/BMI323/common_porting.c:34:8:SensorAPI_SPIx_Read	2
-../Core/Src/DRIVERS_C/BMI323/common_porting.c:50:8:SensorAPI_SPIx_Write	2

@@ -55,12 +55,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern MDMA_HandleTypeDef hmdma_mdma_channel0_sdmmc1_command_end_0;
-extern MDMA_HandleTypeDef hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0;
-extern MDMA_HandleTypeDef hmdma_mdma_channel2_sdmmc1_end_data_0;
-extern SD_HandleTypeDef hsd1;
-extern TIM_HandleTypeDef htim6;
-extern UART_HandleTypeDef huart8;
+extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -204,61 +199,17 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles SDMMC1 global interrupt.
+  * @brief This function handles USB On The Go HS global interrupt.
   */
-void SDMMC1_IRQHandler(void)
+void OTG_HS_IRQHandler(void)
 {
-  /* USER CODE BEGIN SDMMC1_IRQn 0 */
+  /* USER CODE BEGIN OTG_HS_IRQn 0 */
 
-  /* USER CODE END SDMMC1_IRQn 0 */
-  HAL_SD_IRQHandler(&hsd1);
-  /* USER CODE BEGIN SDMMC1_IRQn 1 */
+  /* USER CODE END OTG_HS_IRQn 0 */
+  HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
+  /* USER CODE BEGIN OTG_HS_IRQn 1 */
 
-  /* USER CODE END SDMMC1_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM6 global interrupt, DAC1_CH1 and DAC1_CH2 underrun error interrupts.
-  */
-void TIM6_DAC_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
-
-  /* USER CODE END TIM6_DAC_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim6);
-  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
-
-  /* USER CODE END TIM6_DAC_IRQn 1 */
-}
-
-/**
-  * @brief This function handles UART8 global interrupt.
-  */
-void UART8_IRQHandler(void)
-{
-  /* USER CODE BEGIN UART8_IRQn 0 */
-
-  /* USER CODE END UART8_IRQn 0 */
-  HAL_UART_IRQHandler(&huart8);
-  /* USER CODE BEGIN UART8_IRQn 1 */
-
-  /* USER CODE END UART8_IRQn 1 */
-}
-
-/**
-  * @brief This function handles MDMA global interrupt.
-  */
-void MDMA_IRQHandler(void)
-{
-  /* USER CODE BEGIN MDMA_IRQn 0 */
-
-  /* USER CODE END MDMA_IRQn 0 */
-  HAL_MDMA_IRQHandler(&hmdma_mdma_channel0_sdmmc1_command_end_0);
-  HAL_MDMA_IRQHandler(&hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0);
-  HAL_MDMA_IRQHandler(&hmdma_mdma_channel2_sdmmc1_end_data_0);
-  /* USER CODE BEGIN MDMA_IRQn 1 */
-
-  /* USER CODE END MDMA_IRQn 1 */
+  /* USER CODE END OTG_HS_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
