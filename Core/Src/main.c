@@ -61,6 +61,9 @@ TIM_HandleTypeDef htim6;
 UART_HandleTypeDef huart8;
 UART_HandleTypeDef huart1;
 
+MDMA_HandleTypeDef hmdma_mdma_channel0_sdmmc1_command_end_0;
+MDMA_HandleTypeDef hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0;
+MDMA_HandleTypeDef hmdma_mdma_channel2_sdmmc1_end_data_0;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -69,6 +72,7 @@ UART_HandleTypeDef huart1;
 void SystemClock_Config(void);
 static void MPU_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_MDMA_Init(void);
 static void MX_SDMMC1_SD_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
@@ -161,6 +165,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_MDMA_Init();
   MX_SDMMC1_SD_Init();
   MX_I2C1_Init();
   MX_I2C2_Init();
@@ -232,7 +237,7 @@ void SystemClock_Config(void)
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 3;
@@ -781,6 +786,111 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * Enable MDMA controller clock
+  * Configure MDMA for global transfers
+  *   hmdma_mdma_channel0_sdmmc1_command_end_0
+  *   hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0
+  *   hmdma_mdma_channel2_sdmmc1_end_data_0
+  */
+static void MX_MDMA_Init(void)
+{
+
+  /* MDMA controller clock enable */
+  __HAL_RCC_MDMA_CLK_ENABLE();
+  /* Local variables */
+
+  /* Configure MDMA channel MDMA_Channel0 */
+  /* Configure MDMA request hmdma_mdma_channel0_sdmmc1_command_end_0 on MDMA_Channel0 */
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Instance = MDMA_Channel0;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.Request = MDMA_REQUEST_SDMMC1_COMMAND_END;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.Priority = MDMA_PRIORITY_LOW;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.Endianness = MDMA_LITTLE_ENDIANNESS_PRESERVE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.SourceInc = MDMA_SRC_INC_BYTE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.DestinationInc = MDMA_DEST_INC_BYTE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.SourceDataSize = MDMA_SRC_DATASIZE_BYTE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.DestDataSize = MDMA_DEST_DATASIZE_BYTE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.DataAlignment = MDMA_DATAALIGN_PACKENABLE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.BufferTransferLength = 1;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.SourceBurst = MDMA_SOURCE_BURST_SINGLE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.DestBurst = MDMA_DEST_BURST_SINGLE;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.SourceBlockAddressOffset = 0;
+  hmdma_mdma_channel0_sdmmc1_command_end_0.Init.DestBlockAddressOffset = 0;
+  if (HAL_MDMA_Init(&hmdma_mdma_channel0_sdmmc1_command_end_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Configure post request address and data masks */
+  if (HAL_MDMA_ConfigPostRequestMask(&hmdma_mdma_channel0_sdmmc1_command_end_0, 0, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Configure MDMA channel MDMA_Channel1 */
+  /* Configure MDMA request hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0 on MDMA_Channel1 */
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Instance = MDMA_Channel1;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.Request = MDMA_REQUEST_SDMMC1_DMA_ENDBUFFER;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.Priority = MDMA_PRIORITY_LOW;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.Endianness = MDMA_LITTLE_ENDIANNESS_PRESERVE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.SourceInc = MDMA_SRC_INC_BYTE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.DestinationInc = MDMA_DEST_INC_BYTE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.SourceDataSize = MDMA_SRC_DATASIZE_BYTE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.DestDataSize = MDMA_DEST_DATASIZE_BYTE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.DataAlignment = MDMA_DATAALIGN_PACKENABLE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.BufferTransferLength = 1;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.SourceBurst = MDMA_SOURCE_BURST_SINGLE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.DestBurst = MDMA_DEST_BURST_SINGLE;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.SourceBlockAddressOffset = 0;
+  hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0.Init.DestBlockAddressOffset = 0;
+  if (HAL_MDMA_Init(&hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Configure post request address and data masks */
+  if (HAL_MDMA_ConfigPostRequestMask(&hmdma_mdma_channel1_sdmmc1_dma_endbuffer_0, 0, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Configure MDMA channel MDMA_Channel2 */
+  /* Configure MDMA request hmdma_mdma_channel2_sdmmc1_end_data_0 on MDMA_Channel2 */
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Instance = MDMA_Channel2;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.Request = MDMA_REQUEST_SDMMC1_END_DATA;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.Priority = MDMA_PRIORITY_LOW;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.Endianness = MDMA_LITTLE_ENDIANNESS_PRESERVE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.SourceInc = MDMA_SRC_INC_BYTE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.DestinationInc = MDMA_DEST_INC_BYTE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.SourceDataSize = MDMA_SRC_DATASIZE_BYTE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.DestDataSize = MDMA_DEST_DATASIZE_BYTE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.DataAlignment = MDMA_DATAALIGN_PACKENABLE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.BufferTransferLength = 1;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.SourceBurst = MDMA_SOURCE_BURST_SINGLE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.DestBurst = MDMA_DEST_BURST_SINGLE;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.SourceBlockAddressOffset = 0;
+  hmdma_mdma_channel2_sdmmc1_end_data_0.Init.DestBlockAddressOffset = 0;
+  if (HAL_MDMA_Init(&hmdma_mdma_channel2_sdmmc1_end_data_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Configure post request address and data masks */
+  if (HAL_MDMA_ConfigPostRequestMask(&hmdma_mdma_channel2_sdmmc1_end_data_0, 0, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* MDMA interrupt initialization */
+  /* MDMA_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(MDMA_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(MDMA_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -917,27 +1027,6 @@ void MPU_Config(void)
   /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 
-}
-
-/**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM7 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* USER CODE BEGIN Callback 0 */
-
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM7) {
-    HAL_IncTick();
-  }
-  /* USER CODE BEGIN Callback 1 */
-
-  /* USER CODE END Callback 1 */
 }
 
 /**

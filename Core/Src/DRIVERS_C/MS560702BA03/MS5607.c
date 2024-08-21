@@ -68,12 +68,12 @@ void ms5607_delay_func(uint32_t period)
 
 	while(period--)
 	{
-		for(i = 0; i < 84; i++)
+		for(i = 0; i < 64; i++)
 		{
 			;
 		}
 	}
-	//HAL_Delay(period/1000);
+//	HAL_Delay(period/1000);
 }
 
 /** Reset and prepare for general usage.

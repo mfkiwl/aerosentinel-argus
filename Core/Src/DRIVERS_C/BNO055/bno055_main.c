@@ -286,7 +286,7 @@ void DelayUs(unsigned int Delay)
 
 	while(Delay--)
 	{
-		for(i = 0; i < 84; i++)
+		for(i = 0; i < 64; i++)
 		{
 			;
 		}
