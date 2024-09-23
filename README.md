@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/a31a767f-9484-4454-ac91-99be2e87a4a0" alt="aerosentinel logo">
+  <img src="https://github.com/user-attachments/assets/dd768899-18c6-43a8-8959-26c94cd3e7ab" alt="aerosentinel logo">
 </p>
 
 #
