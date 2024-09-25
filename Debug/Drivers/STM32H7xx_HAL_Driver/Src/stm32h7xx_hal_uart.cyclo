@@ -41,7 +41,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:2897:19:HAL_LIN_SendBreak	2
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:2942:23:HAL_UART_GetState	1
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:2958:10:HAL_UART_GetError	1
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:3004:19:UART_SetConfig	121
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:3004:19:UART_SetConfig	107
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:3268:6:UART_AdvFeatureConfig	10
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:3342:19:UART_CheckIdleState	8
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c:3411:19:UART_WaitOnFlagUntilTimeout	10

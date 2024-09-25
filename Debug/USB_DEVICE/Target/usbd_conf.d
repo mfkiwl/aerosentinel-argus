@@ -1,6 +1,6 @@
 USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
- ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h \
+ ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
  ../Drivers/CMSIS/Include/cmsis_version.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
@@ -33,8 +33,6 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
@@ -54,7 +52,7 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
  ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
-../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h:
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
 ../Drivers/CMSIS/Include/cmsis_version.h:
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
@@ -87,8 +85,6 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:

@@ -1,0 +1,4 @@
+../Core/Src/blackbox.c:21:9:SDIO_Mount_SDCard	16	static
+../Core/Src/blackbox.c:43:9:SDIO_Format_SDCard	536	static
+../Core/Src/blackbox.c:76:6:SDIO_Get_SDCard_Info	120	static
+../Core/Src/blackbox.c:116:6:SDIO_Test_FileOperations	648	static

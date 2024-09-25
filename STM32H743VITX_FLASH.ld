@@ -1,12 +1,12 @@
 /*
 ******************************************************************************
 **
-**  File        : LinkerScript.ld (debug in RAM dedicated)
+**  File        : LinkerScript.ld
 **
 **  Author      : STM32CubeIDE
 **
 **  Abstract    : Linker script for STM32H7 series
-**                1024Kbytes RAM_EXEC and 352Kbytes RAM
+**                2048Kbytes FLASH and 1056Kbytes RAM
 **
 **                Set heap size, stack size and stack location according
 **                to application requirements.
@@ -35,7 +35,7 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = ORIGIN(RAM_EXEC) + LENGTH(RAM_EXEC);    /* end of RAM */
+_estack = ORIGIN(RAM_D1) + LENGTH(RAM_D1);    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
@@ -43,26 +43,26 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
+  FLASH (rx)     : ORIGIN = 0x08000000, LENGTH = 2048K
+  DTCMRAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
+  RAM_D1 (xrw)   : ORIGIN = 0x24000000, LENGTH = 512K
+  RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
+  RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K
   ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
-  RAM_EXEC (xrw) : ORIGIN = 0x24000000, LENGTH = 1024K
-  DTCMRAM1 (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
-  DTCMRAM2 (xrw) : ORIGIN = 0x20010000, LENGTH = 64K
-  RAM_CD (xrw)   : ORIGIN = 0x30000000, LENGTH = 128K
-  RAM_SRD (xrw)  : ORIGIN = 0x38000000, LENGTH = 32K
 }
 
 /* Define output sections */
 SECTIONS
 {
-  /* The startup code goes first into RAM_EXEC */
+  /* The startup code goes first into FLASH */
   .isr_vector :
   {
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
-  } >RAM_EXEC
+  } >FLASH
 
-  /* The program code and other data goes into RAM_EXEC */
+  /* The program code and other data goes into FLASH */
   .text :
   {
     . = ALIGN(4);
@@ -71,42 +71,40 @@ SECTIONS
     *(.glue_7)         /* glue arm to thumb code */
     *(.glue_7t)        /* glue thumb to arm code */
     *(.eh_frame)
-    *(.RamFunc)        /* .RamFunc sections */
-    *(.RamFunc*)       /* .RamFunc* sections */
 
     KEEP (*(.init))
     KEEP (*(.fini))
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
-  } >RAM_EXEC
+  } >FLASH
 
-  /* Constant data goes into RAM_EXEC */
+  /* Constant data goes into FLASH */
   .rodata :
   {
     . = ALIGN(4);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
-  } >RAM_EXEC
+  } >FLASH
 
   .ARM.extab (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     *(.ARM.extab* .gnu.linkonce.armextab.*)
-  } >RAM_EXEC
+  } >FLASH
   .ARM (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     __exidx_start = .;
     *(.ARM.exidx*)
     __exidx_end = .;
-  } >RAM_EXEC
+  } >FLASH
 
   .preinit_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP (*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
-  } >RAM_EXEC
+  } >FLASH
 
   .init_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -114,7 +112,7 @@ SECTIONS
     KEEP (*(SORT(.init_array.*)))
     KEEP (*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
-  } >RAM_EXEC
+  } >FLASH
 
   .fini_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -122,7 +120,7 @@ SECTIONS
     KEEP (*(SORT(.fini_array.*)))
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
-  } >RAM_EXEC
+  } >FLASH
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
@@ -134,10 +132,12 @@ SECTIONS
     _sdata = .;        /* create a global symbol at data start */
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
+    *(.RamFunc)        /* .RamFunc sections */
+    *(.RamFunc*)       /* .RamFunc* sections */
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } >RAM_EXEC
+  } >RAM_D1 AT> FLASH
 
   /* Uninitialized data section */
   . = ALIGN(4);
@@ -153,7 +153,7 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-  } >RAM_EXEC
+  } >RAM_D1
 
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :
@@ -164,7 +164,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >RAM_EXEC
+  } >RAM_D1
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
@@ -176,3 +176,5 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }
+
+

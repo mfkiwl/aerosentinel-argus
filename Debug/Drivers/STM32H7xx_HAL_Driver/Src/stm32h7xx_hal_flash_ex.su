@@ -26,5 +26,3 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c:1933:13:FLASH_OB_GetSecureArea	32	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c:1966:13:FLASH_CRC_AddSector	16	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c:1998:13:FLASH_CRC_SelectAddress	24	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c:2032:13:FLASH_OB_OTP_LockConfig	16	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c:2046:17:FLASH_OB_OTP_GetLock	4	static

@@ -36,7 +36,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:2752:13:USART_DMATxAbortCallback	3
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:2800:13:USART_DMARxAbortCallback	3
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:2849:26:USART_WaitOnFlagUntilTimeout	5
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:2877:26:USART_SetConfig	142
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:2877:26:USART_SetConfig	135
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:3000:26:USART_CheckIdleState	5
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:3050:13:USART_TxISR_8BIT	4
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c:3085:13:USART_TxISR_16BIT	4

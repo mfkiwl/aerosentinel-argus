@@ -6,7 +6,7 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
- ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h \
+ ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
  ../Drivers/CMSIS/Include/cmsis_version.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
@@ -35,8 +35,6 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
@@ -58,7 +56,7 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
-../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7a3xx.h:
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
 ../Drivers/CMSIS/Include/cmsis_version.h:
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
@@ -87,8 +85,6 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
-../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
