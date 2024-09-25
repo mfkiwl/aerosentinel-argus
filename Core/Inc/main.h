@@ -67,14 +67,6 @@ void Error_Handler(void);
 #define ADXL375_ON_GPIO_Port GPIOA
 #define SPI1_CS_Pin GPIO_PIN_4
 #define SPI1_CS_GPIO_Port GPIOC
-#define BLUE_Pin GPIO_PIN_1
-#define BLUE_GPIO_Port GPIOB
-#define RED_Pin GPIO_PIN_9
-#define RED_GPIO_Port GPIOE
-#define WHITE_Pin GPIO_PIN_11
-#define WHITE_GPIO_Port GPIOE
-#define GREEN_Pin GPIO_PIN_13
-#define GREEN_GPIO_Port GPIOE
 #define MPL311_ON_Pin GPIO_PIN_14
 #define MPL311_ON_GPIO_Port GPIOE
 #define HEARTBEAT_Pin GPIO_PIN_15

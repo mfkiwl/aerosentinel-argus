@@ -22,6 +22,9 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Src/DATA_MANAGEMENT \
+Core/Src/DRIVERS/BNO055 \
+Core/Src/DRIVERS/MS5607 \
 Core/Src \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver/Src \

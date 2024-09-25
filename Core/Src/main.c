@@ -24,7 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h" // printf function
-#include "blackbox.h" // printf function
+#include "DATA_MANAGEMENT/telemetry_manager.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -88,42 +88,42 @@ int _write(int file, char *ptr, int len){
 }
 
 
-void SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
-    // Set the RED LED
-    if (red) {
-        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_SET);
-    } else {
-        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_RESET);
-    }
-
-    // Set the GREEN LED
-    if (green) {
-        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_SET);
-    } else {
-        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_RESET);
-    }
-
-    // Set the BLUE LED
-    if (blue) {
-        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_SET);
-    } else {
-        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_RESET);
-    }
-
-    // Set the WHITE LED
-    if (white) {
-        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_SET);
-    } else {
-        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_RESET);
-    }
-
-    if(!red && !green && !blue && !white) {
-        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_RESET);
-    }
-}
+//void SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
+//    // Set the RED LED
+//    if (red) {
+//        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_SET);
+//    } else {
+//        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_RESET);
+//    }
+//
+//    // Set the GREEN LED
+//    if (green) {
+//        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_SET);
+//    } else {
+//        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_RESET);
+//    }
+//
+//    // Set the BLUE LED
+//    if (blue) {
+//        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_SET);
+//    } else {
+//        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_RESET);
+//    }
+//
+//    // Set the WHITE LED
+//    if (white) {
+//        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_SET);
+//    } else {
+//        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_RESET);
+//    }
+//
+//    if(!red && !green && !blue && !white) {
+//        HAL_GPIO_WritePin(GPIOE, RED_Pin, GPIO_PIN_RESET);
+//        HAL_GPIO_WritePin(GPIOE, GREEN_Pin, GPIO_PIN_RESET);
+//        HAL_GPIO_WritePin(GPIOB, BLUE_Pin, GPIO_PIN_RESET);
+//        HAL_GPIO_WritePin(GPIOE, WHITE_Pin, GPIO_PIN_RESET);
+//    }
+//}
 
 /* USER CODE END 0 */
 
@@ -172,10 +172,9 @@ int main(void)
   MX_FATFS_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-//  SetColor(0, 0, 0, 0); // All OFF
-//  FRESULT FR_Status;
-//  FR_Status = SDIO_Mount_SDCard();
-//  SDIO_Get_SDCard_Info();
+
+  SensorManager_Init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -696,7 +695,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, SPI4_CS_Pin|RED_Pin|WHITE_Pin|GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(SPI4_CS_GPIO_Port, SPI4_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(MS5607_ON_GPIO_Port, MS5607_ON_Pin, GPIO_PIN_SET);
@@ -708,18 +707,16 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(SPI1_CS_GPIO_Port, SPI1_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, BLUE_Pin|HEARTBEAT_Pin|BNO086_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, MPL311_ON_Pin|BNO086_ON_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, MPL311_ON_Pin|BNO086_ON_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, HEARTBEAT_Pin|BNO086_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, BNO055_RST_Pin|GPS_RST_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : SPI4_CS_Pin RED_Pin WHITE_Pin GREEN_Pin
-                           MPL311_ON_Pin BNO086_ON_Pin */
-  GPIO_InitStruct.Pin = SPI4_CS_Pin|RED_Pin|WHITE_Pin|GREEN_Pin
-                          |MPL311_ON_Pin|BNO086_ON_Pin;
+  /*Configure GPIO pins : SPI4_CS_Pin MPL311_ON_Pin BNO086_ON_Pin */
+  GPIO_InitStruct.Pin = SPI4_CS_Pin|MPL311_ON_Pin|BNO086_ON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -745,8 +742,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BLUE_Pin HEARTBEAT_Pin BNO086_RST_Pin */
-  GPIO_InitStruct.Pin = BLUE_Pin|HEARTBEAT_Pin|BNO086_RST_Pin;
+  /*Configure GPIO pins : HEARTBEAT_Pin BNO086_RST_Pin */
+  GPIO_InitStruct.Pin = HEARTBEAT_Pin|BNO086_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
