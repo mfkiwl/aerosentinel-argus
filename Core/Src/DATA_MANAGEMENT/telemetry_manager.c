@@ -15,11 +15,9 @@ TelemetryData telemetry;
 
 // Define the array of sensors with their initialization functions and names
 sensors_init_t sensors[] = {
-//    {Init_BMI323, "BMI323"},
     {BNO055_Init, "BNO055"},
-//    {BME680_Init, "BME680"},
     {MS5607_Init, "MS5607"},
-//    {GPS_Init, "ATGM336H"}
+    {ADXL375_Init, "ADXL375"}
 };
 
 

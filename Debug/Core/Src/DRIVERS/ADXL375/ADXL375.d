@@ -1,7 +1,5 @@
-Core/Src/DATA_MANAGEMENT/telemetry_manager.o: \
- ../Core/Src/DATA_MANAGEMENT/telemetry_manager.c \
- ../Core/Inc/DATA_MANAGEMENT/telemetry_manager.h \
- ../Core/Inc/DRIVERS/BNO055/bno055_main.h \
+Core/Src/DRIVERS/ADXL375/ADXL375.o: ../Core/Src/DRIVERS/ADXL375/ADXL375.c \
+ ../Core/Inc/DRIVERS/ADXL375/ADXL375.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -42,11 +40,8 @@ Core/Src/DATA_MANAGEMENT/telemetry_manager.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h \
- ../Core/Inc/DRIVERS/BNO055/bno055.h ../Core/Inc/DRIVERS/MS5607/MS5607.h \
- ../Core/Inc/main.h ../Core/Inc/DRIVERS/ADXL375/ADXL375.h
-../Core/Inc/DATA_MANAGEMENT/telemetry_manager.h:
-../Core/Inc/DRIVERS/BNO055/bno055_main.h:
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
+../Core/Inc/DRIVERS/ADXL375/ADXL375.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:
 ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h:
 ../Drivers/CMSIS/Include/core_cm7.h:
@@ -88,7 +83,3 @@ Core/Src/DATA_MANAGEMENT/telemetry_manager.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h:
-../Core/Inc/DRIVERS/BNO055/bno055.h:
-../Core/Inc/DRIVERS/MS5607/MS5607.h:
-../Core/Inc/main.h:
-../Core/Inc/DRIVERS/ADXL375/ADXL375.h:

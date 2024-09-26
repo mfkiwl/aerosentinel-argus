@@ -11,6 +11,7 @@
 
 #include "DRIVERS/BNO055/bno055_main.h"
 #include "DRIVERS/MS5607/MS5607.h"
+#include "DRIVERS/ADXL375/ADXL375.h"
 
 
 // Define the structure
@@ -27,13 +28,9 @@ typedef enum {
 
 typedef struct {
     // Define a structure to hold all sensor data
-//	IMU_6_Axis_Data asm330lhh_data;
-//	Barometer_4_Axis bme680_data;
-//	IMU_6_Axis_Data bmi323_data;
 	AHRS_9_Axis_Data bno055_data;
-//	GPS_t gps_data;
-//    IMU_6_Axis_Data lis2mdltr_data;
     Barometer_2_Axis ms5607_data;
+	HigG_Accemerometer_3_Axis adxl375_data;
 } TelemetryData;
 
 

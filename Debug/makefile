@@ -21,6 +21,7 @@ RM := rm -rf
 -include Core/Startup/subdir.mk
 -include Core/Src/DRIVERS/MS5607/subdir.mk
 -include Core/Src/DRIVERS/BNO055/subdir.mk
+-include Core/Src/DRIVERS/ADXL375/subdir.mk
 -include Core/Src/DATA_MANAGEMENT/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

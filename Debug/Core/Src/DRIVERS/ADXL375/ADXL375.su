@@ -1,0 +1,9 @@
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:25:8:ADXL375_Init	16	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:65:19:ADXL375_ReadAcceleration	16	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:73:6:ADXL375_CleanRawValues	16	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:103:27:get_high_g_acceleration	48	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:120:6:adxl375_print_highG_data	32	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:132:19:WriteData	24	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:147:19:ReadData	24	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:169:6:ToggleCSHigh	8	static
+../Core/Src/DRIVERS/ADXL375/ADXL375.c:174:6:ToggleCSLow	8	static

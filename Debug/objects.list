@@ -1,4 +1,5 @@
 "./Core/Src/DATA_MANAGEMENT/telemetry_manager.o"
+"./Core/Src/DRIVERS/ADXL375/ADXL375.o"
 "./Core/Src/DRIVERS/BNO055/bno055.o"
 "./Core/Src/DRIVERS/BNO055/bno055_main.o"
 "./Core/Src/DRIVERS/BNO055/bno055_support.o"

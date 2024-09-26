@@ -123,7 +123,7 @@ void DelayUs(unsigned int Delay)
   * @brief  BNO055 Initialization Function
   *
   * @param  		bno055_config     TODO -> Create this structure and add the parameter to this function.
-  * @retval         Initialization Status (MANDATORY: return 1 or True -> no Error)
+  * @retval         Initialization Status (MANDATORY: return 0 -> no Error)
   *
   */
 int8_t BNO055_Init(){
