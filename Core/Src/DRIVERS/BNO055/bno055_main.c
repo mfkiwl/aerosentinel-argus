@@ -148,14 +148,14 @@ int8_t BNO055_Init(){
 	/* set the power mode as NORMAL*/
 	power_mode = BNO055_POWER_MODE_NORMAL;
 	comres += bno055_set_power_mode(power_mode);
-	if(comres == BNO055_SUCCESS)
-	{
-		//printf("BNO Power mode set successfully! \n");
-	}
-	else
-	{
-		//printf("bno055_init failed, comres=%d\r\n", comres);
-	}
+//	if(comres == BNO055_SUCCESS)
+//	{
+//		printf("BNO Power mode set successfully! \n");
+//	}
+//	else
+//	{
+//		printf("bno055_init failed, comres=%d\r\n", comres);
+//	}
 
 	/************************* START READ RAW FUSION DATA ********
 		* For reading fusion data it is required to set the
@@ -173,18 +173,16 @@ int8_t BNO055_Init(){
 		* 0x0C - BNO055_OPERATION_MODE_NDOF
 		* based on the user need configure the operation mode*/
 	    // Set the operation mode to NDOF
-	    comres += bno055_set_operation_mode(BNO055_OPERATION_MODE_NDOF);
-	    comres += bno055_get_operation_mode(&op_mode_current);
-//		if(comres == BNO055_SUCCESS && op_mode_current == BNO055_OPERATION_MODE_NDOF)
-//		{
-//			printf("BNO Operation mode set successfully (NDOF Mode)! \n");
-//			printf("BNO Current Mode (Verif) : %d \n", op_mode_current);
-//		}
-//		else
-//		{
-//			printf("bno055_init failed, comres=%d\r\n", comres);
-//		}
-	    DelayUs(1000); // 1 second
+		printf("Trying to set BNO055 operational mode...");
+		while(op_mode_current != BNO055_OPERATION_MODE_NDOF){
+		    comres += bno055_set_operation_mode(BNO055_OPERATION_MODE_NDOF);
+		    comres += bno055_get_operation_mode(&op_mode_current);
+		    HAL_Delay(250);
+		}
+
+		printf("Success! \n");
+
+	    HAL_Delay(1000);
 
 //		comres +=bno055_set_temp_unit(BNO055_TEMP_UNIT_CELSIUS);
 //		comres +=bno055_set_accel_unit(BNO055_ACCEL_UNIT_MSQ);
@@ -256,14 +254,14 @@ AHRS_9_Axis_Data bno_read_fusion_data(){
     return data;
 }
 
-void Send_Quat_To_IMU_Visualizer(quaternion_vect q)
-{
-char quaternionStr[100];
-float lama = 0.1;
-// Format quaternion (W, X, Y, Z vectors) as a comma-separated string
-sprintf(quaternionStr, "%.6f,%.6f,%.6f,%.6f,%.6f\r\n", q.w, q.x, q.y, q.z, lama);
-HAL_UART_Transmit(&huart1, (uint8_t*)quaternionStr, strlen(quaternionStr), HAL_MAX_DELAY);
-}
+//void Send_Quat_To_IMU_Visualizer(quaternion_vect q)
+//{
+//char quaternionStr[100];
+//float lama = 0.1;
+//// Format quaternion (W, X, Y, Z vectors) as a comma-separated string
+//sprintf(quaternionStr, "%.6f,%.6f,%.6f,%.6f,%.6f\r\n", q.w, q.x, q.y, q.z, lama);
+//HAL_UART_Transmit(&huart1, (uint8_t*)quaternionStr, strlen(quaternionStr), HAL_MAX_DELAY);
+//}
 
 void bno055_print_fusion_data(AHRS_9_Axis_Data *data) {
 printf("BNO055 AHRS: \n");
@@ -278,7 +276,7 @@ printf("Pitch: %.2f deg, Roll: %.2f deg, Yaw: %.2f deg \n", data->orientation[0]
 printf("Quaternion -> ");
 printf("W: %.2f , X: %.2f , Y: %.2f , Z: %.2f \n", data->quaternion.w, data->quaternion.x, data->quaternion.y, data->quaternion.z);
 
-Send_Quat_To_IMU_Visualizer(data->quaternion);
+//Send_Quat_To_IMU_Visualizer(data->quaternion);
 
 // Print acceleration (X, Y, Z)
 printf("Acceleration -> ");
