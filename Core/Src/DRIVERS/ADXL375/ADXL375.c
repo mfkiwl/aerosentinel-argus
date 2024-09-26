@@ -106,9 +106,9 @@ HigG_Accemerometer_3_Axis get_high_g_acceleration(){
 	  status = ADXL375_ReadAcceleration();
 	  if (status == HAL_OK) {
 		  ADXL375_CleanRawValues();
-		  data.acc.x = dev.accData[0];
-		  data.acc.y = dev.accData[1];
-		  data.acc.z = dev.accData[2];
+		  data.acc.x = dev.accData[0] / 1000;
+		  data.acc.y = dev.accData[1] / 1000;
+		  data.acc.z = dev.accData[2] / 1000;
 	  }
 
 	  return data;
