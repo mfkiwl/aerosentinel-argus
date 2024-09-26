@@ -12,7 +12,7 @@
 #include "DRIVERS/BNO055/bno055_main.h"
 #include "DRIVERS/MS5607/MS5607.h"
 #include "DRIVERS/ADXL375/ADXL375.h"
-
+#include "DRIVERS/MPL311/mpl311.h"
 
 // Define the structure
 typedef struct {
@@ -31,10 +31,13 @@ typedef struct {
 	AHRS_9_Axis_Data bno055_data;
     Barometer_2_Axis ms5607_data;
 	HigG_Accemerometer_3_Axis adxl375_data;
+	Altimeter_3_Axis mpl311_data;
 } TelemetryData;
 
 
 telemetry_init_status SensorManager_Init(void);
+void SensorManager_UpdateData(TelemetryData *data);
+void TestTelemetry();
 
 
 #endif /* INC_DATA_MANAGEMENT_TELEMETRY_MANAGER_H_ */

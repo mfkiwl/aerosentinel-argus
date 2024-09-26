@@ -1,7 +1,6 @@
 ../Core/Src/DRIVERS/BNO055/bno055_main.c:57:13:bno055_platform_read	1
 ../Core/Src/DRIVERS/BNO055/bno055_main.c:80:13:bno055_platform_write	1
 ../Core/Src/DRIVERS/BNO055/bno055_main.c:106:6:DelayUs	1
-../Core/Src/DRIVERS/BNO055/bno055_main.c:129:8:BNO055_Init	1
-../Core/Src/DRIVERS/BNO055/bno055_main.c:207:18:bno_read_fusion_data	1
-../Core/Src/DRIVERS/BNO055/bno055_main.c:259:6:Send_Quat_To_IMU_Visualizer	1
-../Core/Src/DRIVERS/BNO055/bno055_main.c:268:6:bno055_print_fusion_data	1
+../Core/Src/DRIVERS/BNO055/bno055_main.c:129:8:BNO055_Init	2
+../Core/Src/DRIVERS/BNO055/bno055_main.c:205:18:bno_read_fusion_data	1
+../Core/Src/DRIVERS/BNO055/bno055_main.c:266:6:bno055_print_fusion_data	1

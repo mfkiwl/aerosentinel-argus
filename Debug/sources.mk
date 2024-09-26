@@ -25,6 +25,7 @@ SUBDIRS := \
 Core/Src/DATA_MANAGEMENT \
 Core/Src/DRIVERS/ADXL375 \
 Core/Src/DRIVERS/BNO055 \
+Core/Src/DRIVERS/MPL311 \
 Core/Src/DRIVERS/MS5607 \
 Core/Src \
 Core/Startup \

@@ -3,6 +3,7 @@
 "./Core/Src/DRIVERS/BNO055/bno055.o"
 "./Core/Src/DRIVERS/BNO055/bno055_main.o"
 "./Core/Src/DRIVERS/BNO055/bno055_support.o"
+"./Core/Src/DRIVERS/MPL311/mpl311.o"
 "./Core/Src/DRIVERS/MS5607/MS5607.o"
 "./Core/Src/blackbox.o"
 "./Core/Src/main.o"

@@ -73,8 +73,6 @@ void Error_Handler(void);
 #define HEARTBEAT_GPIO_Port GPIOB
 #define BNO055_ON_Pin GPIO_PIN_15
 #define BNO055_ON_GPIO_Port GPIOA
-#define BNO055_RST_Pin GPIO_PIN_3
-#define BNO055_RST_GPIO_Port GPIOD
 #define GPS_RST_Pin GPIO_PIN_4
 #define GPS_RST_GPIO_Port GPIOD
 #define BNO086_RST_Pin GPIO_PIN_5

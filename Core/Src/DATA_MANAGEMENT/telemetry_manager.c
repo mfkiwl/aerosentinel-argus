@@ -11,13 +11,12 @@
 
 TelemetryData telemetry;
 
-
-
 // Define the array of sensors with their initialization functions and names
 sensors_init_t sensors[] = {
     {BNO055_Init, "BNO055"},
     {MS5607_Init, "MS5607"},
-    {ADXL375_Init, "ADXL375"}
+    {ADXL375_Init, "ADXL375"},
+	{MPL3115A2_Init, "MPL3115A2"}
 };
 
 
@@ -50,3 +49,37 @@ telemetry_init_status SensorManager_Init(void) {
         return TELEMETRY_INIT_FAILURE;
     }
 }
+
+void SensorManager_UpdateData(TelemetryData *data) {
+    // Update data from each sensor
+	telemetry.bno055_data = bno_read_fusion_data();
+    telemetry.ms5607_data = MS5607_ReadData();
+    telemetry.adxl375_data = get_high_g_acceleration();
+    telemetry.mpl311_data = mpl311_read_data();
+
+
+}
+
+void TestTelemetry(){
+	for(int i = 0; i < 50 ; i++){
+
+
+        //printf("// --------------------------------------------- // \n");
+
+	// Sensor Data Read
+	SensorManager_UpdateData(&telemetry);
+
+	// Sensor Data Print
+
+	bno055_print_fusion_data(&telemetry.bno055_data);
+	ms5607_print_barometer_data(&telemetry.ms5607_data);
+	adxl375_print_highG_data(&telemetry.adxl375_data);
+	mpl311_print_altimetry(&telemetry.mpl311_data);
+
+	//printf("// --------------------------------------------- // \n");
+
+	//DELAY BETWEEN READINGS TO DESIGN CORRECTLY
+    HAL_Delay(250);
+    	}
+}
+

@@ -174,6 +174,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   SensorManager_Init();
+  TestTelemetry();
 
   /* USER CODE END 2 */
 
@@ -713,7 +714,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, HEARTBEAT_Pin|BNO086_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, BNO055_RST_Pin|GPS_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPS_RST_GPIO_Port, GPS_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : SPI4_CS_Pin MPL311_ON_Pin BNO086_ON_Pin */
   GPIO_InitStruct.Pin = SPI4_CS_Pin|MPL311_ON_Pin|BNO086_ON_Pin;
@@ -755,12 +756,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BNO055_RST_Pin GPS_RST_Pin */
-  GPIO_InitStruct.Pin = BNO055_RST_Pin|GPS_RST_Pin;
+  /*Configure GPIO pin : GPS_RST_Pin */
+  GPIO_InitStruct.Pin = GPS_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPS_RST_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
