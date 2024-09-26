@@ -53,7 +53,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/DRIVERS/BNO055/bno055_main.h \
  ../Core/Inc/DRIVERS/BNO055/bno055.h ../Core/Inc/DRIVERS/MS5607/MS5607.h \
  ../Core/Inc/DRIVERS/ADXL375/ADXL375.h \
- ../Core/Inc/DRIVERS/MPL311/mpl311.h
+ ../Core/Inc/DRIVERS/MPL311/mpl311.h ../Core/Inc/DRIVERS/BNO086/bno086.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -115,3 +115,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/DRIVERS/MS5607/MS5607.h:
 ../Core/Inc/DRIVERS/ADXL375/ADXL375.h:
 ../Core/Inc/DRIVERS/MPL311/mpl311.h:
+../Core/Inc/DRIVERS/BNO086/bno086.h:

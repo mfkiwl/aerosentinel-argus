@@ -1,3 +1,3 @@
-../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:23:23:SensorManager_Init	24	static
-../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:53:6:SensorManager_UpdateData	176	static
-../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:63:6:TestTelemetry	16	static
+../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:24:23:SensorManager_Init	24	static
+../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:54:6:SensorManager_UpdateData	176	static
+../Core/Src/DATA_MANAGEMENT/telemetry_manager.c:64:6:TestTelemetry	16	static

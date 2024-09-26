@@ -16,7 +16,8 @@ sensors_init_t sensors[] = {
     {BNO055_Init, "BNO055"},
     {MS5607_Init, "MS5607"},
     {ADXL375_Init, "ADXL375"},
-	{MPL3115A2_Init, "MPL3115A2"}
+	{MPL3115A2_Init, "MPL3115A2"},
+	{BNO086_Init, "BNO086"}
 };
 
 

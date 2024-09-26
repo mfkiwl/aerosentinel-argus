@@ -13,6 +13,7 @@
 #include "DRIVERS/MS5607/MS5607.h"
 #include "DRIVERS/ADXL375/ADXL375.h"
 #include "DRIVERS/MPL311/mpl311.h"
+#include "DRIVERS/BNO086/bno086.h"
 
 // Define the structure
 typedef struct {

@@ -75,8 +75,8 @@ void Error_Handler(void);
 #define BNO055_ON_GPIO_Port GPIOA
 #define GPS_RST_Pin GPIO_PIN_4
 #define GPS_RST_GPIO_Port GPIOD
-#define BNO086_RST_Pin GPIO_PIN_5
-#define BNO086_RST_GPIO_Port GPIOB
+#define BNO086_RDY_Pin GPIO_PIN_4
+#define BNO086_RDY_GPIO_Port GPIOB
 #define BNO086_ON_Pin GPIO_PIN_1
 #define BNO086_ON_GPIO_Port GPIOE
 
