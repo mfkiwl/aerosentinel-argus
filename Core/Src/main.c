@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h" // printf function
 #include "DATA_MANAGEMENT/telemetry_manager.h"
+#include "DRIVERS/BNO086/bno086.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,12 +54,17 @@ SD_HandleTypeDef hsd1;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi4;
 
+TIM_HandleTypeDef htim2;
+
 UART_HandleTypeDef huart2;
 USART_HandleTypeDef husart3;
 
 /* USER CODE BEGIN PV */
 uint32_t count = 0;
-/* USER CODE END PV */
+
+// The interrupt variable
+extern volatile uint8_t BNO_Ready;
+
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -73,6 +79,7 @@ static void MX_SPI1_Init(void);
 static void MX_SPI4_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART3_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -87,16 +94,14 @@ int _write(int file, char *ptr, int len){
 	return len;
 }
 
-void I2C_Scan(I2C_HandleTypeDef *hi2c)
-{
-    printf("Scanning I2C bus...\n");
-    for (uint16_t i = 1; i < 128; i++) {
-        if (HAL_I2C_IsDeviceReady(hi2c, (uint16_t)(i << 1), 1, 10) == HAL_OK) {
-            printf("Device found at 0x%02X\n", i);
-        }
-    }
-    printf("I2C scan complete.\n");
+// Interrupt callback function for BMP581 and BNO086
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+  if(GPIO_Pin == BNO_INT_Pin) {
+    BNO_Ready = 1;
+  }
+	__HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
 }
+
 //void SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
 //    // Set the RED LED
 //    if (red) {
@@ -180,19 +185,13 @@ int main(void)
   MX_USART3_Init();
   MX_FATFS_Init();
   MX_USB_DEVICE_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-//  GPIO_PinState pinState;
-//  for (int i = 0; i <= 20 ; i++){
-//	  pinState = HAL_GPIO_ReadPin(BNO086_RDY_GPIO_Port, BNO086_RDY_Pin);
-//	  if (pinState == GPIO_PIN_SET) {
-//	      printf("BNO086 RDY pin is HIGH");
-//	  } else {
-//		  printf("BNO086 RDY pin is LOW");
-//	  }
-//	  I2C_Scan(&hi2c1);
-//	  printf("--------------");
-//	  HAL_Delay(500);
-//  }
+
+  printf("Aerosentinel Argus: Navigation Module - Pre-production Module \r\n");
+
+
+
 
 
 
@@ -207,6 +206,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+
+
+		// If BNO086 triggers interrupt, check for new data
+//		if(BNO_Ready) {
+//			// If we have new data from BNO
+//			if((BNO_dataAvailable() == HAL_OK) && (sensorData.sensorId == ROTATION_VECTOR)) {
+//				sensorData.sensorId = 0;
+//				quaternionUpdate(&sensorData.SenVal.RotationVector);
+//				printf("Y = %.3lf P = %.3lf R = %.3lf \r\n", rpy.Yaw, rpy.Pitch, rpy.Roll);
+//			}
+//			}
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -598,6 +611,51 @@ static void MX_SPI4_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 74;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -736,7 +794,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOE, MPL311_ON_Pin|BNO086_ON_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(HEARTBEAT_GPIO_Port, HEARTBEAT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, HEARTBEAT_Pin|BNO_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPS_RST_GPIO_Port, GPS_RST_Pin, GPIO_PIN_RESET);
@@ -768,12 +826,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : HEARTBEAT_Pin */
-  GPIO_InitStruct.Pin = HEARTBEAT_Pin;
+  /*Configure GPIO pins : HEARTBEAT_Pin BNO_RST_Pin */
+  GPIO_InitStruct.Pin = HEARTBEAT_Pin|BNO_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(HEARTBEAT_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA9 */
   GPIO_InitStruct.Pin = GPIO_PIN_9;
@@ -788,11 +846,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPS_RST_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BNO086_RDY_Pin */
-  GPIO_InitStruct.Pin = BNO086_RDY_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BNO086_RDY_GPIO_Port, &GPIO_InitStruct);
+  /*Configure GPIO pin : BNO_INT_Pin */
+  GPIO_InitStruct.Pin = BNO_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(BNO_INT_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

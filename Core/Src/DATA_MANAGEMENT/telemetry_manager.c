@@ -34,7 +34,7 @@ telemetry_init_status SensorManager_Init(void) {
             printf("%s initialization failed.\n", sensors[i].sensor_name);
             all_success = false;
         } else {
-            printf("[%s] device found! Initialization succeeded.\n", sensors[i].sensor_name);
+            printf("[%s] device found! Initialization and calibration succeeded.\n", sensors[i].sensor_name);
             any_success = true;
         }
     }

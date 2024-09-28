@@ -74,8 +74,8 @@ all: main-build
 main-build: aerosentinel_argus.elf secondary-outputs
 
 # Tool invocations
-aerosentinel_argus.elf aerosentinel_argus.map: $(OBJS) $(USER_OBJS) C:\Users\Utilisateur\Documents\aerosentinel-argus\STM32H743VITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "aerosentinel_argus.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\Utilisateur\Documents\aerosentinel-argus\STM32H743VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="aerosentinel_argus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+aerosentinel_argus.elf aerosentinel_argus.map: $(OBJS) $(USER_OBJS) /Users/yaxsomo/aerosentinel-argus/STM32H743VITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "aerosentinel_argus.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/Users/yaxsomo/aerosentinel-argus/STM32H743VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="aerosentinel_argus.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

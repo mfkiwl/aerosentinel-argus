@@ -75,10 +75,41 @@ void Error_Handler(void);
 #define BNO055_ON_GPIO_Port GPIOA
 #define GPS_RST_Pin GPIO_PIN_4
 #define GPS_RST_GPIO_Port GPIOD
-#define BNO086_RDY_Pin GPIO_PIN_4
-#define BNO086_RDY_GPIO_Port GPIOB
+#define BNO_INT_Pin GPIO_PIN_4
+#define BNO_INT_GPIO_Port GPIOB
+#define BNO_INT_EXTI_IRQn EXTI4_IRQn
+#define BNO_RST_Pin GPIO_PIN_5
+#define BNO_RST_GPIO_Port GPIOB
 #define BNO086_ON_Pin GPIO_PIN_1
 #define BNO086_ON_GPIO_Port GPIOE
+
+/* USER CODE BEGIN Private defines */
+#define BNO_RST_On  (BNO_RST_GPIO_Port->BSRR = BNO_RST_Pin)
+#define BNO_RST_Off (BNO_RST_GPIO_Port->BSRR = (uint32_t)BNO_RST_Pin << 16U)
+
+#define START_MARKER						60 // < Start marker for serial
+#define END_MARKER							62 // > End marker for serial
+
+#define CMD_CALIBRATE						67 // C Calibrate
+#define RESPONSE_CALIBRATE_OK		CMD_CALIBRATE // C Calibrate OK
+#define RESPONSE_CALIBRATE_FAIL	99 // c Calibrate command has failed
+#define RESPONSE_DATA						68 // D Send sensor data to main board
+#define RESPONSE_BMP_INIT_OK		75 // K
+#define RESPONSE_BMP_INIT_FAIL	70 // F
+
+#define RESPONSE_BNO_INIT_OK		107 // k
+#define RESPONSE_BNO_INIT_FAIL	102 // f
+
+// We get Start, Command and End
+#define DEV_RX_LEN							3
+// Rx buffer positions
+#define START_POS								0
+#define CMD_POS									1
+#define END_POS									2
+
+// Tx buffer positions 0 is < 1 is D, 2-7 BMP data, 8-19 BNO DATA, 20-55 GPS data, 56 CheckSum, 57 is >
+
+#define TIMEOUT_SEND						100
 
 /* USER CODE BEGIN Private defines */
 
